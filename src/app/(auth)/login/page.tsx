@@ -7,12 +7,14 @@ import { Input } from "@nextui-org/input";
 import Image from "next/image";
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import TDForm from "@/src/components/form/TDForm";
+import TDInput from "@/src/components/form/TDInput";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
 
   // handle login
-  const handleLogin:SubmitHandler<FieldValues> = (data) => {
+  const handleLogin: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
   };
 
@@ -34,30 +36,28 @@ const Login = () => {
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
             <p>Login with Email</p>
           </div>
-          <form
-            className="space-y-3"
-            onSubmit={ handleSubmit(handleLogin)}
-          >
-            <Input
+          <TDForm onSubmit={handleLogin}>
+          <div className="space-y-2">
+          <TDInput
+              name="email"
+              label="Email"
               type="email"
-              label="email"
               variant="bordered"
-              {...register("email")}
             />
-            <Input
+            <TDInput
+              name="password"
+              label="Password"
               type="password"
-              label="password"
               variant="bordered"
-              {...register("login")}
             />
-
             <Button color="primary" className="w-full" type="submit">
               Login
             </Button>
-          </form>
+          </div>
+          </TDForm>
           <p>
-            I Don&#39;t have an accout{" "}
-            <Link href={""} className="text-blue-800 mt-1">
+            I Don&#39;t have an accout.?{" "}
+            <Link href={"/signup"} className="text-blue-800 mt-1 hover:text-blue-700">
               Sign Up
             </Link>
           </p>
