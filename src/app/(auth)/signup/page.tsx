@@ -48,8 +48,9 @@ const SignUp = () => {
                 variant="bordered"
               />
               <TDInput name="phoneNumber" label="Number" />
+              <TDInput name="image" label="Image" />
               <TDInput name="address" label="Address" />
-              <TDInput name="Gender" label="Gender" />
+              <TDInput name="gender" label="Gender" />
               <TDInput
                 name="password"
                 label="Password"
