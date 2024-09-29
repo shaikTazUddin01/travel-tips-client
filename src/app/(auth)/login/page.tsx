@@ -1,21 +1,40 @@
 "use client";
 import loginImage from "@/src/assets/travelLogin.jpg";
 import login1 from "@/src/assets/login1.jpg";
-// import login2 from "@/src/assets/login2.jpg";
 import { Button } from "@nextui-org/button";
-import { Input } from "@nextui-org/input";
 import Image from "next/image";
 import Link from "next/link";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
+import { useLoginApiMutation } from "@/src/redux/features/auth/authApi";
+import { TResponse } from "@/src/types";
+import { toast } from "sonner";
+import { decodedToken } from "@/src/utils/decodedToken";
+import { useAppDispatch } from "@/src/redux/hooks";
+import { authInfo } from "@/src/redux/features/auth/authSlice";
+// import { userInfo } from "@/src/redux/features/auth/authSlice";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
-
+  const [login] = useLoginApiMutation();
+  const dispatch = useAppDispatch();
   // handle login
-  const handleLogin: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+  const handleLogin: SubmitHandler<FieldValues> = async (data) => {
+    try {
+      const res = (await login(data)) as TResponse<any>;
+      // console.log(res?.data?.data?.accessToken);
+      if (res?.data) {
+        toast.success("login success");
+        const accessToken = res?.data?.data?.accessToken;
+        const decoded = await decodedToken(accessToken);
+        dispatch(authInfo({ data: decoded, token: accessToken }));
+        // console.log(decoded);
+      } else {
+        toast.error(res?.error?.data?.message);
+      }
+    } catch (error) {
+      toast.error(error?.message);
+    }
   };
 
   return (
@@ -37,27 +56,30 @@ const Login = () => {
             <p>Login with Email</p>
           </div>
           <TDForm onSubmit={handleLogin}>
-          <div className="space-y-2">
-          <TDInput
-              name="email"
-              label="Email"
-              type="email"
-              variant="bordered"
-            />
-            <TDInput
-              name="password"
-              label="Password"
-              type="password"
-              variant="bordered"
-            />
-            <Button color="primary" className="w-full" type="submit">
-              Login
-            </Button>
-          </div>
+            <div className="space-y-2">
+              <TDInput
+                name="email"
+                label="Email"
+                type="email"
+                variant="bordered"
+              />
+              <TDInput
+                name="password"
+                label="Password"
+                type="password"
+                variant="bordered"
+              />
+              <Button color="primary" className="w-full" type="submit">
+                Login
+              </Button>
+            </div>
           </TDForm>
           <p>
             I Don&#39;t have an accout.?{" "}
-            <Link href={"/signup"} className="text-blue-800 mt-1 hover:text-blue-700">
+            <Link
+              href={"/signup"}
+              className="text-blue-800 mt-1 hover:text-blue-700"
+            >
               Sign Up
             </Link>
           </p>

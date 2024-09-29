@@ -3,6 +3,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 interface IProps {
+  required?: boolean;
   name: string;
   label: string;
   type?: string;
@@ -14,10 +15,23 @@ const TDInput = ({
   label,
   type = "text",
   variant = "bordered",
+  required = false,
 }: IProps) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
+  // console.log(errors);
   return (
-    <Input type={type} label={label} variant={variant} {...register(name)} />
+    <Input
+      type={type}
+      label={label}
+      variant={variant}
+      {...register(name)}
+      isInvalid={!!errors[name]}
+      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      isRequired={required}
+    />
   );
 };
 

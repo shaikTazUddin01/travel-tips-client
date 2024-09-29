@@ -8,16 +8,28 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
 import { useSignupApiMutation } from "@/src/redux/features/auth/authApi";
+import { toast } from "sonner";
+import { TResponse } from "@/src/types";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [createUser, result] = useSignupApiMutation();
+  const router=useRouter()
 
   // handle login
   const handleSignUp: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
-    const res = await createUser(data);
-    console.log(res);
-    alert(res)
+    try {
+      const res = (await createUser(data)) as TResponse<any>;
+
+      if (res?.data) {
+        toast.success("sign up success");
+        router.push("login")
+      } else {
+        toast.error(res?.error?.data?.message);
+      }
+    } catch (error) {
+      toast.error(error?.message);
+    }
   };
 
   return (
@@ -40,18 +52,18 @@ const SignUp = () => {
           </div>
           <TDForm onSubmit={handleSignUp}>
             <div className="space-y-2">
-              <TDInput name="name" label="Name" />
-              <TDInput
+              <TDInput required={true} name="name" label="Name" />
+              <TDInput required={true}
                 name="email"
                 label="Email"
                 type="email"
                 variant="bordered"
               />
-              <TDInput name="phoneNumber" label="Number" />
-              <TDInput name="image" label="Image" />
-              <TDInput name="address" label="Address" />
-              <TDInput name="gender" label="Gender" />
-              <TDInput
+              <TDInput required={true} name="phoneNumber" label="Number" />
+              <TDInput required={true} name="image" label="Image" />
+              <TDInput required={true} name="address" label="Address" />
+              <TDInput required={true} name="gender" label="Gender" />
+              <TDInput required={true}
                 name="password"
                 label="Password"
                 type="password"
