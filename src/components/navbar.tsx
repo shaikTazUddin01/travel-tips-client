@@ -75,7 +75,7 @@ export const Navbar = () => {
             </NavbarItem>
           ))}
           <NavbarItem className="hidden sm:flex gap-2">
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
           </NavbarItem>
         </ul>
       </NavbarContent>
@@ -91,7 +91,7 @@ export const Navbar = () => {
       </NavbarContent> */}
       {/* navtoggle and theme switcher */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <ThemeSwitch />
+        {/* <ThemeSwitch /> */}
         <NavbarMenuToggle />
       </NavbarContent>
 

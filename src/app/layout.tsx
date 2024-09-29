@@ -7,7 +7,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/src/config/site";
 import { fontSans } from "@/src/config/fonts";
-import { Navbar } from "@/src/components/navbar";
+// import { Navbar } from "@/src/components/navbar";
 
 export const metadata: Metadata = {
   title: {
@@ -41,7 +41,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           {children}
         </Providers>
       </body>
