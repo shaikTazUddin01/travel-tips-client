@@ -13,7 +13,7 @@ export default function NewsFeedCard() {
   const [isFollowed, setIsFollowed] = React.useState(false);
 
   return (
-    <Card className="w-full mb-8">
+    <Card className="w-full mb-6 border">
       <CardHeader className="justify-between">
         <div className="flex gap-3">
           <Avatar isBordered radius="full" size="md" src="https://nextui.org/avatars/avatar-1.png" />

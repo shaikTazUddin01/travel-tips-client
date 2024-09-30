@@ -36,7 +36,7 @@ const router=useRouter()
       } else {
         toast.error(res?.error?.data?.message);
       }
-    } catch (error) {
+    } catch (error:any) {
       toast.error(error?.message);
     }
   };
