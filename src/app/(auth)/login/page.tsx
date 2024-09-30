@@ -13,11 +13,13 @@ import { toast } from "sonner";
 import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
+import { useRouter } from "next/navigation";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
 const Login = () => {
   const [login] = useLoginApiMutation();
   const dispatch = useAppDispatch();
+const router=useRouter()
   // handle login
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
     try {
@@ -25,9 +27,11 @@ const Login = () => {
       // console.log(res?.data?.data?.accessToken);
       if (res?.data) {
         toast.success("login success");
+
         const accessToken = res?.data?.data?.accessToken;
         const decoded = await decodedToken(accessToken);
         dispatch(authInfo({ data: decoded, token: accessToken }));
+        router.push('/')
         // console.log(decoded);
       } else {
         toast.error(res?.error?.data?.message);

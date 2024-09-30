@@ -6,13 +6,13 @@ const layout = ({children}:{children:ReactNode}) => {
         <div>
             <div className="relative flex flex-col h-screen">
             <Navbar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="container mx-auto max-w-7xl pt-5 pb-10 px-6 flex-grow">
               {children}
             </main>
-            <footer className="w-full flex items-center justify-center py-3">
+            {/* <footer className="w-full flex items-center justify-center py-3">
               <span className="text-default-600">Powered by</span>
               <p className="text-primary">NextUI</p>
-            </footer>
+            </footer> */}
           </div>
         </div>
     );
