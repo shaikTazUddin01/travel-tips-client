@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   Modal,
   ModalContent,
@@ -22,10 +22,12 @@ import { toast } from "sonner";
 
 interface IProps {
   buttonText: string;
+  variant?:"light" | "flat" | "solid" | "bordered" | "faded" | "shadow" | "ghost" | undefined;
   icon?: ReactNode;
   iconColor?: string;
   btnClass?: string;
   size?: "sm" | "md" | "lg" | undefined;
+  btnColor?: "default" | "primary" | "secondary" | "success" | "warning" | "danger" | undefined;
 }
 
 export default function CreatePostModal({
@@ -34,50 +36,48 @@ export default function CreatePostModal({
   iconColor,
   btnClass,
   size,
+  btnColor = "default",
+  variant="light"
 }: IProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
- const [discription,setDiscription]=useState<string>("")
-//  create post hooks
-const [createPost]=useCreatePostMutation()
-//  console.log(useDebounce(discription));
-const description=useDebounce(discription)
+  const [discription, setDiscription] = useState<string>("");
+  //  create post hooks
+  const [createPost] = useCreatePostMutation();
+  //  console.log(useDebounce(discription));
+  const description = useDebounce(discription);
 
- const onSubmit:SubmitHandler<FieldValues>=async(data)=>{
-    
-  
-
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       if (description) {
-        const postDetails={
-          image:data?.image,
-          postContent:description,
-          category:"Technology",
-          tags:"Premium"
-        }
-  
+        const postDetails = {
+          image: data?.image,
+          postContent: description,
+          category: "Technology",
+          tags: "Premium",
+        };
+
         const res = (await createPost(postDetails)) as TResponse<any>;
         // console.log(res?.data?.data?.accessToken);
         if (res?.data) {
           toast.success("post create success");
-  
+
           console.log(res.data);
           // console.log(decoded);
         } else {
           toast.error(res?.error?.data?.message);
         }
       }
-      
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error?.message);
     }
- }
+  };
 
   return (
     <>
       <Button
-        color="default"
-        variant="light"
+        color={btnColor}
+        variant={variant}
         onPress={onOpen}
         className={`${btnClass ? btnClass : "w-full"}`}
         size={`${size ? size : "md"}`}
@@ -105,9 +105,9 @@ const description=useDebounce(discription)
                 </div>
               </ModalHeader>
               <ModalBody>
-                <QuillEditor setDiscription={setDiscription}/>
+                <QuillEditor setDiscription={setDiscription} />
                 <TDForm onSubmit={onSubmit}>
-                  <TDInput label="Image" name="image" required={true}/>
+                  <TDInput label="Image" name="image" required={true} />
 
                   <Button type="submit">post</Button>
                 </TDForm>

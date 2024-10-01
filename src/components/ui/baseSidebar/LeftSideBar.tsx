@@ -1,9 +1,11 @@
 "use client";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Button } from "@nextui-org/react";
 import { MdWorkspacePremium } from "react-icons/md";
 import { FaCreativeCommonsNc, FaUserFriends } from "react-icons/fa";
 import { RiUserFollowFill } from "react-icons/ri";
 import { TbBadgeFilled } from "react-icons/tb";
+import CreatePost from "../../Home/CreatePost";
+import CreatePostModal from "../../Home/CreatePostModal";
 
 const LeftSideBar = () => {
   return (
@@ -43,6 +45,11 @@ const LeftSideBar = () => {
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
         <span>Non-Premium</span>
+      </div>
+      {/* create Post */}
+      <div className="w-full">
+        {/* <Button color="primary" className="w-full rounded-full">Create Post</Button> */}
+        <CreatePostModal  buttonText="Create Post" btnColor="primary" variant="solid" btnClass="rounded-full w-full"/>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import CreatePost from "@/src/components/Home/CreatePost";
-import LeftSideBar from "@/src/components/ui/commoleftSidebar/LeftSideBar";
+import LeftSideBar from "@/src/components/ui/baseSidebar/LeftSideBar";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 
 export default function Home() {
