@@ -25,15 +25,20 @@ const LeftSideBar = () => {
       </div>
       </Link>
       {/* followers */}
+      <Link href={'/followers'}>
+      
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer ">
         <span className="text-2xl p-1"><FaUserFriends/></span>
         <span>Followers</span>
       </div>
+      </Link>
       {/* following */}
+      <Link href={'/following'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><RiUserFollowFill/></span>
         <span>Following</span>
       </div>
+      </Link>
       {/* saved feed */}
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><TbBadgeFilled/></span>
