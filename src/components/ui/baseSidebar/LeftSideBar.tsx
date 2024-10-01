@@ -6,10 +6,12 @@ import { RiUserFollowFill } from "react-icons/ri";
 import { TbBadgeFilled } from "react-icons/tb";
 import CreatePost from "../../Home/CreatePost";
 import CreatePostModal from "../../Home/CreatePostModal";
+import Link from "next/link";
 
 const LeftSideBar = () => {
   return (
     <div className="px-4 py-3 flex flex-col gap-2">
+      <Link href={'/profile'}>
       <div className="flex items-center gap-2 p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <Avatar
           isBordered
@@ -21,6 +23,7 @@ const LeftSideBar = () => {
           <span>Taz Ahmed</span>
         </div>
       </div>
+      </Link>
       {/* followers */}
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer ">
         <span className="text-2xl p-1"><FaUserFriends/></span>

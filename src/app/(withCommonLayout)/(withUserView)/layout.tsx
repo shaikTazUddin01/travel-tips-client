@@ -8,7 +8,7 @@ const layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <div className="relative flex flex-col min-h-screen">
-        <Navbar />
+        {/* <Navbar /> */}
         <main className="container mx-auto max-w-7xl px-6 flex-grow ">
           <div className="flex flex-col lg:flex-row gap-10 ">
             {/* left sidebar */}
@@ -26,7 +26,7 @@ const layout = ({ children }: { children: ReactNode }) => {
             >
               <LeftSideBar />
             </div>
-            <div className="w-full lg:w-[50%] mt-20">{children}</div>
+            <div className="w-full lg:w-[50%]">{children}</div>
             {/* right side bar */}
             <div
               className="w-[100%] lg:w-[25%]  h-[85vh] sticky top-20 overflow-y-auto      
