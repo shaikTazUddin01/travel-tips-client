@@ -40,20 +40,27 @@ const LeftSideBar = () => {
       </div>
       </Link>
       {/* saved feed */}
+      <Link href={'/saved'}>
+      
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><TbBadgeFilled/></span>
         <span>Saved</span>
       </div>
+      </Link>
       {/* Premium */}
+      <Link href={'/premium'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><MdWorkspacePremium/></span>
         <span>Premium</span>
       </div>
+      </Link>
       {/* Premium */}
+      <Link href={'/non-premium'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
         <span>Non-Premium</span>
       </div>
+      </Link>
       {/* create Post */}
       <div className="w-full">
         {/* <Button color="primary" className="w-full rounded-full">Create Post</Button> */}

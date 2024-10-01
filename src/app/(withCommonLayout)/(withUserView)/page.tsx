@@ -1,15 +1,13 @@
 import CreatePost from "@/src/components/Home/CreatePost";
-import LeftSideBar from "@/src/components/ui/baseSidebar/LeftSideBar";
-import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
+import NewsFeed from "@/src/components/ui/newsfeed/NewsFeed";
 
 export default function Home() {
+
   return (
     <div className="">
       <CreatePost />
       <div className="mt-5">
-        <NewsFeedCard />
-        <NewsFeedCard />
-        <NewsFeedCard />
+        <NewsFeed/>
       </div>
       {/* profile section */}
     </div>

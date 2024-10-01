@@ -25,8 +25,12 @@ const page = () => {
             />
             <div className="flex justify-between items-start flex-1">
               <div>
-                <h1 className="font-medium">Taz Ahmed</h1>
+                <h1 className="font-medium text-xl">Maisha Ahmed</h1>
                 <p className="text-sm text-default-600">@tazahmedcs23</p>
+                <p className="flex gap-4 text-blue-600 items-center">
+                  <span>120 Followers</span>
+                  {/* <span>- 150 Following</span> */}
+                </p>
               </div>
               {/* button */}
               <div className="flex gap-2">

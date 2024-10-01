@@ -5,3 +5,4 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export * from './response'
+export * from './post'

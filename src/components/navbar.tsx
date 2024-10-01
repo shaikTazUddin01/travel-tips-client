@@ -1,3 +1,4 @@
+'use client'
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -25,6 +26,7 @@ import {
   SearchIcon,
   Logo,
 } from "@/src/assets/icons";
+import { Avatar } from "@nextui-org/react";
 
 export const Navbar = () => {
   const searchInput = (
@@ -58,8 +60,20 @@ export const Navbar = () => {
             <p className="font-bold text-inherit">ACME</p>
           </NextLink>
         </NavbarBrand>
+        {/* search */}
+        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        
+      </NavbarContent>
+      {/* theme switcher lg */}
+      <NavbarContent
+        className="hidden sm:flex basis-1/5 sm:basis-full"
+        justify="end"
+      >
+        {/* <NavbarItem className="hidden sm:flex gap-2">
+          <ThemeSwitch />
+        </NavbarItem> */}
         {/* lg menu */}
-        <ul className="hidden lg:flex gap-4 justify-end w-full ml-2">
+        <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -76,19 +90,19 @@ export const Navbar = () => {
           ))}
           <NavbarItem className="hidden sm:flex gap-2">
             {/* <ThemeSwitch /> */}
+            <Avatar
+                isBordered
+                radius="full"
+                size="md"
+                src="https://nextui.org/avatars/avatar-1.png"
+              />
           </NavbarItem>
         </ul>
-      </NavbarContent>
-      {/* theme switcher lg */}
-      {/* <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
+
+                {/* <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-      </NavbarContent> */}
+        </NavbarItem> */}
+      </NavbarContent>
       {/* navtoggle and theme switcher */}
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         {/* <ThemeSwitch /> */}
