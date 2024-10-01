@@ -1,0 +1,27 @@
+.custom-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .custom-sidebar::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  .custom-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+  }
+  
+  .custom-sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4); 
+  }
+  
+ 
+  .custom-sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;  
+  }
+  
+  .custom-sidebar:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.4) transparent;
+  }
+  

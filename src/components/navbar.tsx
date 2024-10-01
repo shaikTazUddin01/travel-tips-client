@@ -49,7 +49,7 @@ export const Navbar = () => {
   );
 
   return (
-    <NextUINavbar maxWidth="xl" className="bg-white shadow-md" position="sticky">
+    <NextUINavbar maxWidth="xl" className="bg-white shadow-md fixed">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         {/* site logo */}
         <NavbarBrand as="li" className="gap-3 max-w-fit ">
