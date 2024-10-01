@@ -16,7 +16,7 @@ const NewsFeed = () => {
   console.log("postData-->", postData);
   return (
     <div>
-      {isLoading
+      {isLoading 
         ? Array(3).fill(null).map((_, index) => (
             <div key={index}>
               <LoadingSkeletor />

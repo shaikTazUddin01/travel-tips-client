@@ -10,6 +10,7 @@ import {
   Image,
   Divider,
 } from "@nextui-org/react";
+import DOMPurify from "dompurify";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaCrown, FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
@@ -19,10 +20,11 @@ import { TPost } from "@/src/types";
 import { MdOutlinePublic } from "react-icons/md";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import useUser from "@/src/hooks/user/useShowUser";
-import { getTextContent } from "@/src/lib/getTextContent";
+// import { getTextContent } from "@/src/lib/getTextContent";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
-  const [isFollowed, setIsFollowed] = React.useState(false);
+  // const [isFollowed, setIsFollowed] = React.useState(false);
+  const [iconHover,setIconHover]=
   const {user:currentUser}=useUser()
   const {
     category,
@@ -34,7 +36,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     share,
     user,
     isVerify,
-  } = postItem || "undefined";
+  } = postItem || {};
   return (
     <Card className="w-full mb-6 border">
       <CardHeader className="justify-between">
@@ -69,18 +71,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           </div>
         </div>
         {
-          currentUser?.email !== user?.email &&
+          currentUser?.email !== user?.email ?
         <Button className="rounded-full" size="sm" color="primary">
           Follow
+        </Button>
+        :
+        <Button className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center p-0">
+          ...
         </Button>
           }
       </CardHeader>
       <CardBody className="px-0 py-0 text-small">
         <div className="px-3 pb-3">
-<div>
-            {getTextContent(postContent)}
-  </div>          
-          
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postContent) }} />          
           <span className="pt-2 text-default-500">#{category}</span>
         </div>
         <Image

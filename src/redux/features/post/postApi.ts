@@ -11,9 +11,10 @@ export const postApi = baseApi.injectEndpoints({
       invalidatesTags:["Post"]
     }),
     getPost: builder.query({
-      query: () => ({
+      query: (query:string|undefined) => ({
         url: "/post/all-post",
         method: "GET",
+        params:{tags:query}
         // body: data,
       }),
       providesTags:['Post']

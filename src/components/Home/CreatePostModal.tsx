@@ -40,6 +40,7 @@ export default function CreatePostModal({
   variant="light"
 }: IProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  // const { isOpen, onOpen, onOpenChange, setIsOpen } = useDisclosure();
 
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
@@ -47,7 +48,7 @@ export default function CreatePostModal({
   //  console.log(useDebounce(discription));
   const description = useDebounce(discription);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data,event) => {
     try {
       if (description) {
         const postDetails = {
@@ -62,7 +63,9 @@ export default function CreatePostModal({
         if (res?.data) {
           toast.success("post create success");
 
-          console.log(res.data);
+          // console.log(res.data);
+          // onOpenChange(false);
+
           // console.log(decoded);
         } else {
           toast.error(res?.error?.data?.message);

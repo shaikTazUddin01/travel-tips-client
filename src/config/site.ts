@@ -14,6 +14,10 @@ export const siteConfig = {
       href: "/followingpeople",
     },
     {
+      label: "Premium",
+      href: "/premium",
+    },
+    {
       label: "About",
       href: "/about",
     },

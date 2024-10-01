@@ -28,6 +28,7 @@
 		"@react-aria/visually-hidden": "3.8.12",
 		"@reduxjs/toolkit": "^2.2.7",
 		"clsx": "2.1.1",
+		"dompurify": "^3.1.7",
 		"framer-motion": "~11.1.1",
 		"intl-messageformat": "^10.5.0",
 		"jwt-decode": "^4.0.0",
@@ -44,6 +45,7 @@
 		"tailwind-scrollbar": "^3.1.0"
 	},
 	"devDependencies": {
+		"@types/dompurify": "^3.0.5",
 		"@types/node": "20.5.7",
 		"@types/react": "18.3.3",
 		"@types/react-dom": "18.3.0",
