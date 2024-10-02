@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -24,7 +24,7 @@ import useUser from "@/src/hooks/user/useShowUser";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   // const [isFollowed, setIsFollowed] = React.useState(false);
-  const [iconHover,setIconHover]=
+  const [iconClick,setIconClick]=useState(false)
   const {user:currentUser}=useUser()
   const {
     category,
@@ -37,6 +37,10 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     user,
     isVerify,
   } = postItem || {};
+
+  const handleIconClick=()=>{
+    setIconClick(!iconClick)
+  }
   return (
     <Card className="w-full mb-6 border">
       <CardHeader className="justify-between">
@@ -76,9 +80,18 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           Follow
         </Button>
         :
-        <Button className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center p-0">
+        <button className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center pb-2 px-2 " onClick={()=>handleIconClick()}>
           ...
-        </Button>
+        </button>
+          }
+          {
+            iconClick == true &&
+            <div
+            className={`w-[150px] h-10 rounded-xl p-2 bg-default-200 absolute top-[44px] right-5 transition-all duration-300 ease-in-out`}
+          >
+            {/* Your content goes here */}
+          </div>
+       
           }
       </CardHeader>
       <CardBody className="px-0 py-0 text-small">

@@ -11,24 +11,67 @@ import { useSignupApiMutation } from "@/src/redux/features/auth/authApi";
 import { toast } from "sonner";
 import { TResponse } from "@/src/types";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import TDSelect from "@/src/components/form/TDSelect";
+// import { readFile } from "fs";
+
+
+const genderOptions=[
+  {
+    key:'Male',
+    label:"Male"
+  },
+  {
+    key:'Female',
+    label:"Female"
+  },
+  {
+    key:'Other',
+    label:"Other"
+  }
+]
+
 
 const SignUp = () => {
   const [createUser, result] = useSignupApiMutation();
-  const router=useRouter()
+  const [imageFile, setImageFile] = useState<any>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const router = useRouter();
 
+  // console.log(imagePreview);
   // handle login
-  const handleSignUp: SubmitHandler<FieldValues> = async (data) => {
+  const handleSignUp: SubmitHandler<FieldValues> = async (fieldsValue) => {
     try {
-      const res = (await createUser(data)) as TResponse<any>;
+      const formData=new FormData()
+      formData.append("data",JSON.stringify(fieldsValue))
+      formData.append("image",imageFile)
+      // console.log(formData.get());
+      // console.log(formData.get("data"));
+      // console.log(formData.get("image"));
+      const res = (await createUser(formData)) as TResponse<any>;
 
       if (res?.data) {
         toast.success("sign up success");
-        router.push("login")
+        router.push("login");
       } else {
         toast.error(res?.error?.data?.message);
       }
-    } catch (error) {
+    } catch (error: any) {
       toast.error(error?.message);
+    }
+  };
+
+  const handleImageSubmit = (e: any) => {
+    const file = e.target.files[0];
+
+    setImageFile(file);
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -53,22 +96,61 @@ const SignUp = () => {
           <TDForm onSubmit={handleSignUp}>
             <div className="space-y-2">
               <TDInput required={true} name="name" label="Name" />
-              <TDInput required={true}
+              <TDInput
+                required={true}
                 name="email"
                 label="Email"
                 type="email"
                 variant="bordered"
               />
               <TDInput required={true} name="phoneNumber" label="Number" />
-              <TDInput required={true} name="image" label="Image" />
+              <div className="flex gap-2">
+              <TDSelect label="Gender" name="gender" options={genderOptions}/>
+<TDInput required={true} name="age" label="age" type="number"/>
+              </div>
               <TDInput required={true} name="address" label="Address" />
-              <TDInput required={true} name="gender" label="Gender" />
-              <TDInput required={true}
+              <TDInput
+                required={true}
                 name="password"
                 label="Password"
                 type="password"
                 variant="bordered"
               />
+
+              <div className="   w-full  flex">
+                <label
+                  htmlFor="image"
+                  className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                >
+                  {imageFile ? (
+                    imageFile.name
+                  ) : (
+                    <span>
+                      Select Profile Image
+                      <span className="text-red-500">*</span>
+                    </span>
+                  )}
+                </label>
+              </div>
+              <input
+                type="file"
+                id="image"
+                onChange={(e) => handleImageSubmit(e)}
+                className="hidden"
+              />
+              <div>
+                {imagePreview && (
+                  <div>
+                    <Image
+                      src={imagePreview}
+                      alt="image"
+                      width={150}
+                      height={150}
+                      className="rounded-xl object-cover size-[150px]"
+                    />
+                  </div>
+                )}
+              </div>
               <Button color="primary" className="w-full" type="submit">
                 Signup
               </Button>

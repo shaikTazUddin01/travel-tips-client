@@ -25,7 +25,7 @@ const TDSelect = ({
   } = useFormContext();
   // console.log(errors);
   return (
-    <Select label={label} {...register(name)} className="max-w-xs">
+    <Select label={label} {...register(name)} className="w-full" variant="bordered" isRequired={true}>
       {options?.map((option) => (
         <SelectItem key={option.key}>{option.label}</SelectItem>
       ))}
