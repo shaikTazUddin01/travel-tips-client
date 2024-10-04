@@ -1,9 +1,15 @@
 "use client";
 import FollowCard from "@/src/components/ui/follow/FollowCard";
+import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import { Divider } from "@nextui-org/divider";
 import React from "react";
 
-const page = () => {
+const MyFollowing = () => {
+  const {data,isLoading}=useGetMyFollowingQuery(undefined)
+  if (isLoading) {
+return <p>Loading...</p>
+  }
+  console.log("--->",data?.data);
   return (
     <div>
       <div className="border-1  w-full rounded-xl">
@@ -27,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default MyFollowing;
