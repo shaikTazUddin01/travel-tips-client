@@ -6,8 +6,10 @@ import { IoMdAdd } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import CreatePost from "@/src/components/Home/CreatePost";
+import useUser from "@/src/hooks/user/useShowUser";
 
-const page = () => {
+const Profile = () => {
+  const {user}=useUser()
   return (
     <div>
       {/* main section */}
@@ -19,13 +21,13 @@ const page = () => {
         <div className="-mt-4 mx-5">
           <div className="flex gap-1 items-center">
             <Image
-              src="https://nextui.org/avatars/avatar-1.png"
+              src={user?.image}
               radius="full"
               className="size-[120px] border-3 border-white"
             />
             <div className="flex justify-between items-start flex-1">
               <div>
-                <h1 className="font-medium text-xl">Maisha Ahmed</h1>
+                <h1 className="font-medium text-xl">{user?.name}</h1>
                 <p className="text-sm text-default-600">@tazahmedcs23</p>
                 <p className="flex gap-4 text-blue-600 items-center">
                   <span>120 Followers</span>
@@ -73,4 +75,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Profile;

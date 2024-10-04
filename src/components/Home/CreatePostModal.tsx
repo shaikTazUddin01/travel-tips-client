@@ -19,6 +19,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
 import { TResponse } from "@/src/types";
 import { toast } from "sonner";
+import useUser from "@/src/hooks/user/useShowUser";
 
 interface IProps {
   buttonText: string;
@@ -41,7 +42,7 @@ export default function CreatePostModal({
 }: IProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const { isOpen, onOpen, onOpenChange, setIsOpen } = useDisclosure();
-
+const{user}=useUser()
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
   const [createPost] = useCreatePostMutation();
@@ -59,14 +60,9 @@ export default function CreatePostModal({
         };
 
         const res = (await createPost(postDetails)) as TResponse<any>;
-        // console.log(res?.data?.data?.accessToken);
         if (res?.data) {
           toast.success("post create success");
 
-          // console.log(res.data);
-          // onOpenChange(false);
-
-          // console.log(decoded);
         } else {
           toast.error(res?.error?.data?.message);
         }
@@ -100,10 +96,10 @@ export default function CreatePostModal({
                     isBordered
                     radius="full"
                     size="md"
-                    src="https://nextui.org/avatars/avatar-1.png"
+                    src={user?.image}
                   />
                   <div>
-                    <h1>Taz Uddin</h1>
+                    <h1>{user?.name}</h1>
                   </div>
                 </div>
               </ModalHeader>

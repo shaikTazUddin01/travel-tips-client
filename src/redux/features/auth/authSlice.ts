@@ -30,10 +30,15 @@ export const authSlice = createSlice({
       // console.log("--->", data);
       (state.user = data), (state.token = token);
     },
+    logout:(state)=>{
+      state.user=null;
+      state.token=null;
+
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { authInfo } = authSlice.actions;
+export const { authInfo ,logout} = authSlice.actions;
 
 export default authSlice.reducer;

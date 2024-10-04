@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import {
   Navbar as NextUINavbar,
   NavbarContent,
@@ -15,6 +15,7 @@ import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
+import { LuLogOut } from "react-icons/lu";
 
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/theme-switch";
@@ -26,9 +27,17 @@ import {
   SearchIcon,
   Logo,
 } from "@/src/assets/icons";
-import { Avatar } from "@nextui-org/react";
+import { Avatar, Divider } from "@nextui-org/react";
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/features/auth/authSlice";
+import { useState } from "react";
+import useUser from "../hooks/user/useShowUser";
+import { userInfo } from "os";
 
 export const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const [profileNavToggle, setProfileNavToggle] = useState(false);
+  const { user } = useUser();
   const searchInput = (
     <Input
       aria-label="Search"
@@ -50,6 +59,10 @@ export const Navbar = () => {
     />
   );
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <NextUINavbar maxWidth="xl" className="bg-white shadow-md fixed">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -62,7 +75,6 @@ export const Navbar = () => {
         </NavbarBrand>
         {/* search */}
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-        
       </NavbarContent>
       {/* theme switcher lg */}
       <NavbarContent
@@ -91,15 +103,50 @@ export const Navbar = () => {
           <NavbarItem className="hidden sm:flex gap-2">
             {/* <ThemeSwitch /> */}
             <Avatar
-                isBordered
-                radius="full"
-                size="md"
-                src="https://nextui.org/avatars/avatar-1.png"
-              />
+              isBordered
+              radius="full"
+              size="md"
+              src={user?.image}
+              onClick={() => setProfileNavToggle(!profileNavToggle)}
+            />
+            {/* toggle navbar */}
+            {profileNavToggle && (
+              <div className="min-w-[200px] min-h-[150px] border-1 shadow-lg p-5 absolute top-14 rounded-md right-0 bg-default-50">
+                <ul>
+                  <NavbarItem>
+                    <Link href="/profile" className="w-full">
+                      <div
+                        className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1"
+                        
+                      >
+                        <Avatar
+                          isBordered
+                          radius="full"
+                          size="sm"
+                          src={user?.image}
+                        />
+                        <span className="text-black text-sm">{user?.name}</span>
+                      </div>
+                    </Link>
+                    <Divider />
+                    <Button
+                      className="w-full flex items-center gap-2 justify-start"
+                      variant="light"
+                      onClick={() => handleLogout()}
+                    >
+                      <span>
+                        <LuLogOut />
+                      </span>
+                      <span>logout</span>
+                    </Button>
+                  </NavbarItem>
+                </ul>
+              </div>
+            )}
           </NavbarItem>
         </ul>
 
-                {/* <NavbarItem className="hidden sm:flex gap-2">
+        {/* <NavbarItem className="hidden sm:flex gap-2">
           <ThemeSwitch />
         </NavbarItem> */}
       </NavbarContent>

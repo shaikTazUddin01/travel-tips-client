@@ -7,7 +7,7 @@ import CreatePostModal from "./CreatePostModal";
 
 const CreatePost = () => {
   const { user } = useUser();
-  console.log(user);
+  
 
   return (
     <div className="w-full  rounded-xl shadow-lg py-2 border p-2 ">
@@ -16,7 +16,7 @@ const CreatePost = () => {
           isBordered
           radius="full"
           size="md"
-          src="https://nextui.org/avatars/avatar-1.png"
+          src={user?.image}
         />
         <CreatePostModal buttonText="Post Here , What&#39;s on your Mind?"
         btnClass="w-full rounded-full bg-transparent border-2 flex justify-start text-[17px] " size="lg"

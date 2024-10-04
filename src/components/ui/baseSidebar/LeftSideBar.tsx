@@ -7,8 +7,11 @@ import { TbBadgeFilled } from "react-icons/tb";
 import CreatePost from "../../Home/CreatePost";
 import CreatePostModal from "../../Home/CreatePostModal";
 import Link from "next/link";
+import useUser from "@/src/hooks/user/useShowUser";
 
 const LeftSideBar = () => {
+  const { user } = useUser();
+  
   return (
     <div className="px-4 py-3 flex flex-col gap-2">
       <Link href={'/profile'}>
@@ -17,10 +20,10 @@ const LeftSideBar = () => {
           isBordered
           radius="full"
           size="sm"
-          src="https://nextui.org/avatars/avatar-1.png"
+          src={user?.image}
         />
         <div>
-          <span>Taz Ahmed</span>
+          <span>{user?.name}</span>
         </div>
       </div>
       </Link>
