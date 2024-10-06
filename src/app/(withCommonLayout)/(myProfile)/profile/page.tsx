@@ -7,9 +7,13 @@ import { MdEdit } from "react-icons/md";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import CreatePost from "@/src/components/Home/CreatePost";
 import useUser from "@/src/hooks/user/useShowUser";
+import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
+import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
+import { TPost } from "@/src/types";
 
 const Profile = () => {
-  const {user}=useUser()
+  const { user } = useUser();
+  const { data: mypost, isLoading } = useGetMyPostQuery(undefined);
   return (
     <div>
       {/* main section */}
@@ -65,11 +69,27 @@ const Profile = () => {
       </div>
       {/* content section */}
       <div className="mt-5 mx-5">
-        <CreatePost/>
-        <div className="mt-5">
-        <NewsFeedCard />
-        <NewsFeedCard />
-        </div>
+        <CreatePost />
+
+        {isLoading ? (
+          Array(3)
+            .fill(null)
+            .map((_, index) => (
+              <div key={index}>
+                <LoadingSkeletor />
+              </div>
+            ))
+        ) : (
+          <div className="mt-5">
+            {mypost?.data?.map((data: TPost) => {
+              return (
+                <div key={data?._id}>
+                  <NewsFeedCard postItem={data} />
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

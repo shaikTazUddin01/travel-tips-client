@@ -14,7 +14,10 @@ const RightSideBar = () => {
     useGetMyFollowingQuery(undefined);
   const { user: myData } = useUser();
 
-  const followedUserIds = myFollowing?.data?.following?.map((item :TUser)=>{return item?._id}) || [];
+  const followedUserIds =
+    myFollowing?.data?.following?.map((item: TUser) => {
+      return item?._id;
+    }) || [];
   // console.log('object---',followedUserIds);
   // Filter out the current logged-in user and users already followed
   const allUserWithoutMeOrFollowing = allUsers?.data?.filter(
@@ -22,18 +25,18 @@ const RightSideBar = () => {
       user?._id !== myData?.userId && !followedUserIds.includes(user?._id)
   );
 
-// console.log("user--->",allUserWithoutMeOrFollowing);
+  // console.log("user--->",allUserWithoutMeOrFollowing);
 
   return (
     <div>
       <div>
-        {isLoading
-          ? Array(5).fill(null).map((_, index) => (
-                <div key={index}>
-                  <ShowMoreProfileLoading />
-                </div>
-              ))
-          : allUserWithoutMeOrFollowing?.length > 0 && <MoreProfile users={allUserWithoutMeOrFollowing}/>}
+        {isLoading ? (
+          <ShowMoreProfileLoading />
+        ) : (
+          allUserWithoutMeOrFollowing?.length > 0 && (
+            <MoreProfile users={allUserWithoutMeOrFollowing} />
+          )
+        )}
       </div>
       <div>
         <VerifyedProfile />

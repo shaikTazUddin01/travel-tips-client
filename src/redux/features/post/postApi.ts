@@ -14,7 +14,16 @@ export const postApi = baseApi.injectEndpoints({
       query: (query:string|undefined) => ({
         url: "/post/all-post",
         method: "GET",
-        params:{tags:query}
+        params:{type:query}
+        // body: data,
+      }),
+      providesTags:['Post']
+    }),
+    getMyPost: builder.query({
+      query: (query:string|undefined) => ({
+        url: "/post/my-post",
+        method: "GET",
+        params:{type:query}
         // body: data,
       }),
       providesTags:['Post']
@@ -32,4 +41,4 @@ export const postApi = baseApi.injectEndpoints({
  
 });
 
-export const {useCreatePostMutation,useGetPostQuery,useGetSpecificPostQuery} = postApi;
+export const {useCreatePostMutation,useGetPostQuery,useGetSpecificPostQuery,useGetMyPostQuery} = postApi;

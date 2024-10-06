@@ -39,7 +39,7 @@ export default function CreatePostModal({
   const { user } = useUser();
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
-  const [createPost] = useCreatePostMutation();
+  const [createPost,isLoading] = useCreatePostMutation();
   //  console.log(useDebounce(discription));
   const description = useDebounce(discription);
 
@@ -48,6 +48,7 @@ export default function CreatePostModal({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId=toast.loading("post creating....")
     try {
       if (description) {
         const formData = new FormData();
@@ -60,18 +61,15 @@ export default function CreatePostModal({
         formData.append("data", JSON.stringify(postDetails));
         formData.append("image", imageFile);
 
-        // console.log(formData.get('data'));
-        // console.log(formData.get('image'));
-
         const res = (await createPost(formData)) as TResponse<any>;
         if (res?.data) {
-          toast.success("post create success");
+          toast.success("post create success",{id:toastId,duration:1000});
         } else {
-          toast.error(res?.error?.data?.message);
+          toast.error(res?.error?.data?.message,{id:toastId});
         }
       }
     } catch (error: any) {
-      toast.error(error?.message);
+      toast.error(error?.message,{id:toastId});
     }
   };
 
@@ -104,7 +102,7 @@ export default function CreatePostModal({
         )}
         <span>{buttonText}</span>
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
         <ModalContent>
           {(onClose) => (
             <div className="min-h-[80vh]">
@@ -122,6 +120,7 @@ export default function CreatePostModal({
                 </div>
               </ModalHeader>
               <ModalBody>
+                
                 <QuillEditor setDiscription={setDiscription} />
                 <TDForm
                   onSubmit={onSubmit}
@@ -131,11 +130,13 @@ export default function CreatePostModal({
                     <TDSelect
                       name="category"
                       label="Category"
+                      required={true}
                       options={categoryOptions}
                     />
                     <TDSelect
                       name="type"
                       label="Content Type"
+                      required={true}
                       options={[
                         { key: "Premium", label: "Premiun" },
                         { key: "Non-Premium", label: "Non-Premiun" },

@@ -24,34 +24,29 @@ import useUser from "@/src/hooks/user/useShowUser";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   // const [isFollowed, setIsFollowed] = React.useState(false);
-  console.log(postItem);
-  const [iconClick,setIconClick]=useState(false)
-  const {user:currentUser}=useUser()
+  // console.log(postItem);
+  const [iconClick, setIconClick] = useState(false);
+  const { user: currentUser } = useUser();
   const {
     category,
     image,
     like,
     comment,
     postContent,
-    tags,
+    type,
     share,
     user,
     isVerify,
   } = postItem || {};
 
-  const handleIconClick=()=>{
-    setIconClick(!iconClick)
-  }
+  const handleIconClick = () => {
+    setIconClick(!iconClick);
+  };
   return (
     <Card className="w-full mb-6 border">
       <CardHeader className="justify-between">
         <div className="flex gap-3">
-          <Avatar
-            isBordered
-            radius="full"
-            size="md"
-            src={user?.image}
-          />
+          <Avatar isBordered radius="full" size="md" src={user?.image} />
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-[16px] font-semibold leading-none text-default-600 flex items-center ">
               <span>{user?.name}</span>
@@ -62,8 +57,8 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
               )}
             </h4>
             <h5 className="text-small tracking-tight text-default-400 flex items-center gap-1">
-              <span>{tags}</span>
-              {tags == "Premium" ? (
+              <span>{type}</span>
+              {type == "Premium" ? (
                 <span className="text-yellow-500">
                   <FaCrown />
                 </span>
@@ -75,37 +70,37 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </h5>
           </div>
         </div>
-        {
-          currentUser?.email !== user?.email ?
-        <Button className="rounded-full" size="sm" color="primary">
-          Follow
-        </Button>
-        :
-        <button className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center pb-2 px-2 " onClick={()=>handleIconClick()}>
+        <button
+          className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center pb-2 px-2 "
+          onClick={() => handleIconClick()}
+        >
           ...
         </button>
-          }
-          {
-            iconClick == true &&
-            <div
+
+        {iconClick == true && (
+          <div
             className={`w-[150px] h-10 rounded-xl p-2 bg-default-200 absolute top-[44px] right-5 transition-all duration-300 ease-in-out`}
           >
             {/* Your content goes here */}
           </div>
-       
-          }
+        )}
       </CardHeader>
-      <CardBody className="px-0 py-0 text-small">
+      <CardBody className="px-0 py-0 text-small w-[100%]">
         <div className="px-3 pb-3">
-        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postContent) }} />          
-          <span className="pt-2 text-default-500">#{category}</span>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(postContent),
+            }}
+          />
         </div>
-        <Image
-          alt="news"
-          className="object-cover px-0 w-full rounded-none"
-          src="https://nextui.org/images/hero-card-complete.jpeg"
-          //   width={270}
-        />
+        <span className="pl-2 text-default-500 mt-2">#{category}</span>
+        <div className="w-full ">
+          <Image
+            alt="post image"
+            className="object-cover w-[1000px] rounded-none h-[300px]"
+            src={image}
+          />
+        </div>
       </CardBody>
       <CardFooter className="gap-3 flex-col">
         <div className="flex w-full justify-between">

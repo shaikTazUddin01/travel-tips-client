@@ -13,7 +13,7 @@ const NewsFeed = () => {
     isFetching,
   } = useGetPostQuery(undefined);
 
-  console.log("postData-->", postData);
+  // console.log("postData-->", postData);
   return (
     <div>
       {isLoading

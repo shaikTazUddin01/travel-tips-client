@@ -6,7 +6,7 @@ export interface TPost {
     image: string;
     category: string;
     postContent: string;
-    tags: string;
+    type: string;
     like: number;
     comment: number;
     share: number;

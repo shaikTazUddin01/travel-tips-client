@@ -9,7 +9,7 @@ export default function Home() {
       <div className="mt-5">
         <NewsFeed/>
       </div>
-      {/* profile section */}
+      
     </div>
   );
 }

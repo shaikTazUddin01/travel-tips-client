@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -8,7 +8,6 @@ type TProps = {
 
 function QuillEditor({ setDiscription }: TProps) {
   const [value, setValue] = useState("");
-  
 
   //   console.log(value);
   //   setDiscription(value)
@@ -18,7 +17,7 @@ function QuillEditor({ setDiscription }: TProps) {
     setDiscription(value);
   };
 
-  return <ReactQuill theme="snow"  value={value} onChange={handleChange} />;
+  return <ReactQuill theme="snow" value={value} onChange={handleChange}/>
 }
 
 export default QuillEditor;
