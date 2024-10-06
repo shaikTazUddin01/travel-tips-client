@@ -15,22 +15,20 @@ import { useState } from "react";
 import TDSelect from "@/src/components/form/TDSelect";
 // import { readFile } from "fs";
 
-
-const genderOptions=[
+const genderOptions = [
   {
-    key:'Male',
-    label:"Male"
+    key: "Male",
+    label: "Male",
   },
   {
-    key:'Female',
-    label:"Female"
+    key: "Female",
+    label: "Female",
   },
   {
-    key:'Other',
-    label:"Other"
-  }
-]
-
+    key: "Other",
+    label: "Other",
+  },
+];
 
 const SignUp = () => {
   const [createUser, result] = useSignupApiMutation();
@@ -42,9 +40,9 @@ const SignUp = () => {
   // handle login
   const handleSignUp: SubmitHandler<FieldValues> = async (fieldsValue) => {
     try {
-      const formData=new FormData()
-      formData.append("data",JSON.stringify(fieldsValue))
-      formData.append("image",imageFile)
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(fieldsValue));
+      formData.append("image", imageFile);
       // console.log(formData.get());
       // console.log(formData.get("data"));
       // console.log(formData.get("image"));
@@ -105,8 +103,12 @@ const SignUp = () => {
               />
               <TDInput required={true} name="phoneNumber" label="Number" />
               <div className="flex gap-2">
-              <TDSelect label="Gender" name="gender" options={genderOptions}/>
-<TDInput required={true} name="age" label="age" type="number"/>
+                <TDSelect
+                  label="Gender"
+                  name="gender"
+                  options={genderOptions}
+                />
+                <TDInput required={true} name="age" label="age" type="number" />
               </div>
               <TDInput required={true} name="address" label="Address" />
               <TDInput

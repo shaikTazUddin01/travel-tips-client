@@ -8,6 +8,7 @@ import {
   Button,
   useDisclosure,
   Avatar,
+  Image,
 } from "@nextui-org/react";
 import { ReactNode, useState } from "react";
 import QuillEditor from "./QuillEditor";
@@ -17,19 +18,11 @@ import TDForm from "../form/TDForm";
 import TDInput from "../form/TDInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
-import { TResponse } from "@/src/types";
+import { IPostProps, TResponse } from "@/src/types";
 import { toast } from "sonner";
 import useUser from "@/src/hooks/user/useShowUser";
-
-interface IProps {
-  buttonText: string;
-  variant?:"light" | "flat" | "solid" | "bordered" | "faded" | "shadow" | "ghost" | undefined;
-  icon?: ReactNode;
-  iconColor?: string;
-  btnClass?: string;
-  size?: "sm" | "md" | "lg" | undefined;
-  btnColor?: "default" | "primary" | "secondary" | "success" | "warning" | "danger" | undefined;
-}
+import TDSelect from "../form/TDSelect";
+import { categoryOptions } from "@/src/utils/categoryOptions";
 
 export default function CreatePostModal({
   buttonText,
@@ -38,37 +31,64 @@ export default function CreatePostModal({
   btnClass,
   size,
   btnColor = "default",
-  variant="light"
-}: IProps) {
+  variant = "light",
+}: IPostProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const { isOpen, onOpen, onOpenChange, setIsOpen } = useDisclosure();
-const{user}=useUser()
+  const { user } = useUser();
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
   const [createPost] = useCreatePostMutation();
   //  console.log(useDebounce(discription));
   const description = useDebounce(discription);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data,event) => {
+  // image upload
+  const [imageFile, setImageFile] = useState<any>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       if (description) {
+        const formData=new FormData()
         const postDetails = {
-          image: data?.image,
+          // image: data?.image,
           postContent: description,
-          category: "Technology",
-          tags: "Premium",
+          category: data?.category,
+          type: data?.type,
         };
 
-        const res = (await createPost(postDetails)) as TResponse<any>;
+        formData.append("data",JSON.stringify(postDetails))
+        formData.append("image",imageFile)
+
+        console.log(formData.get('data'));
+        console.log(formData.get('image'));
+
+      
+
+        const res = (await createPost(formData)) as TResponse<any>;
         if (res?.data) {
           toast.success("post create success");
-
         } else {
           toast.error(res?.error?.data?.message);
         }
       }
     } catch (error: any) {
       toast.error(error?.message);
+    }
+  };
+
+  //handle image submit
+  const handleImageSubmit = (e: any) => {
+    const file = e.target.files[0];
+
+    setImageFile(file);
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -106,9 +126,60 @@ const{user}=useUser()
               <ModalBody>
                 <QuillEditor setDiscription={setDiscription} />
                 <TDForm onSubmit={onSubmit}>
-                  <TDInput label="Image" name="image" required={true} />
+                  <div className="space-y-2">
+                  <TDSelect
+                    name="category"
+                    label="Category"
+                    options={categoryOptions}
+                  />
+                  <TDSelect
+                    name="type"
+                    label="Content Type"
+                    options={[{key:'Premium',label:"Premiun"},{key:'Non-Premium',label:"Non-Premiun"},]}
+                  />
 
-                  <Button type="submit">post</Button>
+                  {/* image upload section */}
+
+                  <div className=" w-full  flex">
+                    <label
+                      htmlFor="image"
+                      className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                    >
+                      {imageFile ? (
+                        imageFile.name
+                      ) : (
+                        <span>
+                          Select Image
+                          <span className="text-red-500">*</span>
+                        </span>
+                      )}
+                    </label>
+                  </div>
+                  <input
+                    type="file"
+                    id="image"
+                    onChange={(e) => handleImageSubmit(e)}
+                    className="hidden"
+                  />
+                  <div>
+                    {imagePreview && (
+                      <div className="">
+                        <Image
+                          src={imagePreview}
+                          alt="image"
+                          width={150}
+                          height={150}
+                          className="rounded-xl object-cover size-[150px]"
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  <Button type="submit" className="w-full" color="primary">
+                    post
+                  </Button>
+                  </div>
+                  
                 </TDForm>
               </ModalBody>
             </div>

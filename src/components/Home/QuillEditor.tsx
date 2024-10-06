@@ -17,7 +17,7 @@ function QuillEditor({ setDiscription }: TProps) {
     setDiscription(value);
   };
 
-  return <ReactQuill theme="snow" value={value} onChange={handleChange} />;
+  return <ReactQuill theme="snow"  value={value} onChange={handleChange} />;
 }
 
 export default QuillEditor;
