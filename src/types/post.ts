@@ -7,7 +7,7 @@ export interface TPost {
     category: string;
     postContent: string;
     type: string;
-    like: number;
+    like: [string];
     comment: number;
     share: number;
     createdAt: string;

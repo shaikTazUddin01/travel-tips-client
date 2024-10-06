@@ -8,8 +8,8 @@ const ShowMoreProfileLoading = () => {
         {Array(4)
           .fill(null)
           .map((_, index) => (
-            <>
-              <div className="flex justify-between m-4">
+          
+              <div className="flex justify-between m-4" key={index}>
                 <div className="flex gap-3">
                   <Skeleton className="size-10 rounded-full" />
                   <div className="flex flex-col gap-1 items-start justify-center">
@@ -19,7 +19,7 @@ const ShowMoreProfileLoading = () => {
                 </div>
                 <Skeleton className="h-6 w-[60px] rounded-full mt-2" />
               </div>
-            </>
+          
           ))}
       </div>
     </>
