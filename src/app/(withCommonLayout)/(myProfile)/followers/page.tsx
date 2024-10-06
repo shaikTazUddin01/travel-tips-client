@@ -3,13 +3,15 @@ import FollowCard from "@/src/components/ui/follow/FollowCard";
 import { useGetMyFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 import { TUser } from "@/src/types";
 import { Divider } from "@nextui-org/divider";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const Followers = () => {
+  const pathname=usePathname()
   const {data:followersData,isLoading}=useGetMyFollowersQuery(undefined)
   const followers=followersData?.data?.followers
 
-console.log(followers);
+// console.log(followers);
 
   return (
     <div>
@@ -22,7 +24,7 @@ console.log(followers);
         <div className="mt-2">
           {
             
-              followers?.map((follower :TUser)=><FollowCard key={follower?._id} people={follower}/>)
+              followers?.map((follower :TUser)=><FollowCard key={follower?._id} people={follower} pathname={pathname}/>)
             
           }
        {/* <FollowCard/>

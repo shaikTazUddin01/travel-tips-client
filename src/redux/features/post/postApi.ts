@@ -19,9 +19,17 @@ export const postApi = baseApi.injectEndpoints({
       }),
       providesTags:['Post']
     }),
+    getSpecificPost: builder.query({
+      query: (id) => ({
+        url: `/post/getSpecificUserPost/${id}`,
+        method: "GET",
+        // body: data,
+      }),
+      providesTags:['Post']
+    }),
     
     }),
  
 });
 
-export const {useCreatePostMutation,useGetPostQuery} = postApi;
+export const {useCreatePostMutation,useGetPostQuery,useGetSpecificPostQuery} = postApi;

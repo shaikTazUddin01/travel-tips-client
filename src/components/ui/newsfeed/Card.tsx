@@ -24,6 +24,7 @@ import useUser from "@/src/hooks/user/useShowUser";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   // const [isFollowed, setIsFollowed] = React.useState(false);
+  console.log(postItem);
   const [iconClick,setIconClick]=useState(false)
   const {user:currentUser}=useUser()
   const {

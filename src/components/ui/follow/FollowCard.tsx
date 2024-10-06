@@ -1,8 +1,9 @@
 import { TUser } from '@/src/types';
 import { Avatar, Button, Divider } from '@nextui-org/react';
+import Link from 'next/link';
 import React from 'react';
 
-const FollowCard = ({people}:any) => {
+const FollowCard = ({people,pathname}:any) => {
 console.log(people);
   return (
         <div className="w-full px-5 mt-3">
@@ -23,7 +24,10 @@ console.log(people);
                 </h5>
               </div>
             </div>
+            <Link href={`${pathname}/${people._id}`}>
+            
             <Button variant="bordered" className="rounded-full">View Profile</Button>
+            </Link>
           </div>
           <div className="mt-3">
           <Divider/>

@@ -7,7 +7,7 @@ import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
 
-const FollowersProfile = () => {
+const FollowingProfile = () => {
   const { id } = useParams();
   // get followers info
   const { data: userData, isLoading:userLoading } = useGetSingleUserQuery(id as string);
@@ -58,4 +58,4 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
   );
 };
 
-export default FollowersProfile;
+export default FollowingProfile;

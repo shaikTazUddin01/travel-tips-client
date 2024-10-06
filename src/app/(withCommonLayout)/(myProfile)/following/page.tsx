@@ -4,10 +4,12 @@ import FollowCard from "@/src/components/ui/follow/FollowCard";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import { TUser } from "@/src/types";
 import { Divider } from "@nextui-org/divider";
+import { usePathname } from "next/navigation";
 import React from "react";
-
 const MyFollowing = () => {
+const pathname=usePathname()  
   const { data, isLoading } = useGetMyFollowingQuery(undefined);
+  console.log(pathname);
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -24,7 +26,7 @@ const MyFollowing = () => {
         {/* followers */}
         <div className="mt-2">
           {
-           followings?.length >0 ? followings?.map((followingPeople:TUser)=>(<FollowCard key={followingPeople?._id} people={followingPeople}/>))
+           followings?.length >0 ? followings?.map((followingPeople:TUser)=>(<FollowCard key={followingPeople?._id} people={followingPeople} pathname={pathname}/>))
            :
            <div>
             <h1 className="text-center py-2">Yor Are Not Following Any Person.!</h1>

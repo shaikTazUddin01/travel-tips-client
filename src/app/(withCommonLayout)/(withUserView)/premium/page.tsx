@@ -17,21 +17,26 @@ const PremiumContent = () => {
   console.log("postData-->", postData);
   return (
     <div>
-      {isLoading
-        ? Array(3)
-            .fill(null)
-            .map((_, index) => (
-              <div key={index}>
-                <LoadingSkeletor />
-              </div>
-            ))
-        : postData?.data?.map((data: TPost) => {
-            return (
-              <div key={data?._id}>
-                <NewsFeedCard postItem={data} />
-              </div>
-            );
-          })}
+      <div>
+        <CreatePost />
+      </div>
+      <div className="mt-5">
+        {isLoading
+          ? Array(3)
+              .fill(null)
+              .map((_, index) => (
+                <div key={index}>
+                  <LoadingSkeletor />
+                </div>
+              ))
+          : postData?.data?.map((data: TPost) => {
+              return (
+                <div key={data?._id}>
+                  <NewsFeedCard postItem={data} />
+                </div>
+              );
+            })}
+      </div>
     </div>
   );
 };
