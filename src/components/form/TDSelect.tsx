@@ -17,15 +17,17 @@ const TDSelect = ({
   options,
   // type = "text",
   // variant = "bordered",
-  // required = false,
+  required = false,
 }: IProps) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
-  // console.log(errors);
+  console.log(errors);
   return (
-    <Select label={label} {...register(name)} className="w-full" variant="bordered" isRequired={true}>
+    <Select label={label} {...register(name)} className="w-full" variant="bordered" isRequired={required}
+    isInvalid={!!errors[name]}
+    errorMessage={ errors[name]?.message as string | undefined }>
       {options?.map((option) => (
         <SelectItem key={option.key}>{option.label}</SelectItem>
       ))}

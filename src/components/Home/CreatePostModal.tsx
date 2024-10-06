@@ -10,7 +10,8 @@ import {
   Avatar,
   Image,
 } from "@nextui-org/react";
-import { ReactNode, useState } from "react";
+import {  useState } from "react";
+
 import QuillEditor from "./QuillEditor";
 import useDebounce from "@/src/hooks/useDebounce";
 import { delay } from "framer-motion";
@@ -49,21 +50,18 @@ export default function CreatePostModal({
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
       if (description) {
-        const formData=new FormData()
+        const formData = new FormData();
         const postDetails = {
-          // image: data?.image,
           postContent: description,
           category: data?.category,
           type: data?.type,
         };
 
-        formData.append("data",JSON.stringify(postDetails))
-        formData.append("image",imageFile)
+        formData.append("data", JSON.stringify(postDetails));
+        formData.append("image", imageFile);
 
-        console.log(formData.get('data'));
-        console.log(formData.get('image'));
-
-      
+        // console.log(formData.get('data'));
+        // console.log(formData.get('image'));
 
         const res = (await createPost(formData)) as TResponse<any>;
         if (res?.data) {
@@ -125,61 +123,59 @@ export default function CreatePostModal({
               </ModalHeader>
               <ModalBody>
                 <QuillEditor setDiscription={setDiscription} />
-                <TDForm onSubmit={onSubmit}>
-                  <div className="space-y-2">
-                  <TDSelect
-                    name="category"
-                    label="Category"
-                    options={categoryOptions}
-                  />
-                  <TDSelect
-                    name="type"
-                    label="Content Type"
-                    options={[{key:'Premium',label:"Premiun"},{key:'Non-Premium',label:"Non-Premiun"},]}
-                  />
-
-                  {/* image upload section */}
-
-                  <div className=" w-full  flex">
-                    <label
-                      htmlFor="image"
-                      className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
-                    >
-                      {imageFile ? (
-                        imageFile.name
-                      ) : (
-                        <span>
-                          Select Image
-                          <span className="text-red-500">*</span>
-                        </span>
-                      )}
-                    </label>
-                  </div>
-                  <input
-                    type="file"
-                    id="image"
-                    onChange={(e) => handleImageSubmit(e)}
-                    className="hidden"
-                  />
-                  <div>
-                    {imagePreview && (
-                      <div className="">
-                        <Image
-                          src={imagePreview}
-                          alt="image"
-                          width={150}
-                          height={150}
-                          className="rounded-xl object-cover size-[150px]"
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  <Button type="submit" className="w-full" color="primary">
-                    post
-                  </Button>
-                  </div>
+                <TDForm
+                  onSubmit={onSubmit}
                   
+                >
+                  <div className="space-y-2">
+                    <TDSelect
+                      name="category"
+                      label="Category"
+                      options={categoryOptions}
+                    />
+                    <TDSelect
+                      name="type"
+                      label="Content Type"
+                      options={[
+                        { key: "Premium", label: "Premiun" },
+                        { key: "Non-Premium", label: "Non-Premiun" },
+                      ]}
+                    />
+
+                    {/* image upload section */}
+
+                    <div className=" w-full  flex">
+                      <label
+                        htmlFor="image"
+                        className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                      >
+                        {imageFile ? imageFile.name : "select image"}
+                      </label>
+                    </div>
+                    <input
+                      type="file"
+                      id="image"
+                      onChange={(e) => handleImageSubmit(e)}
+                      className="hidden"
+                    />
+                    <div>
+                      {imagePreview && (
+                        <div className="">
+                          <Image
+                            src={imagePreview}
+                            alt="image"
+                            width={150}
+                            height={150}
+                            className="rounded-xl object-cover size-[150px]"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    <Button type="submit" className="w-full" color="primary">
+                      post
+                    </Button>
+                  </div>
                 </TDForm>
               </ModalBody>
             </div>

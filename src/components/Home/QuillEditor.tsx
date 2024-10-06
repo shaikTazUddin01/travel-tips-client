@@ -8,6 +8,7 @@ type TProps = {
 
 function QuillEditor({ setDiscription }: TProps) {
   const [value, setValue] = useState("");
+  
 
   //   console.log(value);
   //   setDiscription(value)

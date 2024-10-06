@@ -14,6 +14,8 @@ import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginValidation } from "@/src/validation/loginValidation";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
 const Login = () => {
@@ -59,19 +61,22 @@ const router=useRouter()
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
             <p>Login with Email</p>
           </div>
-          <TDForm onSubmit={handleLogin}>
-            <div className="space-y-2">
+          <TDForm onSubmit={handleLogin} resolver={zodResolver(loginValidation)}>
+            <div className="space-y-2 text-left" >
               <TDInput
                 name="email"
                 label="Email"
                 type="email"
                 variant="bordered"
+                required={true}
               />
               <TDInput
                 name="password"
                 label="Password"
                 type="password"
                 variant="bordered"
+                required={true}
+
               />
               <Button color="primary" className="w-full" type="submit">
                 Login

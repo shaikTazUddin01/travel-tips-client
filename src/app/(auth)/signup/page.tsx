@@ -12,7 +12,9 @@ import { toast } from "sonner";
 import { TResponse } from "@/src/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import{zodResolver} from '@hookform/resolvers/zod'
 import TDSelect from "@/src/components/form/TDSelect";
+import { signupValidation } from "@/src/validation/signupValidation";
 // import { readFile } from "fs";
 
 const genderOptions = [
@@ -39,13 +41,11 @@ const SignUp = () => {
   // console.log(imagePreview);
   // handle login
   const handleSignUp: SubmitHandler<FieldValues> = async (fieldsValue) => {
+    console.log(fieldsValue);
     try {
       const formData = new FormData();
       formData.append("data", JSON.stringify(fieldsValue));
       formData.append("image", imageFile);
-      // console.log(formData.get());
-      // console.log(formData.get("data"));
-      // console.log(formData.get("image"));
       const res = (await createUser(formData)) as TResponse<any>;
 
       if (res?.data) {
@@ -91,22 +91,31 @@ const SignUp = () => {
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
             <p>signup with your Information</p>
           </div>
-          <TDForm onSubmit={handleSignUp}>
-            <div className="space-y-2">
-              <TDInput required={true} name="name" label="Name" />
-              <TDInput
+          <TDForm onSubmit={handleSignUp} resolver={zodResolver(signupValidation)}>
+            <div className="space-y-2 text-left">
+              {/* <TDInput required={true} name="name" type="text" label="Name" /> */}
+               <TDInput
+                required={true}
+                name="name"
+                label="Name"
+                type="text"
+                variant="bordered"
+              />
+               <TDInput
                 required={true}
                 name="email"
                 label="Email"
                 type="email"
                 variant="bordered"
               />
-              <TDInput required={true} name="phoneNumber" label="Number" />
+              
+              <TDInput required={true} name="phoneNumber" label="Phone Number" />
               <div className="flex gap-2">
                 <TDSelect
                   label="Gender"
                   name="gender"
                   options={genderOptions}
+                  required={true}
                 />
                 <TDInput required={true} name="age" label="age" type="number" />
               </div>
@@ -129,7 +138,7 @@ const SignUp = () => {
                   ) : (
                     <span>
                       Select Profile Image
-                      <span className="text-red-500">*</span>
+                      
                     </span>
                   )}
                 </label>

@@ -21,7 +21,9 @@ const TDInput = ({
     register,
     formState: { errors },
   } = useFormContext();
-  // console.log(errors);
+
+console.log(errors);
+
   return (
     <Input
       type={type}
@@ -29,7 +31,7 @@ const TDInput = ({
       variant={variant}
       {...register(name)}
       isInvalid={!!errors[name]}
-      errorMessage={errors[name] ? (errors[name].message as string) : ""}
+      errorMessage={ errors[name]?.message as string | undefined }
       isRequired={required}
     />
   );
