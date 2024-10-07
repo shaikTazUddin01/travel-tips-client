@@ -33,7 +33,7 @@ const genderOptions = [
 ];
 
 const SignUp = () => {
-  const [createUser, result] = useSignupApiMutation();
+  const [createUser, {isLoading}] = useSignupApiMutation();
   const [imageFile, setImageFile] = useState<any>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const router = useRouter();
@@ -41,7 +41,7 @@ const SignUp = () => {
   // console.log(imagePreview);
   // handle login
   const handleSignUp: SubmitHandler<FieldValues> = async (fieldsValue) => {
-    console.log(fieldsValue);
+    // console.log(fieldsValue);
     try {
       const formData = new FormData();
       formData.append("data", JSON.stringify(fieldsValue));
@@ -162,9 +162,16 @@ const SignUp = () => {
                   </div>
                 )}
               </div>
-              <Button color="primary" className="w-full" type="submit">
+              {
+                isLoading?
+                <Button color="primary" className="w-full" isLoading>
+              </Button>
+                :
+                <Button color="primary" className="w-full" type="submit">
                 Signup
               </Button>
+              }
+              
             </div>
           </TDForm>
           <p>

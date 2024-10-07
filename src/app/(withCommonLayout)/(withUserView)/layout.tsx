@@ -10,7 +10,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       <div className="relative flex flex-col min-h-screen">
         {/* <Navbar /> */}
         <main className="container mx-auto max-w-7xl px-6 flex-grow ">
-          <div className="flex flex-col lg:flex-row gap-10 border  ">
+          <div className="flex flex-col lg:flex-row gap-10 ">
             {/* left sidebar */}
             <div
               className="w-[100%] lg:w-[25%] border shadow-md rounded-xl lg:h-[85vh] lg:sticky top-20 overflow-y-auto 
