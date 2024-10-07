@@ -25,6 +25,7 @@ import {
   useDeleteSpecificPostMutation,
   useGetPostQuery,
 } from "@/src/redux/features/post/postApi";
+import AdminUpdatePost from "@/src/components/ui/post/AdminUpdatePost";
 
 export default function ContentManagement() {
   const { data: allPost } = useGetPostQuery(undefined);
@@ -88,15 +89,10 @@ export default function ContentManagement() {
                 </span>
               </TableCell>
               <TableCell>{post?.like?.length}</TableCell>
-              {/* <TableCell>{user?.isVerify}</TableCell> */}
-              {/* <TableCell
-                className={`${user?.status == "Active" ? "text-green-500" : "text-red-500"}`}
-              >
-                {user?.status}
-              </TableCell> */}
+             
               <TableCell className="flex gap-2">
                 {/* edit user */}
-                {/* <EditUser data={post} id={user?._id as string} /> */}
+                <AdminUpdatePost data={post} id={post?._id as string} />
                 {/* delete user */}
                 <Button
                   className="text-xl text-red-500"

@@ -63,6 +63,7 @@ export default function CreatePostModal({
         const res = (await createPost(formData)) as TResponse<any>;
         if (res?.data) {
           toast.success("post create success",{id:toastId,duration:1000});
+          onOpenChange()
         } else {
           toast.error(res?.error?.data?.message,{id:toastId});
         }

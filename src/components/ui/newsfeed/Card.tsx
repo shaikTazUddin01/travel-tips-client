@@ -27,15 +27,26 @@ import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
-import { TPost } from "@/src/types";
-import { useUpvoteDownvoteMutation } from "@/src/redux/features/post/postApi";
+import { TPost, TResponse } from "@/src/types";
+import {
+  useCommentToPostMutation,
+  useUpvoteDownvoteMutation,
+} from "@/src/redux/features/post/postApi";
+import TDForm from "../../form/TDForm";
+import TDInput from "../../form/TDInput";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import CommentBox from "./CommentBox";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
+  const [isClickToComment, setIsClickToComment] = useState(false);
   const [upvoteDownvote, { isLoading: upDoLoading }] =
     useUpvoteDownvoteMutation();
+  // comment to post
+  const [postComment] = useCommentToPostMutation();
   const [isUpvote, setIsUpvote] = useState<boolean>();
-  // const =useState('')
-  // const { user: currentUser } = useUser();
+  // show comment under ther post
+  const [showComment, setShowComment] = useState(false);
+
   const {
     category,
     image,
@@ -45,7 +56,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     type,
     share,
     user,
-    isVerify,
+    // isVerify,
     _id,
   } = postItem || {};
 
@@ -66,6 +77,16 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     setIsUpvote(!!isUserUpvote);
   }, [isUserUpvote]);
 
+  // handle comment submit
+  const handleCommentSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const commentInFo = {
+      postId: _id,
+      comment: data?.comment,
+    };
+    const res = (await postComment(commentInFo)) as TResponse<any>;
+    console.log(res);
+  };
+
   return (
     <Card className="w-full mb-6 border">
       <CardHeader className="justify-between">
@@ -74,7 +95,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-[16px] font-semibold leading-none text-default-600 flex items-center ">
               <span>{user?.name}</span>
-              {isVerify && (
+              {user?.isVerify && (
                 <span className="text-blue-600">
                   <BiSolidBadgeCheck />
                 </span>
@@ -140,50 +161,59 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </span>{" "}
             <span>{like?.length}</span>
           </h1>
-          <h1 className="flex items-center gap-1">
+          <button
+            className="flex items-center gap-1"
+            onClick={()=>setShowComment(!showComment)}
+          >
             <span>
               <FaComment />
             </span>{" "}
-            <span>{comment}</span>
-          </h1>
+            <span>{comment?.length}</span>
+          </button>
         </div>
 
         <Divider />
         <div className="flex w-full justify-between gap-10">
           {/* like section */}
-          {
-            upDoLoading ?
-            <Button  isLoading
-            className="flex-1 text-[16px]"
-            size="sm" variant="flat" />
-      :
+          {upDoLoading ? (
+            <Button
+              isLoading
+              className="flex-1 text-[16px]"
+              size="sm"
+              variant="flat"
+            />
+          ) : (
+            <Button
+              className="flex-1 text-[16px]"
+              size="sm"
+              variant="flat"
+              onClick={() => handleUpvote(_id)}
+            >
+              {isUpvote ? (
+                <span className="flex gap-1 items-center text-blue-600 ">
+                  <span className="text-xl">
+                    <AiFillLike />
+                  </span>
+                  <span className="font-medium">Like</span>
+                </span>
+              ) : (
+                <span className="flex gap-1 items-center">
+                  <span className="text-xl">
+                    <AiOutlineLike />
+                  </span>
+                  <span className="">Like</span>
+                </span>
+              )}
+            </Button>
+          )}
+
+          {/* comment section */}
           <Button
             className="flex-1 text-[16px]"
             size="sm"
             variant="flat"
-            onClick={() => handleUpvote(_id)}
+            onClick={() => setIsClickToComment(!isClickToComment)}
           >
-            {isUpvote ? (
-              <span className="flex gap-1 items-center text-blue-600 ">
-                <span className="text-xl">
-                  <AiFillLike />
-                </span>
-                <span className="font-medium">Like</span>
-              </span>
-            ) : (
-              <span className="flex gap-1 items-center">
-                <span className="text-xl">
-                  <AiOutlineLike />
-                </span>
-                <span className="">Like</span>
-              </span>
-            )}
-          </Button>
-          }
-
-          {/* comment section */}
-
-          <Button className="flex-1 text-[16px]" size="sm" variant="flat">
             <span className="text-xl">
               <FaRegComment />
             </span>{" "}
@@ -197,6 +227,20 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           </Button>
         </div>
       </CardFooter>
+      {/* showing comment */}
+      {showComment ? <CommentBox comment={comment} /> : ""}
+      {/* handle comment */}
+      {isClickToComment && (
+        <div className="p-5">
+          <TDForm onSubmit={handleCommentSubmit}>
+            <TDInput label="comment" name="comment" />
+
+            <div className="flex justify-end">
+              <Button type="submit">submit</Button>
+            </div>
+          </TDForm>
+        </div>
+      )}
     </Card>
   );
 }

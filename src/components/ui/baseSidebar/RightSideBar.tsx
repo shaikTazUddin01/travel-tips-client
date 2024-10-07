@@ -50,7 +50,7 @@ const RightSideBar = () => {
         )}
       </div>
       <div>
-        <VerifyedProfile />
+        {/* <VerifyedProfile /> */}
       </div>
     </div>
   );

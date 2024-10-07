@@ -54,6 +54,24 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    // get specific data
+    updateSpecificPost: builder.mutation({
+      query: (data) => ({
+        url: "/post/updatePost",
+        method: "PATCH",
+        body:data
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    // comment post
+    commentToPost: builder.mutation({
+      query: (data) => ({
+        url: "/post/comment",
+        method: "POST",
+        body:data
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -63,5 +81,7 @@ export const {
   useGetSpecificPostQuery,
   useGetMyPostQuery,
   useUpvoteDownvoteMutation,
-  useDeleteSpecificPostMutation
+  useDeleteSpecificPostMutation,
+  useUpdateSpecificPostMutation,
+  useCommentToPostMutation
 } = postApi;
