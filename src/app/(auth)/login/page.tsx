@@ -1,20 +1,21 @@
 "use client";
-import loginImage from "@/src/assets/travelLogin.jpg";
-import login1 from "@/src/assets/login1.jpg";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import loginImage from "@/src/assets/travelLogin.jpg";
+import login1 from "@/src/assets/login1.jpg";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
 import { useLoginApiMutation } from "@/src/redux/features/auth/authApi";
 import { TResponse } from "@/src/types";
-import { toast } from "sonner";
 import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { loginValidation } from "@/src/validation/loginValidation";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
@@ -51,9 +52,9 @@ const router=useRouter()
       <div className="bg-white rounded-2xl h-full  grid grid-cols-2 shadow items-center  mx-auto">
         <div>
           <Image
-            src={loginImage}
-            className="rounded-2xl object-cover w-full h-full"
             alt="login image"
+            className="rounded-2xl object-cover w-full h-full"
+            src={loginImage}
           />
         </div>
         <div className="text-center mx-auto w-[80%] p-10">
@@ -61,24 +62,24 @@ const router=useRouter()
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
             <p>Login with Email</p>
           </div>
-          <TDForm onSubmit={handleLogin} resolver={zodResolver(loginValidation)}>
+          <TDForm resolver={zodResolver(loginValidation)} onSubmit={handleLogin}>
             <div className="space-y-2 text-left" >
               <TDInput
-                name="email"
                 label="Email"
+                name="email"
+                required={true}
                 type="email"
                 variant="bordered"
-                required={true}
               />
               <TDInput
-                name="password"
                 label="Password"
+                name="password"
+                required={true}
                 type="password"
                 variant="bordered"
-                required={true}
 
               />
-              <Button color="primary" className="w-full" type="submit">
+              <Button className="w-full" color="primary" type="submit">
                 Login
               </Button>
             </div>
@@ -86,8 +87,8 @@ const router=useRouter()
           <p>
             I Don&#39;t have an accout.?{" "}
             <Link
-              href={"/signup"}
               className="text-blue-800 mt-1 hover:text-blue-700"
+              href={"/signup"}
             >
               Sign Up
             </Link>

@@ -4,25 +4,24 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
   Avatar,
   Image,
 } from "@nextui-org/react";
 import {  useState } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
+
+import TDForm from "../form/TDForm";
+import TDSelect from "../form/TDSelect";
 
 import QuillEditor from "./QuillEditor";
+
 import useDebounce from "@/src/hooks/useDebounce";
-import { delay } from "framer-motion";
-import TDForm from "../form/TDForm";
-import TDInput from "../form/TDInput";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
 import { IPostProps, TResponse } from "@/src/types";
-import { toast } from "sonner";
 import useUser from "@/src/hooks/user/useShowUser";
-import TDSelect from "../form/TDSelect";
 import { categoryOptions } from "@/src/utils/categoryOptions";
 
 export default function CreatePostModal({
@@ -91,11 +90,11 @@ export default function CreatePostModal({
   return (
     <>
       <Button
+        className={`${btnClass ? btnClass : "w-full"}`}
         color={btnColor}
+        size={`${size ? size : "md"}`}
         variant={variant}
         onPress={onOpen}
-        className={`${btnClass ? btnClass : "w-full"}`}
-        size={`${size ? size : "md"}`}
       >
         {icon && iconColor && (
           <span className={`${iconColor} text-xl`}>{icon}</span>
@@ -128,52 +127,52 @@ export default function CreatePostModal({
                 >
                   <div className="space-y-2">
                     <TDSelect
-                      name="category"
                       label="Category"
-                      required={true}
+                      name="category"
                       options={categoryOptions}
+                      required={true}
                     />
                     <TDSelect
-                      name="type"
                       label="Content Type"
-                      required={true}
+                      name="type"
                       options={[
                         { key: "Premium", label: "Premiun" },
                         { key: "Non-Premium", label: "Non-Premiun" },
                       ]}
+                      required={true}
                     />
 
                     {/* image upload section */}
 
                     <div className=" w-full  flex">
                       <label
-                        htmlFor="image"
                         className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                        htmlFor="image"
                       >
                         {imageFile ? imageFile.name : "select image"}
                       </label>
                     </div>
                     <input
-                      type="file"
-                      id="image"
-                      onChange={(e) => handleImageSubmit(e)}
                       className="hidden"
+                      id="image"
+                      type="file"
+                      onChange={(e) => handleImageSubmit(e)}
                     />
                     <div>
                       {imagePreview && (
                         <div className="">
                           <Image
-                            src={imagePreview}
                             alt="image"
-                            width={150}
-                            height={150}
                             className="rounded-xl object-cover size-[150px]"
+                            height={150}
+                            src={imagePreview}
+                            width={150}
                           />
                         </div>
                       )}
                     </div>
 
-                    <Button type="submit" className="w-full" color="primary">
+                    <Button className="w-full" color="primary" type="submit">
                       post
                     </Button>
                   </div>

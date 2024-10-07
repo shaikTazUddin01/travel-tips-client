@@ -1,9 +1,11 @@
 "use client";
-import useUser from "@/src/hooks/user/useShowUser";
-import { Avatar, Button } from "@nextui-org/react";
-import { FaCalendar,  FaCalendarDay,  FaRegImages } from "react-icons/fa6";
+import { Avatar } from "@nextui-org/react";
+import {  FaCalendarDay,  FaRegImages } from "react-icons/fa6";
 import { PiArticleNyTimesFill } from "react-icons/pi";
+
 import CreatePostModal from "./CreatePostModal";
+
+import useUser from "@/src/hooks/user/useShowUser";
 
 const CreatePost = () => {
   const { user } = useUser();
@@ -18,11 +20,11 @@ const CreatePost = () => {
           size="md"
           src={user?.image}
         />
-        <CreatePostModal buttonText="Post Here , What&#39;s on your Mind?"
-        btnClass="w-full rounded-full bg-transparent border-2 flex justify-start text-sm lg:text-[17px] " size="lg"
+        <CreatePostModal btnClass="w-full rounded-full bg-transparent border-2 flex justify-start text-sm lg:text-[17px] "
+        buttonText="Post Here , What&#39;s on your Mind?" size="lg"
         />
       </div>
-      <div className="h-[1px] bg-slate-300 mx-5 mt-3"></div>
+      <div className="h-[1px] bg-slate-300 mx-5 mt-3" />
       
       <div className="flex flex-col lg:flex-row justify-between px-10 items-center mt-2">
         {/* <div className="flex items-center gap-2 hover:bg-slate-200 px-4 py-1 rounded-md cursor-pointer">

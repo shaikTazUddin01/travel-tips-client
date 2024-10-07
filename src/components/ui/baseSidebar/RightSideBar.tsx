@@ -1,14 +1,15 @@
 "use client";
 
-import { useAlluserQuery, useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import MoreProfile from "../moreProfiles/MoreProfile";
 import VerifyedProfile from "../moreProfiles/VerifyedProfile";
+import ShowMoreProfileLoading from "../LoadingSkeleton/ShowMoreProfileLoading";
+import VerifyAccount from "../verifyAccount/VerifyAccount";
+
+import { useAlluserQuery, useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import useUser from "@/src/hooks/user/useShowUser";
 import { TUser } from "@/src/types";
-import ShowMoreProfileLoading from "../LoadingSkeleton/ShowMoreProfileLoading";
-import { Button } from "@nextui-org/button";
-import VerifyAccount from "../verifyAccount/VerifyAccount";
+
 
 const RightSideBar = () => {
   const { data: allUsers, isLoading } = useAlluserQuery(undefined);

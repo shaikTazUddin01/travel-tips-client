@@ -46,6 +46,14 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    // get specific data
+    deleteSpecificPost: builder.mutation({
+      query: (id) => ({
+        url: `/post/delete-post/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -54,5 +62,6 @@ export const {
   useGetPostQuery,
   useGetSpecificPostQuery,
   useGetMyPostQuery,
-  useUpvoteDownvoteMutation
+  useUpvoteDownvoteMutation,
+  useDeleteSpecificPostMutation
 } = postApi;

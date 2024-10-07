@@ -21,13 +21,13 @@ import { FaCrown, FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
 import { FaComment } from "react-icons/fa6";
 import { AiFillLike } from "react-icons/ai";
-import { TPost } from "@/src/types";
 import { MdOutlinePublic } from "react-icons/md";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import useUser from "@/src/hooks/user/useShowUser";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
+import { TPost } from "@/src/types";
 import { useUpvoteDownvoteMutation } from "@/src/redux/features/post/postApi";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
@@ -99,9 +99,9 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           <DropdownTrigger>
             <Button
               className="text-xl font-semibold"
-              variant="light"
-              size="sm"
               radius="full"
+              size="sm"
+              variant="light"
             >
               <BsThreeDots />
             </Button>
@@ -153,10 +153,9 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           {/* like section */}
           {
             upDoLoading ?
-            <Button  className="flex-1 text-[16px]"
-            size="sm"
-            variant="flat" isLoading>
-          </Button>
+            <Button  isLoading
+            className="flex-1 text-[16px]"
+            size="sm" variant="flat" />
       :
           <Button
             className="flex-1 text-[16px]"

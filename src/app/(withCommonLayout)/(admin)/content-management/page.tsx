@@ -15,23 +15,27 @@ import { AiFillDelete } from "react-icons/ai";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
-import { TResponse, TUser } from "@/src/types";
+import { TPost, TResponse, TUser } from "@/src/types";
 import {
   useAlluserQuery,
   useDeleteUserMutation,
 } from "@/src/redux/features/user/userApi";
 import EditUser from "@/src/components/ui/allUser/EditUser";
+import {
+  useDeleteSpecificPostMutation,
+  useGetPostQuery,
+} from "@/src/redux/features/post/postApi";
 
-export default function AllUser() {
-  const { data: allUser } = useAlluserQuery(undefined);
-  const [deleteUser] = useDeleteUserMutation();
+export default function ContentManagement() {
+  const { data: allPost } = useGetPostQuery(undefined);
+  const [deletePost] = useDeleteSpecificPostMutation();
 
-  const handleDeleteUser = async (id: string) => {
+  const handleDeletePost = async (id: string) => {
     try {
       // before delete alert
       Swal.fire({
         title: "Are you sure?",
-        text: "You went to delete this user",
+        text: "You went to delete this Post",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -39,10 +43,10 @@ export default function AllUser() {
         confirmButtonText: "Yes, delete it!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-    const toastId = toast.loading("deleting....");
+          const toastId = toast.loading("deleting....");
 
           // delete mutation
-          const res = (await deleteUser(id)) as TResponse<any>;
+          const res = (await deletePost(id)) as TResponse<any>;
           if (res?.data) {
             toast.warning("Delete Success", { id: toastId, duration: 1000 });
           } else {
@@ -59,36 +63,46 @@ export default function AllUser() {
     <Table aria-label="static collection table">
       <TableHeader>
         <TableColumn>IMAGE</TableColumn>
-        <TableColumn>NAME</TableColumn>
-        <TableColumn>ROLE</TableColumn>
-        {/* <TableColumn>Verify</TableColumn> */}
-        <TableColumn>STATUS</TableColumn>
+        <TableColumn>User</TableColumn>
+        <TableColumn>Category</TableColumn>
+        <TableColumn>Type</TableColumn>
+        <TableColumn>Status</TableColumn>
+        <TableColumn>Like</TableColumn>
         <TableColumn>Action</TableColumn>
       </TableHeader>
       <TableBody>
-        {allUser?.data?.map((user: TUser) => {
+        {allPost?.data?.map((post: TPost) => {
           return (
-            <TableRow key={user?._id}>
+            <TableRow key={post?._id}>
               <TableCell>
-                <Image className="size-10" src={user?.image} />
+                <Image className="size-10" src={post?.image} />
               </TableCell>
-              <TableCell>{user?.name}</TableCell>
-              <TableCell>{user?.role}</TableCell>
+              <TableCell>{post?.user?.name}</TableCell>
+              <TableCell>{post?.category}</TableCell>
+              <TableCell>{post?.type}</TableCell>
+              <TableCell>
+                <span
+                  className={`${post?.status == "Active" ? "text-green-500" : "text-red-500"}`}
+                >
+                  {post?.status}
+                </span>
+              </TableCell>
+              <TableCell>{post?.like?.length}</TableCell>
               {/* <TableCell>{user?.isVerify}</TableCell> */}
-              <TableCell
+              {/* <TableCell
                 className={`${user?.status == "Active" ? "text-green-500" : "text-red-500"}`}
               >
                 {user?.status}
-              </TableCell>
+              </TableCell> */}
               <TableCell className="flex gap-2">
                 {/* edit user */}
-                <EditUser data={user} id={user?._id as string} />
+                {/* <EditUser data={post} id={user?._id as string} /> */}
                 {/* delete user */}
                 <Button
                   className="text-xl text-red-500"
                   size="sm"
                   variant="flat"
-                  onClick={() => handleDeleteUser(user?._id)}
+                  onClick={() => handleDeletePost(post?._id)}
                 >
                   <AiFillDelete />
                 </Button>

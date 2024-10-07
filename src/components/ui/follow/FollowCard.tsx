@@ -1,4 +1,3 @@
-import { TUser } from '@/src/types';
 import { Avatar, Button, Divider } from '@nextui-org/react';
 import Link from 'next/link';
 import React from 'react';
@@ -26,7 +25,7 @@ console.log(people);
             </div>
             <Link href={`${pathname}/${people._id}`}>
             
-            <Button variant="bordered" className="rounded-full">View Profile</Button>
+            <Button className="rounded-full" variant="bordered">View Profile</Button>
             </Link>
           </div>
           <div className="mt-3">

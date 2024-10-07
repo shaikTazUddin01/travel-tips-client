@@ -11,7 +11,7 @@ export default function LoadingSkeletor() {
             <Skeleton className=" rounded-lg h-5 w-[90px]"/>
           </div>
         </div>
-        <Skeleton className="rounded-lg h-6 w-[70px]"></Skeleton>
+        <Skeleton className="rounded-lg h-6 w-[70px]" />
       </CardHeader>
       <div className="space-y-1">
       <Skeleton className="h-5 w-full rounded-lg bg-default-200"/>
@@ -20,8 +20,7 @@ export default function LoadingSkeletor() {
       </div>
 
       <div >
-        <Skeleton className="w-full h-[300px] rounded-lg">
-        </Skeleton>
+        <Skeleton className="w-full h-[300px] rounded-lg" />
       </div>
       <div className="flex justify-between">
       <Skeleton className="w-[80px] h-5 rounded-lg"/>

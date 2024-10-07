@@ -3,17 +3,19 @@
 import {
   Modal,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalFooter,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
 import { RiEdit2Fill } from "react-icons/ri";
-import TDForm from "../../form/TDForm";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-import TDSelect from "../../form/TDSelect";
 import { toast } from "sonner";
+
+import TDForm from "../../form/TDForm";
+import TDSelect from "../../form/TDSelect";
+
+
 import { TResponse, TUser } from "@/src/types";
 import { useUpdateUserMutation } from "@/src/redux/features/user/userApi";
 
@@ -82,9 +84,7 @@ export default function EditUser({id,data}:{id:string,data:TUser}) {
                   </div>
                 </TDForm>
               </ModalBody>
-              <ModalFooter>
-               
-              </ModalFooter>
+              <ModalFooter />
             </>
           )}
         </ModalContent>

@@ -9,7 +9,7 @@ const ShowMoreProfileLoading = () => {
           .fill(null)
           .map((_, index) => (
           
-              <div className="flex justify-between m-4" key={index}>
+              <div key={index} className="flex justify-between m-4">
                 <div className="flex gap-3">
                   <Skeleton className="size-10 rounded-full" />
                   <div className="flex flex-col gap-1 items-start justify-center">

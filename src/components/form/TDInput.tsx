@@ -26,12 +26,12 @@ console.log(errors);
 
   return (
     <Input
-      type={type}
       label={label}
+      type={type}
       variant={variant}
       {...register(name)}
-      isInvalid={!!errors[name]}
       errorMessage={ errors[name]?.message as string | undefined }
+      isInvalid={!!errors[name]}
       isRequired={required}
     />
   );

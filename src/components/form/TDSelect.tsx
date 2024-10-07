@@ -1,5 +1,4 @@
 import { Select, SelectItem } from "@nextui-org/react";
-
 import { useFormContext } from "react-hook-form";
 
 interface IProps {
@@ -26,11 +25,11 @@ const TDSelect = ({
   } = useFormContext();
   // console.log(errors);
   return (
-    <Select label={label} {...register(name)} className="w-full" variant="bordered" isRequired={required}
+    <Select label={label} {...register(name)} className="w-full" defaultSelectedKeys={defaultValue ? [defaultValue] : undefined} errorMessage={ errors[name]?.message as string | undefined }
     isInvalid={!!errors[name]}
+    isRequired={required}
     size={size}
-    defaultSelectedKeys={defaultValue ? [defaultValue] : undefined}
-    errorMessage={ errors[name]?.message as string | undefined }>
+    variant="bordered">
       {options?.map((option) => (
         <SelectItem key={option.key}>{option.label}</SelectItem>
       ))}

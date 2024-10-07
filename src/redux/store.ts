@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "@/src/redux/features/auth/authSlice";
-import { baseApi } from "./Api/baseApi";
+
 // import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+
+import { baseApi } from "./Api/baseApi";
+
+import authReducer from "@/src/redux/features/auth/authSlice";
 const persistConfig = {
   key: "auth",
   storage,

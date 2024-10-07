@@ -1,7 +1,8 @@
-import { useVerifyAccoutMutation } from "@/src/redux/features/userVerify/verifyApi";
 import { Button } from "@nextui-org/button";
 import React from "react";
 import { toast } from "sonner";
+
+import { useVerifyAccoutMutation } from "@/src/redux/features/userVerify/verifyApi";
 
 const VerifyAccount = () => {
   const [accoutVerify] = useVerifyAccoutMutation();
@@ -22,8 +23,8 @@ const VerifyAccount = () => {
         <h1 className="text-xl font-medium">Verify Your Account</h1>
         <p className="text-sm">verify to unlock new feature and access premium content</p>
       <Button
-        color="primary"
         className="w-full"
+        color="primary"
         onClick={() => handleAccountVerify()}
       >
         Verify Now

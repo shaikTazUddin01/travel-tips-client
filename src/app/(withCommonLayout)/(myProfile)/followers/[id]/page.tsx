@@ -1,7 +1,8 @@
 "use client";
 import { useParams } from "next/navigation";
-import bg from "@/src/assets/login1.jpg";
 import { Image } from "@nextui-org/react";
+
+import bg from "@/src/assets/login1.jpg";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { TPost, TUser } from "@/src/types";
@@ -25,13 +26,13 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
         <div
           className="h-[250px] w-100% bg-stone-200 rounded-xl object-cover bg-cover"
           style={{ backgroundImage: `url(${bg.src})` }}
-        ></div>
+         />
         <div className="-mt-4 mx-5">
           <div className="flex gap-1 items-center">
             <Image
-              src={userInFo?.image}
-              radius="full"
               className="size-[120px] border-3 border-white"
+              radius="full"
+              src={userInFo?.image}
             />
             <div className="flex justify-between items-start flex-1">
               <div>

@@ -16,23 +16,20 @@ import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { LuLogOut } from "react-icons/lu";
+import { Avatar, Divider } from "@nextui-org/react";
+import { useState } from "react";
+
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/features/auth/authSlice";
+import useUser from "../hooks/user/useShowUser";
 
 import { siteConfig } from "@/src/config/site";
-import { ThemeSwitch } from "@/src/components/theme-switch";
 import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  HeartFilledIcon,
   SearchIcon,
   Logo,
 } from "@/src/assets/icons";
-import { Avatar, Divider } from "@nextui-org/react";
-import { useAppDispatch } from "../redux/hooks";
-import { logout } from "../redux/features/auth/authSlice";
-import { useState } from "react";
-import useUser from "../hooks/user/useShowUser";
-import { userInfo } from "os";
+
+
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -64,7 +61,7 @@ export const Navbar = () => {
   };
 
   return (
-    <NextUINavbar maxWidth="xl" className="bg-white shadow-md fixed">
+    <NextUINavbar className="bg-white shadow-md fixed" maxWidth="xl">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         {/* site logo */}
         <NavbarBrand as="li" className="gap-3 max-w-fit ">
@@ -114,7 +111,7 @@ export const Navbar = () => {
               <div className="min-w-[200px] min-h-[150px] border-1 shadow-lg p-5 absolute top-14 rounded-md right-0 bg-default-50">
                 <ul>
                   <NavbarItem>
-                    <Link href="/profile" className="w-full">
+                    <Link className="w-full" href="/profile">
                       <div
                         className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1"
                         

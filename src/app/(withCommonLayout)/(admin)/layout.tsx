@@ -1,9 +1,8 @@
-import { Navbar } from "@/src/components/navbar";
-import LeftSideBar from "@/src/components/ui/baseSidebar/LeftSideBar";
-import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import { ReactNode } from "react";
+
+import LeftSideBar from "@/src/components/ui/baseSidebar/LeftSideBar";
+
 // import "./style.css";
-import RightSideBar from "@/src/components/ui/baseSidebar/RightSideBar";
 const layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>

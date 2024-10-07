@@ -1,10 +1,11 @@
 "use client";
+import React from "react";
+
 import CreatePost from "@/src/components/Home/CreatePost";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
-import React from "react";
 
 const PremiumContent = () => {
   const {

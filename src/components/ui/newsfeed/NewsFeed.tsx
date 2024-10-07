@@ -1,9 +1,13 @@
 "use client";
+import React from "react";
+
+import LoadingSkeletor from "../LoadingSkeleton/LoadingSkeleton";
+
+import NewsFeedCard from "./Card";
+
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
-import React from "react";
-import NewsFeedCard from "./Card";
-import LoadingSkeletor from "../LoadingSkeleton/LoadingSkeleton";
+
 
 const NewsFeed = () => {
   const {

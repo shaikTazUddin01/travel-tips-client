@@ -1,12 +1,13 @@
 "use client";
-import { Avatar, Button } from "@nextui-org/react";
+import { Avatar } from "@nextui-org/react";
 import { MdWorkspacePremium } from "react-icons/md";
 import { FaCreativeCommonsNc, FaUserFriends } from "react-icons/fa";
 import { RiUserFollowFill } from "react-icons/ri";
-import { TbBadgeFilled } from "react-icons/tb";
-import CreatePost from "../../Home/CreatePost";
-import CreatePostModal from "../../Home/CreatePostModal";
 import Link from "next/link";
+
+import CreatePostModal from "../../Home/CreatePostModal";
+
+
 import useUser from "@/src/hooks/user/useShowUser";
 
 const LeftSideBar = () => {
@@ -64,17 +65,31 @@ const LeftSideBar = () => {
         <span>Non-Premium</span>
       </div>
       </Link>
-      {/* Premium */}
+      {/* All User */}
       <Link href={'/all-user'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
         <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
         <span>All User</span>
       </div>
       </Link>
+      {/* all content */}
+      <Link href={'/content-management'}>
+      <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
+        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span>Content Management</span>
+      </div>
+      </Link>
+      {/* Payment Management */}
+      <Link href={'/payment-management'} >
+      <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
+        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span>Payment Management</span>
+      </div>
+      </Link>
       {/* create Post */}
       <div className="w-full">
         {/* <Button color="primary" className="w-full rounded-full">Create Post</Button> */}
-        <CreatePostModal  buttonText="Create Post" btnColor="primary" variant="solid" btnClass="rounded-full w-full"/>
+        <CreatePostModal  btnClass="rounded-full w-full" btnColor="primary" buttonText="Create Post" variant="solid"/>
       </div>
     </div>
   );

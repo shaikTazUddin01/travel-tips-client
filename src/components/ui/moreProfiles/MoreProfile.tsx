@@ -1,11 +1,12 @@
 "use client";
-import {
-  useMarkFollowingMutation,
-} from "@/src/redux/features/following/followingApi";
-import { TResponse, TUser } from "@/src/types";
 import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/react";
 import { toast } from "sonner";
+
+import { TResponse, TUser } from "@/src/types";
+import {
+  useMarkFollowingMutation,
+} from "@/src/redux/features/following/followingApi";
 
 const MoreProfile = ({users}:any) => {
   
@@ -36,7 +37,7 @@ const MoreProfile = ({users}:any) => {
             {users &&
               users?.map((user: TUser) => {
                 return (
-                  <div className="flex justify-between mb-4" key={user?._id}>
+                  <div key={user?._id} className="flex justify-between mb-4">
                     <div className="flex gap-3">
                       <Avatar
                         isBordered

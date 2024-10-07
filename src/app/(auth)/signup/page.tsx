@@ -1,18 +1,19 @@
 "use client";
-import loginImage from "@/src/assets/travelLogin.jpg";
-import login1 from "@/src/assets/login1.jpg";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
 import Link from "next/link";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import TDForm from "@/src/components/form/TDForm";
-import TDInput from "@/src/components/form/TDInput";
-import { useSignupApiMutation } from "@/src/redux/features/auth/authApi";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-import { TResponse } from "@/src/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import{zodResolver} from '@hookform/resolvers/zod'
+
+import TDForm from "@/src/components/form/TDForm";
+import TDInput from "@/src/components/form/TDInput";
+import { useSignupApiMutation } from "@/src/redux/features/auth/authApi";
+import { TResponse } from "@/src/types";
+import login1 from "@/src/assets/login1.jpg";
+import loginImage from "@/src/assets/travelLogin.jpg";
 import TDSelect from "@/src/components/form/TDSelect";
 import { signupValidation } from "@/src/validation/signupValidation";
 // import { readFile } from "fs";
@@ -81,9 +82,9 @@ const SignUp = () => {
       <div className="bg-white rounded-2xl h-full  grid grid-cols-2 shadow items-center  mx-auto">
         <div>
           <Image
-            src={loginImage}
-            className="rounded-2xl object-cover w-full h-full"
             alt="login image"
+            className="rounded-2xl object-cover w-full h-full"
+            src={loginImage}
           />
         </div>
         <div className="text-center mx-auto w-[80%] p-10">
@@ -91,25 +92,25 @@ const SignUp = () => {
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
             <p>signup with your Information</p>
           </div>
-          <TDForm onSubmit={handleSignUp} resolver={zodResolver(signupValidation)}>
+          <TDForm resolver={zodResolver(signupValidation)} onSubmit={handleSignUp}>
             <div className="space-y-2 text-left">
               {/* <TDInput required={true} name="name" type="text" label="Name" /> */}
                <TDInput
-                required={true}
-                name="name"
                 label="Name"
+                name="name"
+                required={true}
                 type="text"
                 variant="bordered"
               />
                <TDInput
-                required={true}
-                name="email"
                 label="Email"
+                name="email"
+                required={true}
                 type="email"
                 variant="bordered"
               />
               
-              <TDInput required={true} name="phoneNumber" label="Phone Number" />
+              <TDInput label="Phone Number" name="phoneNumber" required={true} />
               <div className="flex gap-2">
                 <TDSelect
                   label="Gender"
@@ -117,21 +118,21 @@ const SignUp = () => {
                   options={genderOptions}
                   required={true}
                 />
-                <TDInput required={true} name="age" label="age" type="number" />
+                <TDInput label="age" name="age" required={true} type="number" />
               </div>
-              <TDInput required={true} name="address" label="Address" />
+              <TDInput label="Address" name="address" required={true} />
               <TDInput
-                required={true}
-                name="password"
                 label="Password"
+                name="password"
+                required={true}
                 type="password"
                 variant="bordered"
               />
 
               <div className="   w-full  flex">
                 <label
-                  htmlFor="image"
                   className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                  htmlFor="image"
                 >
                   {imageFile ? (
                     imageFile.name
@@ -144,30 +145,29 @@ const SignUp = () => {
                 </label>
               </div>
               <input
-                type="file"
-                id="image"
-                onChange={(e) => handleImageSubmit(e)}
                 className="hidden"
+                id="image"
+                type="file"
+                onChange={(e) => handleImageSubmit(e)}
               />
               <div>
                 {imagePreview && (
                   <div>
                     <Image
-                      src={imagePreview}
                       alt="image"
-                      width={150}
-                      height={150}
                       className="rounded-xl object-cover size-[150px]"
+                      height={150}
+                      src={imagePreview}
+                      width={150}
                     />
                   </div>
                 )}
               </div>
               {
                 isLoading?
-                <Button color="primary" className="w-full" isLoading>
-              </Button>
+                <Button isLoading className="w-full" color="primary" />
                 :
-                <Button color="primary" className="w-full" type="submit">
+                <Button className="w-full" color="primary" type="submit">
                 Signup
               </Button>
               }
@@ -177,8 +177,8 @@ const SignUp = () => {
           <p>
             I have an accout{" "}
             <Link
-              href={"/login"}
               className="text-blue-800 mt-1 hover:text-blue-700"
+              href={"/login"}
             >
               LogIn
             </Link>

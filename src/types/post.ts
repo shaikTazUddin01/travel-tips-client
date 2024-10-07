@@ -12,7 +12,7 @@ export interface TPost {
     share: number;
     createdAt: string;
     updatedAt: string;
-    isVerify:boolean;
+    status:string;
     __v: number;
   }
   

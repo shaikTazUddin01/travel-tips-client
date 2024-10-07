@@ -1,9 +1,10 @@
 "use client";
-import { Avatar, Button, Image } from "@nextui-org/react";
-import bg from "@/src/assets/login1.jpg";
-import CreatePostModal from "@/src/components/Home/CreatePostModal";
+import { Button, Image } from "@nextui-org/react";
 import { IoMdAdd } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
+
+import bg from "@/src/assets/login1.jpg";
+import CreatePostModal from "@/src/components/Home/CreatePostModal";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import CreatePost from "@/src/components/Home/CreatePost";
 import useUser from "@/src/hooks/user/useShowUser";
@@ -21,13 +22,13 @@ const Profile = () => {
         <div
           className="h-[250px] w-100% bg-stone-200 rounded-xl object-cover bg-cover"
           style={{ backgroundImage: `url(${bg.src})` }}
-        ></div>
+         />
         <div className="-mt-4 lg:mx-5">
           <div className="flex flex-col lg:flex-row gap-1 items-center">
             <Image
-              src={user?.image}
-              radius="full"
               className="size-[120px] border-3 border-white"
+              radius="full"
+              src={user?.image}
             />
             <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-start flex-1 w-full">
               <div className="text-center lg:text-left">
@@ -43,9 +44,9 @@ const Profile = () => {
                 {/*edit button  */}
                 <div className="flex-1">
                   <Button
+                    className="flex justify-center items-center gap-1"
                     color="primary"
                     size="md"
-                    className="flex justify-center items-center gap-1"
                   >
                     <span>
                       <MdEdit />
