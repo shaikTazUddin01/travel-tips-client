@@ -64,6 +64,13 @@ const LeftSideBar = () => {
         <span>Non-Premium</span>
       </div>
       </Link>
+      {/* Premium */}
+      <Link href={'/all-user'}>
+      <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
+        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span>All User</span>
+      </div>
+      </Link>
       {/* create Post */}
       <div className="w-full">
         {/* <Button color="primary" className="w-full rounded-full">Create Post</Button> */}

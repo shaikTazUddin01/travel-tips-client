@@ -19,12 +19,12 @@ const CreatePost = () => {
           src={user?.image}
         />
         <CreatePostModal buttonText="Post Here , What&#39;s on your Mind?"
-        btnClass="w-full rounded-full bg-transparent border-2 flex justify-start text-[17px] " size="lg"
+        btnClass="w-full rounded-full bg-transparent border-2 flex justify-start text-sm lg:text-[17px] " size="lg"
         />
       </div>
       <div className="h-[1px] bg-slate-300 mx-5 mt-3"></div>
       
-      <div className="flex justify-between px-10 items-center mt-2">
+      <div className="flex flex-col lg:flex-row justify-between px-10 items-center mt-2">
         {/* <div className="flex items-center gap-2 hover:bg-slate-200 px-4 py-1 rounded-md cursor-pointer">
           <span className="text-2xl text-sky-600"><FaRegImages/></span> <span></span>
         </div> */}

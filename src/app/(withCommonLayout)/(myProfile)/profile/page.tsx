@@ -17,23 +17,23 @@ const Profile = () => {
   return (
     <div>
       {/* main section */}
-      <div className="relative">
+      <div className="relative ">
         <div
           className="h-[250px] w-100% bg-stone-200 rounded-xl object-cover bg-cover"
           style={{ backgroundImage: `url(${bg.src})` }}
         ></div>
-        <div className="-mt-4 mx-5">
-          <div className="flex gap-1 items-center">
+        <div className="-mt-4 lg:mx-5">
+          <div className="flex flex-col lg:flex-row gap-1 items-center">
             <Image
               src={user?.image}
               radius="full"
               className="size-[120px] border-3 border-white"
             />
-            <div className="flex justify-between items-start flex-1">
-              <div>
+            <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-start flex-1 w-full">
+              <div className="text-center lg:text-left">
                 <h1 className="font-medium text-xl">{user?.name}</h1>
                 <p className="text-sm text-default-600">@tazahmedcs23</p>
-                <p className="flex gap-4 text-blue-600 items-center">
+                <p className=" text-blue-600 ">
                   <span>120 Followers</span>
                   {/* <span>- 150 Following</span> */}
                 </p>
@@ -68,7 +68,7 @@ const Profile = () => {
         </div>
       </div>
       {/* content section */}
-      <div className="mt-5 mx-5">
+      <div className="mt-5 lg:mx-5">
         <CreatePost />
 
         {isLoading ? (

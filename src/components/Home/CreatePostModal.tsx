@@ -100,7 +100,7 @@ export default function CreatePostModal({
         {icon && iconColor && (
           <span className={`${iconColor} text-xl`}>{icon}</span>
         )}
-        <span>{buttonText}</span>
+        <span >{buttonText}</span>
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
         <ModalContent>

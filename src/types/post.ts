@@ -24,6 +24,8 @@ export interface TPost {
     image: string;
     gender: string;
     role: string;
+    isVerify?:boolean;
+    status?:"Active"|"Blocked";
     phoneNumber: string;
     __v: number;
   }

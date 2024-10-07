@@ -26,14 +26,16 @@ import { MdOutlinePublic } from "react-icons/md";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import useUser from "@/src/hooks/user/useShowUser";
 import { BsThreeDots } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useUpvoteDownvoteMutation } from "@/src/redux/features/post/postApi";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
-  const [upvoteDownvote] = useUpvoteDownvoteMutation();
+  const [upvoteDownvote, { isLoading: upDoLoading }] =
+    useUpvoteDownvoteMutation();
+  const [isUpvote, setIsUpvote] = useState<boolean>();
   // const =useState('')
-  const { user: currentUser } = useUser();
+  // const { user: currentUser } = useUser();
   const {
     category,
     image,
@@ -48,7 +50,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   } = postItem || {};
 
   const handleUpvote = async (id: string) => {
-    // const toastId=toast.loading("post creating....")
+    // const toastId=toast.loading("loading...")
     try {
       if (id) {
         await upvoteDownvote({ postId: id });
@@ -57,6 +59,12 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
       toast.error(error?.message);
     }
   };
+
+  const isUserUpvote = like.find((item) => item == user?._id);
+
+  useEffect(() => {
+    setIsUpvote(!!isUserUpvote);
+  }, [isUserUpvote]);
 
   return (
     <Card className="w-full mb-6 border">
@@ -86,13 +94,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </h5>
           </div>
         </div>
-        {/* <button
-          className="rounded-full text-2xl font-medium bg-transparent hover:bg-slate-200 flex justify-center items-center pb-2 px-2 "
-          onClick={() => handleIconClick()}
-        >
-          ...
-        </button> */}
-        {/* drop down */}
+
         <Dropdown>
           <DropdownTrigger>
             <Button
@@ -147,30 +149,53 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
         </div>
 
         <Divider />
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between gap-10">
           {/* like section */}
-          <h1
-            className="flex items-center gap-1 hover:bg-slate-200 px-5 rounded py-2   cursor-pointer"
+          {
+            upDoLoading ?
+            <Button  className="flex-1 text-[16px]"
+            size="sm"
+            variant="flat" isLoading>
+          </Button>
+      :
+          <Button
+            className="flex-1 text-[16px]"
+            size="sm"
+            variant="flat"
             onClick={() => handleUpvote(_id)}
           >
-            <span className="text-xl">
-              <AiOutlineLike />
-            </span>{" "}
-            <span className="">Like</span>
-          </h1>
+            {isUpvote ? (
+              <span className="flex gap-1 items-center text-blue-600 ">
+                <span className="text-xl">
+                  <AiFillLike />
+                </span>
+                <span className="font-medium">Like</span>
+              </span>
+            ) : (
+              <span className="flex gap-1 items-center">
+                <span className="text-xl">
+                  <AiOutlineLike />
+                </span>
+                <span className="">Like</span>
+              </span>
+            )}
+          </Button>
+          }
+
           {/* comment section */}
-          <h1 className="flex items-center gap-1 hover:bg-slate-200 px-5 rounded py-2  cursor-pointer">
+
+          <Button className="flex-1 text-[16px]" size="sm" variant="flat">
             <span className="text-xl">
               <FaRegComment />
             </span>{" "}
             <span>Comment</span>
-          </h1>
-          <h1 className="flex items-center gap-1 hover:bg-slate-200 px-5 rounded py-2  cursor-pointer">
+          </Button>
+          <Button className="flex-1 text-[16px]" size="sm" variant="flat">
             <span className="text-xl">
               <PiShareFat />
             </span>{" "}
             <span>Share</span>
-          </h1>
+          </Button>
         </div>
       </CardFooter>
     </Card>
