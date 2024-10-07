@@ -23,8 +23,16 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:["user"]
     }),
+    updateUser: builder.mutation({
+      query: ({payload}) => ({
+        url: `/user/updateUserProfile/${payload?.id}`,
+        method: "PATCH",
+        body:payload?.updateInFo
+      }),
+      invalidatesTags:["user"]
+    }),
     
   }),
 });
 
-export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation} = userApi;
+export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation} = userApi;

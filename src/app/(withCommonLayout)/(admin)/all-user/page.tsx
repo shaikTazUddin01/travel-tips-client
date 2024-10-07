@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
+import EditUser from "@/src/components/ui/allUser/EditUser";
 import {
   useAlluserQuery,
   useDeleteUserMutation,
@@ -19,27 +20,40 @@ import {
 import { AiFillDelete } from "react-icons/ai";
 import { RiEdit2Fill } from "react-icons/ri";
 import { toast } from "sonner";
+import Swal from "sweetalert2";
 
 export default function AllUser() {
   const { data: allUser } = useAlluserQuery(undefined);
   const [deleteUser] = useDeleteUserMutation();
 
-
-  const handleDeleteUser =async(id: string)=>{
-    const toastId=toast.loading("deleting....")
+  const handleDeleteUser = async (id: string) => {
     try {
-      
-        const res = (await deleteUser(id)) as TResponse<any>;
-        if (res?.data) {
-          toast.warning("Delete Success",{id:toastId,duration:1000});
-        } else {
-          toast.error(res?.error?.data?.message,{id:toastId});
+      // before delete alert
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You went to delete this user",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+    const toastId = toast.loading("deleting....");
+
+          // delete mutation
+          const res = (await deleteUser(id)) as TResponse<any>;
+          if (res?.data) {
+            toast.warning("Delete Success", { id: toastId, duration: 1000 });
+          } else {
+            toast.error(res?.error?.data?.message, { id: toastId });
+          }
         }
-      }
-     catch (error: any) {
-      toast.error(error?.message,{id:toastId});
+      });
+    } catch (error: any) {
+      toast.error(error?.message);
     }
-  }
+  };
 
   return (
     <Table aria-label="static collection table">
@@ -67,12 +81,17 @@ export default function AllUser() {
                 {user?.status}
               </TableCell>
               <TableCell className="flex gap-2">
-                <span className="text-xl hover:bg-slate-200 cursor-pointer p-2 rounded-md">
-                  <RiEdit2Fill />
-                </span>
-                <span className="text-xl text-red-500 hover:bg-slate-200 cursor-pointer p-2 rounded-md" onClick={()=>handleDeleteUser(user?._id)}>
+                {/* edit user */}
+                <EditUser id={user?._id as string} data={user} />
+                {/* delete user */}
+                <Button
+                  onClick={() => handleDeleteUser(user?._id)}
+                  className="text-xl text-red-500"
+                  size="sm"
+                  variant="flat"
+                >
                   <AiFillDelete />
-                </span>
+                </Button>
               </TableCell>
             </TableRow>
           );

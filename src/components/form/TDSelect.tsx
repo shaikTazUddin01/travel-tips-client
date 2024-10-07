@@ -7,26 +7,29 @@ interface IProps {
   name: string;
   label: string;
   options: { key: string; label: string }[];
-  // type?: string;
-  // variant?: "bordered" | "flat" | "faded" | "underlined";
+  size?:"sm"|"md"|"lg";
+  defaultValue?: string | undefined
+  
 }
 
 const TDSelect = ({
   name,
   label,
   options,
-  // type = "text",
-  // variant = "bordered",
+  size="md",
+  defaultValue,
   required = false,
 }: IProps) => {
   const {
     register,
     formState: { errors },
   } = useFormContext();
-  console.log(errors);
+  // console.log(errors);
   return (
     <Select label={label} {...register(name)} className="w-full" variant="bordered" isRequired={required}
     isInvalid={!!errors[name]}
+    size={size}
+    defaultSelectedKeys={defaultValue ? [defaultValue] : undefined}
     errorMessage={ errors[name]?.message as string | undefined }>
       {options?.map((option) => (
         <SelectItem key={option.key}>{option.label}</SelectItem>
