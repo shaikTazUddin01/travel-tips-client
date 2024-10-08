@@ -1,5 +1,4 @@
 "use client";
-import { useGetAllVerifyInFoQuery } from "@/src/redux/features/userVerify/verifyApi";
 import {
   Spinner,
   Table,
@@ -12,8 +11,9 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import moment from "moment";
-import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
+import { useGetAllVerifyInFoQuery } from "@/src/redux/features/userVerify/verifyApi";
 
 const PaymentManagement = () => {
   const { data: verifyedInFo, isLoading } = useGetAllVerifyInFoQuery(undefined);
@@ -41,8 +41,8 @@ const PaymentManagement = () => {
             <Select
               label="Select a month"
               {...register("month")}
-              variant="bordered"
               size="sm"
+              variant="bordered"
             >
               {monthOptions.map((month) => (
                 <SelectItem key={month.key} value={month.key}>

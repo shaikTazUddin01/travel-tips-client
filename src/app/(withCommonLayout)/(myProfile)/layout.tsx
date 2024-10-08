@@ -4,10 +4,10 @@ import RightSideBar from "@/src/components/ui/baseSidebar/RightSideBar";
 
 const page = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex max-w-6xl mx-auto mt-5">
+    <div className="flex max-w-5xl mx-auto mt-5">
       <main className="container flex flex-col lg:flex-row px-6 gap-5">
-        <div className="w-full lg:w-[70%]">{children}</div>
-        <div
+        <div className="w-full lg:w-[100%]">{children}</div>
+        {/* <div
           className="w-[100%] lg:w-[30%]  h-[85vh] sticky top-20 overflow-y-auto      
   [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar]:h-2
@@ -20,7 +20,7 @@ const page = ({ children }: { children: ReactNode }) => {
             "
         >
           <RightSideBar />
-        </div>
+        </div> */}
       </main>
     </div>
   );

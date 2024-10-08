@@ -1,7 +1,13 @@
 "use client";
-import { Button, Image } from "@nextui-org/react";
-import { IoMdAdd } from "react-icons/io";
-import { MdEdit } from "react-icons/md";
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Image,
+} from "@nextui-org/react";
+import { IoIosCamera, IoMdAdd, IoMdCamera } from "react-icons/io";
 
 import bg from "@/src/assets/login1.jpg";
 import CreatePostModal from "@/src/components/Home/CreatePostModal";
@@ -12,9 +18,13 @@ import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import { TPost } from "@/src/types";
 import EditProfile from "@/src/components/ui/profile/EditProfile";
+import { MdCamera, MdEdit } from "react-icons/md";
+import EditImage from "@/src/components/ui/profile/EditImage";
+import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 
 const Profile = () => {
   const { user } = useUser();
+  const {data:userData}=useGetSingleUserQuery(user?.userId as string)
   const { data: mypost, isLoading } = useGetMyPostQuery(undefined);
   return (
     <div>
@@ -23,17 +33,18 @@ const Profile = () => {
         <div
           className="h-[250px] w-100% bg-stone-200 rounded-xl object-cover bg-cover"
           style={{ backgroundImage: `url(${bg.src})` }}
-         />
+        />
+
+
         <div className="-mt-4 lg:mx-5">
           <div className="flex flex-col lg:flex-row gap-1 items-center">
-            <Image
-              className="size-[120px] border-3 border-white"
-              radius="full"
-              src={user?.image}
-            />
+
+
+            <EditImage user={userData?.data}/>
+
             <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-start flex-1 w-full">
               <div className="text-center lg:text-left">
-                <h1 className="font-medium text-xl">{user?.name}</h1>
+                <h1 className="font-medium text-xl">{userData?.data?.name}</h1>
                 <p className="text-sm text-default-600">@tazahmedcs23</p>
                 <p className=" text-blue-600 ">
                   <span>120 Followers</span>
@@ -45,7 +56,6 @@ const Profile = () => {
                 {/*edit button  */}
                 <div className="flex-1">
                   <EditProfile />
-                 
                 </div>
                 {/* create past button */}
                 <div className="flex-1">

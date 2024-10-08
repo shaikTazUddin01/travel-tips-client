@@ -1,7 +1,6 @@
 "use client";
 
 import MoreProfile from "../moreProfiles/MoreProfile";
-import VerifyedProfile from "../moreProfiles/VerifyedProfile";
 import ShowMoreProfileLoading from "../LoadingSkeleton/ShowMoreProfileLoading";
 import VerifyAccount from "../verifyAccount/VerifyAccount";
 

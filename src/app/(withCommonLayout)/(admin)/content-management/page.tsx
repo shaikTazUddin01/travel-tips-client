@@ -15,12 +15,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { toast } from "sonner";
 import Swal from "sweetalert2";
 
-import { TPost, TResponse, TUser } from "@/src/types";
-import {
-  useAlluserQuery,
-  useDeleteUserMutation,
-} from "@/src/redux/features/user/userApi";
-import EditUser from "@/src/components/ui/allUser/EditUser";
+import { TPost, TResponse } from "@/src/types";
 import {
   useDeleteSpecificPostMutation,
   useGetPostQuery,

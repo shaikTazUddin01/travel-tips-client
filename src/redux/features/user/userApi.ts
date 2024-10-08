@@ -31,8 +31,18 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:["user"]
     }),
+    updateProfileImage: builder.mutation({
+      query: (payload) =>{ 
+        // console.log('object-->',payload);
+        return({
+        url: '/user/updateProfileImage',
+        method: "PATCH",
+        body:payload
+      })},
+      invalidatesTags:["user"]
+    }),
     
   }),
 });
 
-export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation} = userApi;
+export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation} = userApi;

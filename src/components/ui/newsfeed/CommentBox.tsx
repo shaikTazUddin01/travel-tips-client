@@ -1,13 +1,6 @@
-import useUser from "@/src/hooks/user/useShowUser";
-import {
-  useDeleteCommentMutation,
-  useUpdateCommentMutation,
-} from "@/src/redux/features/post/postApi";
-import { IComment, TResponse } from "@/src/types";
 import {
   Avatar,
   Button,
-  button,
   Divider,
   Dropdown,
   DropdownItem,
@@ -17,9 +10,17 @@ import {
 import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { toast } from "sonner";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+
 import TDForm from "../../form/TDForm";
 import TDInput from "../../form/TDInput";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+
+import { IComment, TResponse } from "@/src/types";
+import {
+  useDeleteCommentMutation,
+  useUpdateCommentMutation,
+} from "@/src/redux/features/post/postApi";
+import useUser from "@/src/hooks/user/useShowUser";
 
 const CommentBox = ({
   comment,
@@ -83,11 +84,11 @@ const CommentBox = ({
       <Divider className="mb-3" />
       {comment?.map((item: any) => {
         return (
-          <div className=" pb-4 px-2 w-[100%]" key={item?._id}>
+          <div key={item?._id} className=" pb-4 px-2 w-[100%]">
             <div className="flex gap-2 w-[100%] items-start justify-start">
               <Avatar
-                className=""
                 isBordered
+                className=""
                 radius="full"
                 size="md"
                 src={item?.userId?.image}
@@ -135,7 +136,7 @@ const CommentBox = ({
                 // edit comment section
                 <div className="w-[95%] rounded-xl p-2 bg-default-200">
                   <TDForm onSubmit={handleCommentUpdate}>
-                    <TDInput label="comment" name="comment" defaultvalue={item?.comment}/>
+                    <TDInput defaultvalue={item?.comment} label="comment" name="comment"/>
 
                     <div className="flex justify-end">
                       <Button type="submit">submit</Button>

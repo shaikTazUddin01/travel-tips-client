@@ -32,10 +32,10 @@ const TDInput = ({
       type={type}
       variant={variant}
       {...register(name)}
+      defaultValue={defaultvalue}
       errorMessage={ errors[name]?.message as string | undefined }
       isInvalid={!!errors[name]}
       isRequired={required}
-      defaultValue={defaultvalue}
     />
   );
 };

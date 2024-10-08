@@ -26,16 +26,20 @@ import { BiSolidBadgeCheck } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+
+import TDForm from "../../form/TDForm";
+import TDInput from "../../form/TDInput";
+
+import CommentBox from "./CommentBox";
 
 import { TPost, TResponse } from "@/src/types";
 import {
   useCommentToPostMutation,
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
-import TDForm from "../../form/TDForm";
-import TDInput from "../../form/TDInput";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import CommentBox from "./CommentBox";
+
+
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
