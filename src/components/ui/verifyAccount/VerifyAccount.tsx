@@ -20,8 +20,8 @@ const VerifyAccount = () => {
 
   return (
     <div className="border-1 rounded-xl shadow-xl mb-5 p-5">
-        <h1 className="text-xl font-medium">Verify Your Account</h1>
-        <p className="text-sm">verify to unlock new feature and access premium content</p>
+        <h1 className="text-xl font-medium mb-1">Verify Your Account</h1>
+        <p className="text-sm text-default-700 mb-2">verify to unlock new feature and access premium content</p>
       <Button
         className="w-full"
         color="primary"

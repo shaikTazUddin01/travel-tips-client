@@ -10,7 +10,15 @@ export const verifyApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["user", "verify"],
     }),
+    getAllVerifyInFo: builder.query({
+      query: () => ({
+        url: "/verifyAccount/all-payment",
+        method: "GET",
+        
+      }),
+      providesTags: ["verify"],
+    }),
   }),
 });
 
-export const { useVerifyAccoutMutation } = verifyApi;
+export const { useVerifyAccoutMutation ,useGetAllVerifyInFoQuery} = verifyApi;
