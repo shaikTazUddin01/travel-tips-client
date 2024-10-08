@@ -24,7 +24,11 @@ import {
 import useUser from "@/src/hooks/user/useShowUser";
 import { genderOptions } from "@/src/app/(auth)/signup/page";
 
-export default function EditProfile() {
+interface IProps{
+    color?:"primary" | "default" | "secondary" | "success" | "warning" | "danger" | undefined;
+}
+
+export default function EditProfile({color="primary"}:IProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [updateUser, { isSuccess }] = useUpdateUserMutation();
   const { user } = useUser();
@@ -54,8 +58,8 @@ export default function EditProfile() {
   return (
     <>
       <Button
-        className="flex justify-center items-center gap-1"
-        color="primary"
+        className="flex justify-center items-center gap-1 w-full"
+        color={color}
         size="md"
         onPress={onOpen}
       >

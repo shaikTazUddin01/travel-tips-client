@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+"use client"
 import { useUpdateProfileImageMutation } from "@/src/redux/features/user/userApi";
 import { TResponse, TUser } from "@/src/types";
 import { Button, Image } from "@nextui-org/react";
@@ -33,21 +35,21 @@ const EditImage = ({ user }: { user: TUser }) => {
 
   const handleImageUpdate: SubmitHandler<FieldValues> = async () => {
     if (imageFile) {
-      const toastId = toast.loading("Updating...");
+    //   const toastId = toast.loading("Updating...");
       try {
         const formData = new FormData();
         formData.append("image", imageFile);
         const res = (await profileImageUpdate(formData)) as TResponse<any>;
         if (res?.data) {
-          toast.success("Update success", { id: toastId, duration: 1000 });
+          toast.success("Update success", {  duration: 1000 });
           setTrigger(false);
           setImageFile(null);
           setImagePreview(null);
         } else {
-          toast.error(res?.error?.data?.message, { id: toastId });
+          toast.error(res?.error?.data?.message);
         }
       } catch (error: any) {
-        toast.error(error?.message, { id: toastId });
+        toast.error(error?.message);
       }
     }
   };
@@ -81,6 +83,9 @@ const EditImage = ({ user }: { user: TUser }) => {
           {/* Modal content */}
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded-xl shadow-xl w-[90%] sm:w-[400px] relative">
+                <div className="flex justify-end">
+                <h1 className="-mt-2 cursor-pointer rounded-full" onClick={()=>setTrigger(false)}>X</h1>
+                </div>
               <form onSubmit={handleSubmit(handleImageUpdate)}>
                 <div className="flex flex-col items-center gap-4">
                   {/* Preview the selected image */}
@@ -120,7 +125,7 @@ const EditImage = ({ user }: { user: TUser }) => {
                   
                   {imagePreview && isLoading && (
                     <Button isLoading className="w-full" color="primary">
-                      Loading
+                updating...
                     </Button>
                   )}
                 </div>
