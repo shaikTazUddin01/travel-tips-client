@@ -12,13 +12,17 @@ import { useAppSelector } from "@/src/redux/hooks";
 
 const NewsFeed = () => {
   const category=useAppSelector(state=>state.queryOperation.category)
-  console.log(category);
+  const search=useAppSelector(state=>state.queryOperation.search)
+  const sorting=useAppSelector(state=>state.queryOperation.sorting)
+  const type=useAppSelector(state=>state.queryOperation.type)
+  
+  
   const {
     data: postData,
     isError,
     isLoading,
     isFetching,
-  } = useGetPostQuery(undefined);
+  } = useGetPostQuery({category,search,type});
 
   // console.log("postData-->", postData);
   return (

@@ -1,42 +1,39 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type TQueryOperation = {
-  category:string|null;
-  search:string|null;
-  sorting:number|null
-  type:string|null
+  category: string | null;
+  search: string | null;
+  sorting: number | null;
+  type: string | null;
 };
 
-
-
 const initialState: TQueryOperation = {
-  category:null,
-  search:null,
-  sorting:null,
-  type:null,
+  category: null,
+  search: null,
+  sorting: null,
+  type: null,
 };
 
 export const querySlice = createSlice({
   name: "queryOperation",
   initialState,
   reducers: {
-    category: (state, action) => {
-     state.category=action.payload.category
+    setCategory: (state, action: PayloadAction<string | null>) => {
+      state.category = action.payload;
     },
-    search: (state, action) => {
-     state.search=action.payload.search
+    setSearch: (state, action: PayloadAction<string | null>) => {
+      state.search = action.payload;
     },
-    sorting: (state, action) => {
-     state.sorting=action.payload.sorting
+    setSorting: (state, action: PayloadAction<number | null>) => {
+      state.sorting = action.payload;
     },
-    type: (state, action) => {
-     state.type=action.payload.type
+    setType: (state, action: PayloadAction<string | null>) => {
+      state.type = action.payload;
     },
-    
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { category,search,sorting,type} = querySlice.actions;
+export const { setCategory, setSearch, setSorting, setType } = querySlice.actions;
 
 export default querySlice.reducer;

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { category } from "@/src/redux/features/post/postSlice";
+import { setCategory } from "@/src/redux/features/post/postSlice";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { categoryOptions } from "@/src/utils/categoryOptions";
 import React from "react";
@@ -9,8 +9,8 @@ const PostCategories = () => {
   const dispatch = useAppDispatch();
 
   const handleCategorySubmit = (item: string) => {
-    console.log(item);
-    dispatch(category(item));
+    // console.log(item);
+    dispatch(setCategory(item));
   };
 
   return (
