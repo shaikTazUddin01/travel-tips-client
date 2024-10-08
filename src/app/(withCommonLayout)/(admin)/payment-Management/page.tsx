@@ -1,6 +1,4 @@
 "use client";
-import TDForm from "@/src/components/form/TDForm";
-import TDSelect from "@/src/components/form/TDSelect";
 import { useGetAllVerifyInFoQuery } from "@/src/redux/features/userVerify/verifyApi";
 import {
   Spinner,
@@ -15,36 +13,49 @@ import {
 } from "@nextui-org/react";
 import moment from "moment";
 import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 const PaymentManagement = () => {
   const { data: verifyedInFo, isLoading } = useGetAllVerifyInFoQuery(undefined);
+  const { register, handleSubmit, watch } = useForm();
 
   const months = moment.months();
-  console.log(months);
   const monthOptions = months.map((month) => ({ key: month, label: month }));
 
-  const handleFilter = (data) => {};
+  const selectedMonth = watch("month");
+
+  const filteredData = verifyedInFo?.data?.filter((item: any) => {
+    const itemMonth = moment(item.date).format("MMMM"); 
+    return selectedMonth ? itemMonth === selectedMonth : true;
+  });
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    console.log("Form submitted with:", data);
+  };
 
   return (
     <>
-      <div className=" flex justify-end">
+      <div className="flex justify-end">
         <div className="w-[200px]">
-          <TDForm onSubmit={handleFilter}>
-            <TDSelect
-              name="month"
-              label="filter by month"
-              options={monthOptions}
-            />
-          </TDForm>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Select
+              label="Select a month"
+              {...register("month")}
+              variant="bordered"
+              size="sm"
+            >
+              {monthOptions.map((month) => (
+                <SelectItem key={month.key} value={month.key}>
+                  {month.label}
+                </SelectItem>
+              ))}
+            </Select>
+          </form>
         </div>
       </div>
 
       {/* Table */}
-      <Table
-        isHeaderSticky
-        isStriped
-        aria-label="Example static collection table"
-      >
+      <Table isHeaderSticky isStriped aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Email</TableColumn>
           <TableColumn>Date</TableColumn>
@@ -52,11 +63,8 @@ const PaymentManagement = () => {
           <TableColumn>Transaction Id</TableColumn>
           <TableColumn>Processor</TableColumn>
         </TableHeader>
-        <TableBody
-          isLoading={isLoading}
-          loadingContent={<Spinner label="Loading..." />}
-        >
-          {verifyedInFo?.data?.map((item: any) => (
+        <TableBody isLoading={isLoading} loadingContent={<Spinner label="Loading..." />}>
+          {filteredData?.map((item: any) => (
             <TableRow key={item?._id}>
               <TableCell>{item?.user?.email}</TableCell>
               <TableCell>{moment(item?.date).format("lll")}</TableCell>

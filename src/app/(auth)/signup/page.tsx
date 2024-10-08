@@ -18,7 +18,7 @@ import TDSelect from "@/src/components/form/TDSelect";
 import { signupValidation } from "@/src/validation/signupValidation";
 // import { readFile } from "fs";
 
-const genderOptions = [
+export const genderOptions = [
   {
     key: "Male",
     label: "Male",

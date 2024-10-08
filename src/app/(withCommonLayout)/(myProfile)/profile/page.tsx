@@ -11,6 +11,7 @@ import useUser from "@/src/hooks/user/useShowUser";
 import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import { TPost } from "@/src/types";
+import EditProfile from "@/src/components/ui/profile/EditProfile";
 
 const Profile = () => {
   const { user } = useUser();
@@ -43,16 +44,8 @@ const Profile = () => {
               <div className="flex gap-2">
                 {/*edit button  */}
                 <div className="flex-1">
-                  <Button
-                    className="flex justify-center items-center gap-1"
-                    color="primary"
-                    size="md"
-                  >
-                    <span>
-                      <MdEdit />
-                    </span>
-                    <span>Edit Profile</span>
-                  </Button>
+                  <EditProfile />
+                 
                 </div>
                 {/* create past button */}
                 <div className="flex-1">
