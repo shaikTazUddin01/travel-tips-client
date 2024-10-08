@@ -4,7 +4,7 @@ import RightSideBar from "@/src/components/ui/baseSidebar/RightSideBar";
 
 const page = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="flex max-w-5xl mx-auto mt-5">
+    <div className="max-w-5xl m-auto mt-5 flex justify-center">
       <main className="container flex flex-col lg:flex-row px-6 gap-5">
         <div className="w-full lg:w-[100%]">{children}</div>
         {/* <div

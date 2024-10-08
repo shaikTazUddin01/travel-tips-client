@@ -106,8 +106,8 @@ export default function EditProfile({color="primary"}:IProps) {
                     </div>
 
                     <TDInput
-                      name="phoneNumber"
-                      label="Phone Number"
+                      name="address"
+                      label="Address"
                       defaultvalue={userData?.data?.address}
                     />
                     <Button className="w-full" color="primary" type="submit">

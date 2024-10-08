@@ -4,20 +4,22 @@ import MoreProfile from "../moreProfiles/MoreProfile";
 import ShowMoreProfileLoading from "../LoadingSkeleton/ShowMoreProfileLoading";
 import VerifyAccount from "../verifyAccount/VerifyAccount";
 
-import { useAlluserQuery, useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
+import {
+  useAlluserQuery,
+  useGetSingleUserQuery,
+} from "@/src/redux/features/user/userApi";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import useUser from "@/src/hooks/user/useShowUser";
 import { TUser } from "@/src/types";
-
+import PostCategories from "../newsfeed/PostCategories";
 
 const RightSideBar = () => {
   const { data: allUsers, isLoading } = useAlluserQuery(undefined);
   const { data: myFollowing, isLoading: followingLoading } =
     useGetMyFollowingQuery(undefined);
-  const { user: myData} = useUser();
+  const { user: myData } = useUser();
   // get single user account
-  const {data:myInfo}=useGetSingleUserQuery(myData?.userId as string)
-  
+  const { data: myInfo } = useGetSingleUserQuery(myData?.userId as string);
 
   const followedUserIds =
     myFollowing?.data?.following?.map((item: TUser) => {
@@ -34,11 +36,11 @@ const RightSideBar = () => {
 
   return (
     <div>
-      {myInfo?.data?.isVerify ? (
-        ""
-      ) : (
-        <VerifyAccount/>
-      )}
+      <div>
+        <PostCategories />
+      </div>
+
+      {myInfo?.data?.isVerify ? "" : <VerifyAccount />}
       <div>
         {isLoading ? (
           <ShowMoreProfileLoading />
@@ -48,9 +50,7 @@ const RightSideBar = () => {
           )
         )}
       </div>
-      <div>
-        {/* <VerifyedProfile /> */}
-      </div>
+      <div>{/* <VerifyedProfile /> */}</div>
     </div>
   );
 };

@@ -7,9 +7,12 @@ import NewsFeedCard from "./Card";
 
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
+import { useAppSelector } from "@/src/redux/hooks";
 
 
 const NewsFeed = () => {
+  const category=useAppSelector(state=>state.queryOperation.category)
+  console.log(category);
   const {
     data: postData,
     isError,

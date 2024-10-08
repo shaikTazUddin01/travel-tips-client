@@ -7,6 +7,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import { baseApi } from "./Api/baseApi";
 
 import authReducer from "@/src/redux/features/auth/authSlice";
+import queryReducer from '@/src/redux/features/post/postSlice'
 const persistConfig = {
   key: "auth",
   storage,
@@ -17,6 +18,7 @@ const authPersistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: authPersistedReducer,
+    queryOperation:queryReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -26,12 +26,12 @@ const ProfileHeader = () => {
         style={{ backgroundImage: `url(${bg.src})` }}
       />
 
-      <div className="-mt-4 lg:mx-5">
-        <div className="flex flex-col lg:flex-row gap-1 items-center">
+      <div className="-mt-5 lg:mx-5">
+        <div className="flex flex-col md:flex-row gap-1 items-center">
           <EditImage user={userInFo} />
 
-          <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center lg:items-start flex-1 w-full">
-            <div className="text-center lg:text-left">
+          <div className="flex flex-col md:flex-row justify-center items-center md:justify-between md:items-start flex-1 w-full">
+            <div className="text-center md:text-left">
               <h1 className="font-medium text-xl">{userInFo?.name}</h1>
               <p className="text-sm text-default-600">@tazahmedcs23</p>
               <p className=" text-blue-600 flex gap-2 items-center mt-1">

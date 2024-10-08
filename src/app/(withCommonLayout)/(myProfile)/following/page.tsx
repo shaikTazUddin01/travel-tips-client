@@ -8,7 +8,7 @@ import FollowCard from "@/src/components/ui/follow/FollowCard";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import { TUser } from "@/src/types";
 const MyFollowing = () => {
-const pathname=usePathname()  
+  const pathname = usePathname();
   const { data, isLoading } = useGetMyFollowingQuery(undefined);
   console.log(pathname);
   if (isLoading) {
@@ -26,13 +26,21 @@ const pathname=usePathname()
         <Divider />
         {/* followers */}
         <div className="mt-2">
-          {
-           followings?.length >0 ? followings?.map((followingPeople:TUser)=>(<FollowCard key={followingPeople?._id} pathname={pathname} people={followingPeople}/>))
-           :
-           <div>
-            <h1 className="text-center py-2">Yor Are Not Following Any Person.!</h1>
-           </div>
-          }
+          {followings?.length > 0 ? (
+            followings?.map((followingPeople: TUser) => (
+              <FollowCard
+                key={followingPeople?._id}
+                pathname={pathname}
+                people={followingPeople}
+              />
+            ))
+          ) : (
+            <div>
+              <h1 className="text-center py-2">
+                Yor Are Not Following Any Person.!
+              </h1>
+            </div>
+          )}
           {/* <FollowCard /> */}
         </div>
       </div>

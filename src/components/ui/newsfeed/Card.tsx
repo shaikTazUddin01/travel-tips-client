@@ -223,12 +223,12 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </span>{" "}
             <span>Comment</span>
           </Button>
-          <Button className="flex-1 text-[16px]" size="sm" variant="flat">
+          {/* <Button className="flex-1 text-[16px]" size="sm" variant="flat">
             <span className="text-xl">
               <PiShareFat />
             </span>{" "}
             <span>Share</span>
-          </Button>
+          </Button> */}
         </div>
       </CardFooter>
       {/* showing comment */}
