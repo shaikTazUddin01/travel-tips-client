@@ -72,11 +72,20 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post","messages"],
     }),
-    // comment post
+    // delete comment from post
     deleteComment: builder.mutation({
       query: (data) => ({
         url: "/post/comment",
         method: "DELETE",
+        body:data
+      }),
+      invalidatesTags: ["Post","messages"],
+    }),
+    //Update comment into post
+    updateComment: builder.mutation({
+      query: (data) => ({
+        url: "/post/comment",
+        method: "PATCH",
         body:data
       }),
       invalidatesTags: ["Post","messages"],
@@ -93,5 +102,6 @@ export const {
   useDeleteSpecificPostMutation,
   useUpdateSpecificPostMutation,
   useCommentToPostMutation,
-  useDeleteCommentMutation
+  useDeleteCommentMutation,
+  useUpdateCommentMutation
 } = postApi;

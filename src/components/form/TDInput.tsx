@@ -7,6 +7,7 @@ interface IProps {
   name: string;
   label: string;
   type?: string;
+  defaultvalue?:string;
   variant?: "bordered" | "flat" | "faded" | "underlined";
 }
 
@@ -16,6 +17,7 @@ const TDInput = ({
   type = "text",
   variant = "bordered",
   required = false,
+  defaultvalue
 }: IProps) => {
   const {
     register,
@@ -33,6 +35,7 @@ const TDInput = ({
       errorMessage={ errors[name]?.message as string | undefined }
       isInvalid={!!errors[name]}
       isRequired={required}
+      defaultValue={defaultvalue}
     />
   );
 };
