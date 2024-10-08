@@ -163,7 +163,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           </h1>
           <button
             className="flex items-center gap-1"
-            onClick={()=>setShowComment(!showComment)}
+            onClick={() => setShowComment(!showComment)}
           >
             <span>
               <FaComment />
@@ -228,7 +228,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
         </div>
       </CardFooter>
       {/* showing comment */}
-      {showComment ? <CommentBox comment={comment} /> : ""}
+      {showComment ? <CommentBox comment={comment} postId={_id} /> : ""}
       {/* handle comment */}
       {isClickToComment && (
         <div className="p-5">
