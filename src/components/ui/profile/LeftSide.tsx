@@ -50,10 +50,10 @@ const LeftSide = () => {
       {/* photos */}
       <div className="rounded-xl border shadow-xl  p-3 mt-5">
         <h1 className="text-[22px] font-semibold">Photos</h1>
-        <div className="flex flex-wrap gap-3 rounded-xl overflow-hidden">
+        <div className="flex flex-wrap gap-2 rounded-xl overflow-hidden">
        {myPost?.data?.map((item:TPost)=>{
         return(
-            <Image src={item?.image} key={item?._id} height={100} width={100} alt="photos" className="size-[124] object-cover"/>
+            <Image src={item?.image} key={item?._id} height={100} width={100} alt="photos" className="size-[97] object-cover"/>
         )
        })}
         </div>

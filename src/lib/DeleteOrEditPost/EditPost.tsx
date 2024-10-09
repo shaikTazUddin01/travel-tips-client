@@ -13,26 +13,16 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
-import TDForm from "../form/TDForm";
-import TDSelect from "../form/TDSelect";
-
-import QuillEditor from "./QuillEditor";
-
 import useDebounce from "@/src/hooks/useDebounce";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
-import { IPostProps, TResponse } from "@/src/types";
+import { IPostProps, TPost, TResponse } from "@/src/types";
 import useUser from "@/src/hooks/user/useShowUser";
 import { categoryOptions } from "@/src/constant/categoryOptions";
+import QuillEditor from "@/src/components/Home/QuillEditor";
+import TDForm from "@/src/components/form/TDForm";
+import TDSelect from "@/src/components/form/TDSelect";
 
-export default function CreatePostModal({
-  buttonText,
-  icon,
-  iconColor,
-  btnClass,
-  size,
-  btnColor = "default",
-  variant = "light",
-}: IPostProps) {
+export default function Edit({postItem}:{postItem:TPost}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const { isOpen, onOpen, onOpenChange, setIsOpen } = useDisclosure();
   const { user } = useUser();
@@ -64,8 +54,6 @@ export default function CreatePostModal({
         if (res?.data) {
           toast.success("post create success", { id: toastId, duration: 1000 });
           onOpenChange();
-          setImageFile(null)
-          setImagePreview(null)
         } else {
           toast.error(res?.error?.data?.message, { id: toastId });
         }
@@ -92,18 +80,7 @@ export default function CreatePostModal({
 
   return (
     <>
-      <Button
-        className={`${btnClass ? btnClass : "w-full"}`}
-        color={btnColor}
-        size={`${size ? size : "md"}`}
-        variant={variant}
-        onPress={onOpen}
-      >
-        {icon && iconColor && (
-          <span className={`${iconColor} text-xl`}>{icon}</span>
-        )}
-        <span>{buttonText}</span>
-      </Button>
+      <Button onPress={onOpen}>edit</Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

@@ -59,11 +59,13 @@ export const postApi = baseApi.injectEndpoints({
     }),
     // get specific data
     updateSpecificPost: builder.mutation({
-      query: (data) => ({
-        url: "/post/updatePost",
+      query: ({ id, updateInFo }: { id: string; updateInFo: any }) => {
+        
+        return({
+        url: `/post/updatePost/${id}`,
         method: "PATCH",
-        body:data
-      }),
+        body:updateInFo
+      })},
       invalidatesTags: ["Post"],
     }),
     // comment post
@@ -101,6 +103,15 @@ export const postApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Post","messages"],
     }),
+    // delete post
+    deletePost: builder.mutation({
+      query: (id) => ({
+        url: `/post/delete-post/${id}`,
+        method: "DELETE",
+        
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -115,5 +126,6 @@ export const {
   useCommentToPostMutation,
   useDeleteCommentMutation,
   useUpdateCommentMutation,
-  useGetSinglePostQuery
+  useGetSinglePostQuery,
+  useDeletePostMutation
 } = postApi;

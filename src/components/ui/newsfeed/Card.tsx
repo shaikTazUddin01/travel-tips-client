@@ -40,9 +40,12 @@ import {
 } from "@/src/redux/features/post/postApi";
 import TDTextArea from "../../form/TDTextArea";
 import Link from "next/link";
+import useCurrentUser from "@/src/hooks/user/useCurrentUser";
+import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
+  const { _id: currentUserId } = useCurrentUser();
   const [upvoteDownvote, { isLoading: upDoLoading }] =
     useUpvoteDownvoteMutation();
   // comment to post
@@ -50,7 +53,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isUpvote, setIsUpvote] = useState<boolean>();
   // show comment under ther post
   const [showComment, setShowComment] = useState(false);
-
+  // const currentUser=useCurrentUser()
   const {
     category,
     image,
@@ -63,6 +66,8 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     // isVerify,
     _id,
   } = postItem || {};
+
+  // console.log(currentUserId);
 
   const handleUpvote = async (id: string) => {
     // const toastId=toast.loading("loading...")
@@ -125,23 +130,9 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </h5>
           </div>
         </div>
-
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              className="text-xl font-semibold"
-              radius="full"
-              size="sm"
-              variant="light"
-            >
-              <BsThreeDots />
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="new">New file</DropdownItem>
-            <DropdownItem key="copy">Copy link</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+        {currentUserId == user?._id && (
+          <DeleteAndEditPost postItem={postItem}/>
+        )}
       </CardHeader>
       {/* post content */}
       <CardBody className="px-0 py-0 text-small w-[100%]">
@@ -172,9 +163,6 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <span>{like?.length}</span>
           </h1>
 
-
-
-
           <button
             className="flex items-center gap-1"
             onClick={() => setShowComment(!showComment)}
@@ -184,9 +172,6 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </span>{" "}
             <span>{comment?.length}</span>
           </button>
-
-
-
         </div>
 
         <Divider />
@@ -237,20 +222,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <span>Comment</span>
           </Button>
           {/* view post */}
-          <Link href={`/post/${_id}`}> 
-          <Button
-            className="flex-1 text-[16px]"
-            size="sm"
-            variant="flat"
-            onClick={() => setIsClickToComment(!isClickToComment)}
-          >
-            <span className="text-xl">
-              <FaArrowsToEye />
-            </span>{" "}
-            <span>see post</span>
-          </Button>
+          <Link href={`/post/${_id}`}>
+            <Button
+              className="flex-1 text-[16px]"
+              size="sm"
+              variant="flat"
+              onClick={() => setIsClickToComment(!isClickToComment)}
+            >
+              <span className="text-xl">
+                <FaArrowsToEye />
+              </span>{" "}
+              <span>see post</span>
+            </Button>
           </Link>
-        
         </div>
       </CardFooter>
       {/* showing comment */}

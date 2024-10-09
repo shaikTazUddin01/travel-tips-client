@@ -33,7 +33,7 @@ const TDTextArea = ({
       variant={variant}
       {...register(name)}
       defaultValue={defaultvalue}
-      labelPlacement="outside"
+      labelPlacement="inside"
     //   errorMessage={errors[name]?.message as string | undefined}
     //   isInvalid={!!errors[name]}
       isRequired={required}

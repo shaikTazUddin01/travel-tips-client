@@ -9,11 +9,11 @@ const layout = ({ children }: { children: ReactNode }) => {
       <ProfileHeader />
       <div className="flex flex-col lg:flex-row items-start gap-5 mt-10">
         <div
-          className="w-[100%] lg:w-[30%]  h-auto lg:sticky lg:top-20">
+          className="w-[100%] lg:w-[35%]  h-auto lg:sticky lg:top-20">
           <LeftSide />
         </div>
 
-        <div className="w-[100%] lg:w-[70%]">{children}</div>
+        <div className="w-[100%] lg:w-[65%]">{children}</div>
       </div>
     </div>
   );
