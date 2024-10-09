@@ -60,8 +60,8 @@ const CommentBox = ({
   // handle comment update
 
   const handleCommentUpdate: SubmitHandler<FieldValues> = async (e) => {
-    e.preventDefault()
-    const updateCommentdata=e.target.comment.value
+    e.preventDefault();
+    const updateCommentdata = e.target.comment.value;
     // console.log(updateCommentdata);
     const toastId = toast.loading("updating....");
     try {
@@ -72,7 +72,7 @@ const CommentBox = ({
       };
       const res = (await updateComment(commentInfo)) as TResponse<any>;
       // console.log(res);
-      if (res?.data?.data?.modifiedCount>0) {
+      if (res?.data?.data?.modifiedCount > 0) {
         toast.success("comment updated", { id: toastId, duration: 1000 });
         setEditCommentId(null);
       } else {
@@ -100,7 +100,7 @@ const CommentBox = ({
 
               {editCommentId !== item?._id ? (
                 // content and dropdown
-                <div className="flex gap-1 items-start justify-between  bg-default-200 rounded-xl p-2">
+                <div className="flex gap-5 items-start justify-between  bg-default-200 rounded-xl p-2">
                   {/* content */}
                   <div>
                     <h4 className="text-small font-semibold leading-none text-default-600">
@@ -137,32 +137,25 @@ const CommentBox = ({
                   )}
                 </div>
               ) : (
-              
-
-                  <form
-              action=""
-              className="relative flex items-end border shadow-md rounded-xl p-2"
-              onSubmit={handleCommentUpdate}
-            >
-              <textarea
-                id="comment"
-                name="comment"
-                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
-                defaultValue={item?.comment}
-                rows={1}
-              />
-              <button
-                className="ml-2 text-sky-800 p-2 justify-end text-xl"
-                type="submit"
-              >
-                <MdSend />
-              </button>
-            </form>
-
-
-
-
-
+                <form
+                  action=""
+                  className="relative flex items-end border shadow-md rounded-xl p-2"
+                  onSubmit={handleCommentUpdate}
+                >
+                  <textarea
+                    id="comment"
+                    name="comment"
+                    className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
+                    defaultValue={item?.comment}
+                    rows={1}
+                  />
+                  <button
+                    className="ml-2 text-sky-800 p-2 justify-end text-xl"
+                    type="submit"
+                  >
+                    <MdSend />
+                  </button>
+                </form>
 
                 // </div>
               )}

@@ -1,47 +1,44 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Avatar,
-  Button,
-  Image,
-  Divider,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
-import DOMPurify from "dompurify";
-import { AiOutlineLike } from "react-icons/ai";
-import { FaArrowsToEye, FaCrown, FaRegComment } from "react-icons/fa6";
-import { PiShareFat } from "react-icons/pi";
-import { FaComment } from "react-icons/fa6";
-import { AiFillLike } from "react-icons/ai";
-import { MdOutlinePublic, MdSend } from "react-icons/md";
-import { BiSolidBadgeCheck } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
-import { FieldValues, SubmitHandler } from "react-hook-form";
 
-import TDForm from "../../form/TDForm";
-import TDInput from "../../form/TDInput";
-
-import CommentBox from "./CommentBox";
-
-import { TPost, TResponse } from "@/src/types";
+import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
+import CommentBox from "@/src/components/ui/newsfeed/CommentBox";
+import useCurrentUser from "@/src/hooks/user/useCurrentUser";
 import {
   useCommentToPostMutation,
+  useGetSinglePostQuery,
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
-import TDTextArea from "../../form/TDTextArea";
+import { TResponse } from "@/src/types";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import {
+  Avatar,
+  Button,
+  Divider,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Image,
+} from "@nextui-org/react";
+import DOMPurify from "dompurify";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
+import { BiSolidBadgeCheck } from "react-icons/bi";
+import { BsThreeDots } from "react-icons/bs";
+import { FaComment, FaCrown, FaRegComment } from "react-icons/fa";
+import { FaArrowsToEye } from "react-icons/fa6";
+import { MdOutlinePublic, MdSend } from "react-icons/md";
+import { toast } from "sonner";
 
-export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
+export default function ViewPost() {
+  const { id } = useParams();
+  const { data: specificPost, isLoading } = useGetSinglePostQuery(id as string);
+
   const [isClickToComment, setIsClickToComment] = useState(false);
   const [upvoteDownvote, { isLoading: upDoLoading }] =
     useUpvoteDownvoteMutation();
@@ -60,9 +57,8 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     type,
     share,
     user,
-    // isVerify,
     _id,
-  } = postItem || {};
+  } = specificPost?.data || {};
 
   const handleUpvote = async (id: string) => {
     // const toastId=toast.loading("loading...")
@@ -75,7 +71,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     }
   };
 
-  const isUserUpvote = like.find((item) => item == user?._id);
+  const isUserUpvote = like?.find((item: any) => item == user?._id);
 
   useEffect(() => {
     setIsUpvote(!!isUserUpvote);
@@ -96,6 +92,14 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     }
     // console.log(res);
   };
+
+  if (isLoading) {
+    return (
+      <div className="-mt-5">
+        <LoadingSkeletor />
+      </div>
+    );
+  }
 
   return (
     <Card className="w-full mb-6 border">
@@ -172,21 +176,15 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <span>{like?.length}</span>
           </h1>
 
-
-
-
           <button
             className="flex items-center gap-1"
-            onClick={() => setShowComment(!showComment)}
+            // onClick={() => setShowComment(!showComment)}
           >
             <span>
               <FaComment />
             </span>{" "}
             <span>{comment?.length}</span>
           </button>
-
-
-
         </div>
 
         <Divider />
@@ -236,55 +234,42 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </span>{" "}
             <span>Comment</span>
           </Button>
-          {/* view post */}
-          <Link href={`/post/${_id}`}> 
-          <Button
-            className="flex-1 text-[16px]"
-            size="sm"
-            variant="flat"
-            onClick={() => setIsClickToComment(!isClickToComment)}
-          >
-            <span className="text-xl">
-              <FaArrowsToEye />
-            </span>{" "}
-            <span>see post</span>
-          </Button>
-          </Link>
-        
         </div>
       </CardFooter>
       {/* showing comment */}
-      {showComment ? <CommentBox comment={comment} postId={_id} /> : ""}
+      {/* showing comment */}
+      <CommentBox comment={comment} postId={_id} />
       {/* handle comment */}
-      {isClickToComment && (
-        <div className="p-5 flex gap-2 items-start ">
-          <div className="mt-2">
-            <Avatar isBordered radius="full" size="md" src={user?.image} />
-          </div>
-
-          <div className="flex-1">
-            <form
-              action=""
-              className="relative flex items-end border-2 shadow-md rounded-xl p-2"
-              onSubmit={handleCommentSubmit}
-            >
-              <textarea
-                id="comment"
-                name="comment"
-                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
-                placeholder="Write a comment..."
-                rows={3}
-              />
-              <button
-                className="ml-2 text-sky-800 p-2 justify-end text-xl"
-                type="submit"
-              >
-                <MdSend />
-              </button>
-            </form>
-          </div>
+      <div className="px-5">
+        <Divider />
+      </div>
+      <div className="p-5 flex gap-2 items-start ">
+        <div className="mt-2">
+          <Avatar isBordered radius="full" size="md" src={user?.image} />
         </div>
-      )}
+
+        <div className="flex-1">
+          <form
+            action=""
+            className="relative flex items-end border-2 shadow-md rounded-xl p-2"
+            onSubmit={handleCommentSubmit}
+          >
+            <textarea
+              id="comment"
+              name="comment"
+              className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
+              placeholder="Write a comment..."
+              rows={3}
+            />
+            <button
+              className="ml-2 text-sky-800 p-2 justify-end text-xl"
+              type="submit"
+            >
+              <MdSend />
+            </button>
+          </form>
+        </div>
+      </div>
     </Card>
   );
 }

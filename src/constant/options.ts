@@ -1,10 +1,10 @@
 export const sortIngOptions = [
   {
     key: "asc",
-    label: "most upvote",
+    label: "Highest upvote",
   },
   {
     key: "dsc",
-    label: "lower upvote",
+    label: "Lowest upvote",
   },
 ];

@@ -13,7 +13,6 @@ export const postApi = baseApi.injectEndpoints({
     }),
     // get all post
     getPost: builder.query({
-      
       query: ({category,search,type,sorting}:Record<string,any>) =>{
         console.log({category,search,type,sorting});
         return  ({
@@ -94,6 +93,14 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post","messages"],
     }),
+    //Update comment into post
+    getSinglePost: builder.query({
+      query: (id) => ({
+        url: `/post/getSinglePost/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Post","messages"],
+    }),
   }),
 });
 
@@ -107,5 +114,6 @@ export const {
   useUpdateSpecificPostMutation,
   useCommentToPostMutation,
   useDeleteCommentMutation,
-  useUpdateCommentMutation
+  useUpdateCommentMutation,
+  useGetSinglePostQuery
 } = postApi;
