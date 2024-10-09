@@ -13,7 +13,7 @@ const NonPremiumContent = () => {
     isError,
     isLoading,
     isFetching,
-  } = useGetPostQuery("Non-Premium");
+  } = useGetPostQuery({type:"Non-Premium"});
 
 //   console.log("postData-->", postData);
   return (

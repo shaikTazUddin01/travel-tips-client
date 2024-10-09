@@ -7,12 +7,13 @@ import { TResponse, TUser } from "@/src/types";
 import {
   useMarkFollowingMutation,
 } from "@/src/redux/features/following/followingApi";
+import { BiSolidBadgeCheck } from "react-icons/bi";
 
 const MoreProfile = ({users}:any) => {
   
   const [makeFollowing] = useMarkFollowingMutation();
 
-
+console.log('--->>',users);
   // Handle following
   const handleFollowing = async (id: string) => {
     const toastId = toast.loading("loading...");
@@ -38,7 +39,7 @@ const MoreProfile = ({users}:any) => {
               users?.map((user: TUser) => {
                 return (
                   <div key={user?._id} className="flex justify-between mb-4">
-                    <div className="flex gap-3">
+                    <div className="flex gap-2">
                       <Avatar
                         isBordered
                         radius="full"
@@ -46,11 +47,19 @@ const MoreProfile = ({users}:any) => {
                         src={user?.image}
                       />
                       <div className="flex flex-col gap-1 items-start justify-center">
-                        <h4 className="text-sm font-semibold leading-none text-default-600">
+                        <h4 className="text-sm font-semibold leading-none text-default-600 flex">
+                          <span>
                           {user?.name}
+                          </span>
+                          <span className="text-blue-600 text-[10px]">
+                          {
+                            user?.isVerify &&
+                            <BiSolidBadgeCheck />
+                          }
+                          </span>
                         </h4>
                         <h5 className="text-small tracking-tight text-default-400">
-                          @dfsyhdstyte
+                          {/* @dfsyhdstyte */}
                         </h5>
                       </div>
                     </div>

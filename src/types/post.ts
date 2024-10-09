@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface IComment {
-  userId: string;
+  userId?: string;
   comment: string;
   _id: string;
 }

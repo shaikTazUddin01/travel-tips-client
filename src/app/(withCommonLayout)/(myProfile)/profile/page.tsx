@@ -4,7 +4,7 @@ import CreatePost from "@/src/components/Home/CreatePost";
 import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import { TPost } from "@/src/types";
-import ProfileHeader from "@/src/components/ui/profile/ProfileHeader";
+// import ProfileHeader from "@/src/components/ui/profile/ProfileHeader";
 
 const Profile = () => {
  
@@ -15,8 +15,8 @@ const Profile = () => {
           <CreatePost />
           {isLoading ? (
             Array(3)
-              .fill(null)
-              .map((_, index) => (
+              ?.fill(null)
+              ?.map((_, index) => (
                 <div key={index}>
                   <LoadingSkeletor />
                 </div>

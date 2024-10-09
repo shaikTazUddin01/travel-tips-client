@@ -40,12 +40,22 @@ import {
 } from "@/src/redux/features/post/postApi";
 import TDTextArea from "../../form/TDTextArea";
 import Link from "next/link";
-import useCurrentUser from "@/src/hooks/user/useCurrentUser";
+// import useCurrentUser from "@/src/hooks/user/useCurrentUser";
 import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
+import useUser from "@/src/hooks/user/useShowUser";
+import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
-  const { _id: currentUserId } = useCurrentUser();
+  // const { _id: currentUserId } = useCurrentUser();
+  const {user : userInFo}=useUser()
+  const currentUserId=userInFo?.userId
+// get single user
+const {data:userdata}=useGetSingleUserQuery(currentUserId as string)
+
+const myData=userdata?.data
+
+
   const [upvoteDownvote, { isLoading: upDoLoading }] =
     useUpvoteDownvoteMutation();
   // comment to post
@@ -103,7 +113,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   };
 
   return (
-    <Card className="w-full mb-6 border">
+    <Card className={`w-full mb-6 border`}>
       <CardHeader className="justify-between">
         <div className="flex gap-3">
           <Avatar isBordered radius="full" size="md" src={user?.image} />
@@ -135,7 +145,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
         )}
       </CardHeader>
       {/* post content */}
-      <CardBody className="px-0 py-0 text-small w-[100%]">
+      <CardBody className={`px-0 py-0 text-small w-[100%] ${myData?.isVerify==false && type =="Premium" && 'blur-2xl' }`}>
         <div className="px-3 pb-3">
           <div
             dangerouslySetInnerHTML={{
@@ -154,7 +164,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
         </div>
       </CardBody>
       {/* all like */}
-      <CardFooter className="gap-3 flex-col">
+      <CardFooter className={`gap-3 flex-col  ${myData?.isVerify==false && type =="Premium" && 'blur-2xl' }`}>
         <div className="flex w-full justify-between">
           <h1 className="flex items-center gap-1">
             <span className="text-white bg-blue-600 rounded-full p-[3px]">
@@ -224,7 +234,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           {/* view post */}
           <Link href={`/post/${_id}`}>
             <Button
-              className="flex-1 text-[16px]"
+              className={`flex-1 text-[16px] ${myData?.isVerify ?"cursor-pointer":"cursor-not-allowed"}`}
               size="sm"
               variant="flat"
               onClick={() => setIsClickToComment(!isClickToComment)}

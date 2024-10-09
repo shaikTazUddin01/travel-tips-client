@@ -4,7 +4,7 @@
 
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import CommentBox from "@/src/components/ui/newsfeed/CommentBox";
-import useCurrentUser from "@/src/hooks/user/useCurrentUser";
+// import useCurrentUser from "@/src/hooks/user/useCurrentUser";
 import {
   useCommentToPostMutation,
   useGetSinglePostQuery,

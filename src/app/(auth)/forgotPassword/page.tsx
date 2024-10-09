@@ -11,30 +11,31 @@ import loginImage from "@/src/assets/travelLogin.jpg";
 import login1 from "@/src/assets/login1.jpg";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
-import { useLoginApiMutation } from "@/src/redux/features/auth/authApi";
+import { useChangePasswordMutation, useForgotPasswordMutation, useLoginApiMutation } from "@/src/redux/features/auth/authApi";
 import { TResponse } from "@/src/types";
 import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
-import { authInfo } from "@/src/redux/features/auth/authSlice";
 import { loginValidation } from "@/src/validation/loginValidation";
+import { authInfo } from "@/src/redux/features/auth/authSlice";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
-const Login = () => {
-  const [login] = useLoginApiMutation();
-  const dispatch = useAppDispatch();
+const ChangePassword = () => {
+  
 const router=useRouter()
+const [forgotpass]=useForgotPasswordMutation()
+const dispatch=useAppDispatch()
   // handle login
-  const handleLogin: SubmitHandler<FieldValues> = async (data) => {
+  const handleForgotpass: SubmitHandler<FieldValues> = async (data) => {
+   
     try {
-      const res = (await login(data)) as TResponse<any>;
+      const res = (await forgotpass(data)) as TResponse<any>;
       // console.log(res?.data?.data?.accessToken);
       if (res?.data) {
-        toast.success("login success");
+        toast.success("password forgot successfully");
 
-        const accessToken = res?.data?.data?.accessToken;
-        const decoded = await decodedToken(accessToken);
-        dispatch(authInfo({ data: decoded, token: accessToken }));
-        router.push('/')
+       
+        dispatch(authInfo({ data: null, token: null }));
+        router.push('/login')
         // console.log(decoded);
       } else {
         toast.error(res?.error?.data?.message);
@@ -60,9 +61,9 @@ const router=useRouter()
         <div className="text-center mx-auto w-[80%] p-10">
           <div className="space-y-1 mb-2">
             <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
-            <p>Login with Email</p>
+            <p>Forgot your password</p>
           </div>
-          <TDForm resolver={zodResolver(loginValidation)} onSubmit={handleLogin}>
+          <TDForm onSubmit={handleForgotpass}>
             <div className="space-y-2 text-left" >
               <TDInput
                 label="Email"
@@ -71,35 +72,25 @@ const router=useRouter()
                 type="email"
                 variant="bordered"
               />
+             
               <TDInput
-                label="Password"
-                name="password"
+                label="New Password"
+                name="newPassword"
                 required={true}
                 type="password"
                 variant="bordered"
 
               />
-              <Link href={'/forgotPassword'}>
-              <p className="text-right text-[14px] text-default-500 hover:text-blue-600">Forgot Password?</p>
-              </Link>
               <Button className="w-full" color="primary" type="submit">
-                Login
+                Forgot Password
               </Button>
             </div>
           </TDForm>
-          <p>
-            I Don&#39;t have an accout.?{" "}
-            <Link
-              className="text-blue-800 mt-1 hover:text-blue-700"
-              href={"/signup"}
-            >
-              Sign Up
-            </Link>
-          </p>
+         
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default ChangePassword;

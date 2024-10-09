@@ -32,13 +32,6 @@ export const Navbar = () => {
   const [profileNavToggle, setProfileNavToggle] = useState(false);
   const { user } = useUser();
 
-
-
-
-
-
-  
-
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -54,7 +47,9 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
         {/* search */}
-        <NavbarItem className="hidden lg:flex"><SearchBox/></NavbarItem>
+        <NavbarItem className="hidden lg:flex">
+          <SearchBox />
+        </NavbarItem>
       </NavbarContent>
       {/* theme switcher lg */}
       <NavbarContent
@@ -105,7 +100,18 @@ export const Navbar = () => {
                         <span className="text-black text-sm">{user?.name}</span>
                       </div>
                     </Link>
-                    <Divider />
+                  </NavbarItem>
+                  <NavbarItem>
+                    <Link className="w-full" href="/changePassword">
+                      <Button
+                        className="w-full flex items-center gap-2 justify-start"
+                        variant="light"
+                      >Change Password</Button>
+                    </Link>
+                  </NavbarItem>
+
+                  <Divider className="my-1" />
+                  <NavbarItem>
                     <Button
                       className="w-full flex items-center gap-2 justify-start"
                       variant="light"
@@ -135,7 +141,7 @@ export const Navbar = () => {
 
       {/* smaill screen */}
       <NavbarMenu>
-        <SearchBox/>
+        <SearchBox />
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

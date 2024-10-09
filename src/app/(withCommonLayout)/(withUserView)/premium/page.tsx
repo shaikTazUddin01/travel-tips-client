@@ -8,14 +8,16 @@ import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
 
 const PremiumContent = () => {
+  
+
   const {
     data: postData,
     isError,
     isLoading,
     isFetching,
-  } = useGetPostQuery("Premium");
+  } = useGetPostQuery({ type:"Premium"});
 
-  console.log("postData-->", postData);
+  // console.log("postData-->", postData);
   return (
     <div>
       <div>
