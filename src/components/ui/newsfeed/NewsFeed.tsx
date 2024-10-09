@@ -10,7 +10,7 @@ import { useAppSelector } from "@/src/redux/hooks";
 const NewsFeed = () => {
   const category = useAppSelector((state) => state.queryOperation.category);
   const search = useAppSelector((state) => state.queryOperation.search);
-  // const sorting = useAppSelector((state) => state.queryOperation.sorting);
+  const sorting = useAppSelector((state) => state.queryOperation.sorting);
   const type = useAppSelector((state) => state.queryOperation.type);
 
   const [page, setPage] = useState(1);
@@ -22,7 +22,7 @@ const NewsFeed = () => {
     isError,
     isLoading,
     isFetching,
-  } = useGetPostQuery({ category, search, type ,page});
+  } = useGetPostQuery({ category, search,sorting, type ,page});
 
   useEffect(() => {
     if (postData?.data) {
@@ -46,7 +46,7 @@ const NewsFeed = () => {
 
   const fetchMorePosts = () => {
     if (!isFetching && hasMore) {
-      setPage((prevPage) => prevPage + 1); // Increment page for next set of data
+      setPage((prevPage) => prevPage + 1); 
     }
   };
 
@@ -60,7 +60,7 @@ const NewsFeed = () => {
         loader={<LoadingSkeleton />} 
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Yay! You&#39;ve seen it all</b>
+            <b>No data found.!</b>
           </p>
         }
       >

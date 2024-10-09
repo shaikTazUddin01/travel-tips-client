@@ -21,7 +21,7 @@ import { FaCrown, FaRegComment } from "react-icons/fa6";
 import { PiShareFat } from "react-icons/pi";
 import { FaComment } from "react-icons/fa6";
 import { AiFillLike } from "react-icons/ai";
-import { MdOutlinePublic } from "react-icons/md";
+import { MdOutlinePublic, MdSend } from "react-icons/md";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
@@ -38,8 +38,7 @@ import {
   useCommentToPostMutation,
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
-
-
+import TDTextArea from "../../form/TDTextArea";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
@@ -82,13 +81,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   }, [isUserUpvote]);
 
   // handle comment submit
-  const handleCommentSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const handleCommentSubmit: SubmitHandler<FieldValues> = async (e) => {
+    e.preventDefault();
+    const commentfield = e.target.comment.value;
+
     const commentInFo = {
       postId: _id,
-      comment: data?.comment,
+      comment: commentfield,
     };
     const res = (await postComment(commentInFo)) as TResponse<any>;
-    console.log(res);
+    if (res?.data) {
+      toast.success("your comment post succefully..", { duration: 1000 });
+    }
+    // console.log(res);
   };
 
   return (
@@ -235,14 +240,32 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
       {showComment ? <CommentBox comment={comment} postId={_id} /> : ""}
       {/* handle comment */}
       {isClickToComment && (
-        <div className="p-5">
-          <TDForm onSubmit={handleCommentSubmit}>
-            <TDInput label="comment" name="comment" />
+        <div className="p-5 flex gap-2 items-start ">
+          <div className="mt-2">
+            <Avatar isBordered radius="full" size="md" src={user?.image} />
+          </div>
 
-            <div className="flex justify-end">
-              <Button type="submit">submit</Button>
-            </div>
-          </TDForm>
+          <div className="flex-1">
+            <form
+              action=""
+              className="relative flex items-end border shadow-md rounded-xl p-2"
+              onSubmit={handleCommentSubmit}
+            >
+              <textarea
+                id="comment"
+                name="comment"
+                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
+                placeholder="Write a comment..."
+                rows={3}
+              />
+              <button
+                className="ml-2 text-sky-800 p-2 justify-end text-xl"
+                type="submit"
+              >
+                <MdSend />
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </Card>

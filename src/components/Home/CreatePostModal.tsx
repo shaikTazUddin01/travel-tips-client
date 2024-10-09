@@ -9,7 +9,7 @@ import {
   Avatar,
   Image,
 } from "@nextui-org/react";
-import {  useState } from "react";
+import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -22,7 +22,7 @@ import useDebounce from "@/src/hooks/useDebounce";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
 import { IPostProps, TResponse } from "@/src/types";
 import useUser from "@/src/hooks/user/useShowUser";
-import { categoryOptions } from "@/src/utils/categoryOptions";
+import { categoryOptions } from "@/src/constant/categoryOptions";
 
 export default function CreatePostModal({
   buttonText,
@@ -38,7 +38,7 @@ export default function CreatePostModal({
   const { user } = useUser();
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
-  const [createPost,isLoading] = useCreatePostMutation();
+  const [createPost, isLoading] = useCreatePostMutation();
   //  console.log(useDebounce(discription));
   const description = useDebounce(discription);
 
@@ -47,7 +47,7 @@ export default function CreatePostModal({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId=toast.loading("post creating....")
+    const toastId = toast.loading("post creating....");
     try {
       if (description) {
         const formData = new FormData();
@@ -62,14 +62,14 @@ export default function CreatePostModal({
 
         const res = (await createPost(formData)) as TResponse<any>;
         if (res?.data) {
-          toast.success("post create success",{id:toastId,duration:1000});
-          onOpenChange()
+          toast.success("post create success", { id: toastId, duration: 1000 });
+          onOpenChange();
         } else {
-          toast.error(res?.error?.data?.message,{id:toastId});
+          toast.error(res?.error?.data?.message, { id: toastId });
         }
       }
     } catch (error: any) {
-      toast.error(error?.message,{id:toastId});
+      toast.error(error?.message, { id: toastId });
     }
   };
 
@@ -100,9 +100,9 @@ export default function CreatePostModal({
         {icon && iconColor && (
           <span className={`${iconColor} text-xl`}>{icon}</span>
         )}
-        <span >{buttonText}</span>
+        <span>{buttonText}</span>
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} >
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <div className="min-h-[80vh]">
@@ -120,12 +120,8 @@ export default function CreatePostModal({
                 </div>
               </ModalHeader>
               <ModalBody>
-                
                 <QuillEditor setDiscription={setDiscription} />
-                <TDForm
-                  onSubmit={onSubmit}
-                  
-                >
+                <TDForm onSubmit={onSubmit}>
                   <div className="space-y-2">
                     <TDSelect
                       label="Category"

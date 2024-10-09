@@ -24,37 +24,20 @@ import { logout } from "../redux/features/auth/authSlice";
 import useUser from "../hooks/user/useShowUser";
 
 import { siteConfig } from "@/src/config/site";
-import {
-  SearchIcon,
-  Logo,
-} from "@/src/assets/icons";
-
-
+import { SearchIcon, Logo } from "@/src/assets/icons";
+import SearchBox from "../lib/queryOperation/SearchBox";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
   const [profileNavToggle, setProfileNavToggle] = useState(false);
   const { user } = useUser();
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+
+
+
+
+
+
+  
 
   const handleLogout = () => {
     dispatch(logout());
@@ -71,7 +54,7 @@ export const Navbar = () => {
           </NextLink>
         </NavbarBrand>
         {/* search */}
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <NavbarItem className="hidden lg:flex"><SearchBox/></NavbarItem>
       </NavbarContent>
       {/* theme switcher lg */}
       <NavbarContent
@@ -112,10 +95,7 @@ export const Navbar = () => {
                 <ul>
                   <NavbarItem>
                     <Link className="w-full" href="/profile">
-                      <div
-                        className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1"
-                        
-                      >
+                      <div className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1">
                         <Avatar
                           isBordered
                           radius="full"
@@ -155,7 +135,7 @@ export const Navbar = () => {
 
       {/* smaill screen */}
       <NavbarMenu>
-        {searchInput}
+        <SearchBox/>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

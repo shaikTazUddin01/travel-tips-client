@@ -13,11 +13,15 @@ export const postApi = baseApi.injectEndpoints({
     }),
     // get all post
     getPost: builder.query({
-      query: ({category,search,type}:Record<string,any>) => ({
-        url: "/post/all-post",
-        method: "GET",
-        params: { category,search,type},
-      }),
+      
+      query: ({category,search,type,sorting}:Record<string,any>) =>{
+        console.log({category,search,type,sorting});
+        return  ({
+          url: "/post/all-post",
+          method: "GET",
+          params: { category,search,type,sorting},
+        })
+      },
       providesTags: ["Post"],
     }),
     // get my post

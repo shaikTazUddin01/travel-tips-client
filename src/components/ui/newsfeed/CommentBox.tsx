@@ -21,6 +21,7 @@ import {
   useUpdateCommentMutation,
 } from "@/src/redux/features/post/postApi";
 import useUser from "@/src/hooks/user/useShowUser";
+import { MdSend } from "react-icons/md";
 
 const CommentBox = ({
   comment,
@@ -58,13 +59,16 @@ const CommentBox = ({
   };
   // handle comment update
 
-  const handleCommentUpdate: SubmitHandler<FieldValues> = async (data) => {
+  const handleCommentUpdate: SubmitHandler<FieldValues> = async (e) => {
+    e.preventDefault()
+    const updateCommentdata=e.target.comment.value
+    // console.log(updateCommentdata);
     const toastId = toast.loading("updating....");
     try {
       const commentInfo = {
         postId: postId,
         commentId: editCommentId,
-        comment: data?.comment,
+        comment: updateCommentdata,
       };
       const res = (await updateComment(commentInfo)) as TResponse<any>;
       // console.log(res);
@@ -85,7 +89,7 @@ const CommentBox = ({
       {comment?.map((item: any) => {
         return (
           <div key={item?._id} className=" pb-4 px-2 w-[100%]">
-            <div className="flex gap-2 w-[100%] items-start justify-start">
+            <div className="flex gap-2 w-[100%] items-center justify-start">
               <Avatar
                 isBordered
                 className=""
@@ -96,7 +100,7 @@ const CommentBox = ({
 
               {editCommentId !== item?._id ? (
                 // content and dropdown
-                <div className="flex gap-1 items-start justify-between w-[95%] bg-default-200 rounded-xl p-2">
+                <div className="flex gap-1 items-start justify-between  bg-default-200 rounded-xl p-2">
                   {/* content */}
                   <div>
                     <h4 className="text-small font-semibold leading-none text-default-600">
@@ -133,16 +137,34 @@ const CommentBox = ({
                   )}
                 </div>
               ) : (
-                // edit comment section
-                <div className="w-[95%] rounded-xl p-2 bg-default-200">
-                  <TDForm onSubmit={handleCommentUpdate}>
-                    <TDInput defaultvalue={item?.comment} label="comment" name="comment"/>
+              
 
-                    <div className="flex justify-end">
-                      <Button type="submit">submit</Button>
-                    </div>
-                  </TDForm>
-                </div>
+                  <form
+              action=""
+              className="relative flex items-end border shadow-md rounded-xl p-2"
+              onSubmit={handleCommentUpdate}
+            >
+              <textarea
+                id="comment"
+                name="comment"
+                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
+                defaultValue={item?.comment}
+                rows={1}
+              />
+              <button
+                className="ml-2 text-sky-800 p-2 justify-end text-xl"
+                type="submit"
+              >
+                <MdSend />
+              </button>
+            </form>
+
+
+
+
+
+
+                // </div>
               )}
             </div>
           </div>

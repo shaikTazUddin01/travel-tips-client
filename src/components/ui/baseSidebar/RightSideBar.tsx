@@ -12,6 +12,10 @@ import { useGetMyFollowingQuery } from "@/src/redux/features/following/following
 import useUser from "@/src/hooks/user/useShowUser";
 import { TUser } from "@/src/types";
 import PostCategories from "../newsfeed/PostCategories";
+import { Select, SelectItem } from "@nextui-org/react";
+import { sortIngOptions } from "@/src/constant/options";
+import Sorting from "@/src/lib/queryOperation/Sorting";
+import CategoryFilter from "@/src/lib/queryOperation/CategoryFilter";
 
 const RightSideBar = () => {
   const { data: allUsers, isLoading } = useAlluserQuery(undefined);
@@ -36,11 +40,12 @@ const RightSideBar = () => {
 
   return (
     <div>
-      <div>
-        <PostCategories />
-      </div>
-
+      {/* sorting */}
+      <Sorting/>
       {myInfo?.data?.isVerify ? "" : <VerifyAccount />}
+      <div className="mb-2">
+        <CategoryFilter />
+      </div>
       <div>
         {isLoading ? (
           <ShowMoreProfileLoading />
