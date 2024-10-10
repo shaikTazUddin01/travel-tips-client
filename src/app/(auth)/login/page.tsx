@@ -17,12 +17,13 @@ import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
 import { loginValidation } from "@/src/validation/loginValidation";
+// import { cookies } from "next/headers";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
 const Login = () => {
   const [login] = useLoginApiMutation();
   const dispatch = useAppDispatch();
-const router=useRouter()
+  const router = useRouter();
   // handle login
   const handleLogin: SubmitHandler<FieldValues> = async (data) => {
     try {
@@ -31,39 +32,49 @@ const router=useRouter()
       if (res?.data) {
         toast.success("login success");
 
+        // redirect
+        router.push("/");
+
+        // get access
         const accessToken = res?.data?.data?.accessToken;
         const decoded = await decodedToken(accessToken);
+        // console.log(accessToken);
+        // set cookies
+        document.cookie = `accessToken=${accessToken}; path=/; secure; SameSite=Strict`;
+
         dispatch(authInfo({ data: decoded, token: accessToken }));
-        router.push('/')
         // console.log(decoded);
       } else {
         toast.error(res?.error?.data?.message);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       toast.error(error?.message);
     }
   };
 
   return (
     <div
-      className=" min-h-screen w-full p-20 bg-cover"
+      className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
-      <div className="bg-white rounded-2xl h-full  grid grid-cols-2 shadow items-center  mx-auto">
+      <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto ">
         <div>
           <Image
             alt="login image"
-            className="rounded-2xl object-cover w-full h-full"
+            className="rounded-2xl hidden lg:flex object-cover w-full h-full"
             src={loginImage}
           />
         </div>
-        <div className="text-center mx-auto w-[80%] p-10">
+        <div className="text-center mx-auto w-full lg:w-[80%] p-10">
           <div className="space-y-1 mb-2">
-            <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
+            <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold ">Wellcome</h1>
             <p>Login with Email</p>
           </div>
-          <TDForm resolver={zodResolver(loginValidation)} onSubmit={handleLogin}>
-            <div className="space-y-2 text-left" >
+          <TDForm
+            resolver={zodResolver(loginValidation)}
+            onSubmit={handleLogin}
+          >
+            <div className="space-y-2 text-left">
               <TDInput
                 label="Email"
                 name="email"
@@ -77,10 +88,11 @@ const router=useRouter()
                 required={true}
                 type="password"
                 variant="bordered"
-
               />
-              <Link href={'/forgotPassword'}>
-              <p className="text-right text-[14px] text-default-500 hover:text-blue-600">Forgot Password?</p>
+              <Link href={"/forgotPassword"}>
+                <p className="text-right text-[14px] text-default-500 hover:text-blue-600">
+                  Forgot Password?
+                </p>
               </Link>
               <Button className="w-full" color="primary" type="submit">
                 Login

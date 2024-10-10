@@ -13,7 +13,7 @@ const MoreProfile = ({users}:any) => {
   
   const [makeFollowing] = useMarkFollowingMutation();
 
-console.log('--->>',users);
+// console.log('--->>',users);
   // Handle following
   const handleFollowing = async (id: string) => {
     const toastId = toast.loading("loading...");

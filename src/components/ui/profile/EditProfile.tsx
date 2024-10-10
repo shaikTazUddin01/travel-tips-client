@@ -22,7 +22,8 @@ import {
   useUpdateUserMutation,
 } from "@/src/redux/features/user/userApi";
 import useUser from "@/src/hooks/user/useShowUser";
-import { genderOptions } from "@/src/app/(auth)/signup/page";
+import { genderOptions } from "@/src/constant/options";
+
 
 interface IProps{
     color?:"primary" | "default" | "secondary" | "success" | "warning" | "danger" | undefined;

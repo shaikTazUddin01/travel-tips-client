@@ -30,7 +30,7 @@ const PaymentManagement = () => {
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log("Form submitted with:", data);
+    // console.log("Form submitted with:", data);
   };
 
   return (

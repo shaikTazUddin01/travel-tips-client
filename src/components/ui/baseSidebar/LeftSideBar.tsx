@@ -1,8 +1,8 @@
 "use client";
 import { Avatar } from "@nextui-org/react";
-import { MdWorkspacePremium } from "react-icons/md";
-import { FaCreativeCommonsNc, FaUserFriends } from "react-icons/fa";
-import { RiUserFollowFill } from "react-icons/ri";
+import { MdOutlineManageHistory, MdWorkspacePremium } from "react-icons/md";
+import { FaCreativeCommonsNc, FaUserFriends, FaUsersCog } from "react-icons/fa";
+import { RiSecurePaymentLine, RiUserFollowFill } from "react-icons/ri";
 import Link from "next/link";
 
 import CreatePostModal from "../../Home/CreatePostModal";
@@ -68,21 +68,21 @@ const LeftSideBar = () => {
       {/* All User */}
       <Link href={'/all-user'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
-        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span className="text-2xl p-1"><FaUsersCog/></span>
         <span>All User</span>
       </div>
       </Link>
       {/* all content */}
       <Link href={'/content-management'}>
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
-        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span className="text-2xl p-1"><MdOutlineManageHistory/></span>
         <span>Content Management</span>
       </div>
       </Link>
       {/* Payment Management */}
       <Link href={'/payment-management'} >
       <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
-        <span className="text-2xl p-1"><FaCreativeCommonsNc/></span>
+        <span className="text-2xl p-1"><RiSecurePaymentLine/></span>
         <span>Payment Management</span>
       </div>
       </Link>

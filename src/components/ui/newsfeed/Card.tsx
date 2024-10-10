@@ -138,13 +138,15 @@ const myData=userdata?.data
       </CardHeader>
       {/* post content */}
       <CardBody className={`px-0 py-0 text-small w-[100%] ${myData?.isVerify==false && type =="Premium" && 'blur-2xl' }`}>
-        <div className="px-3 pb-3">
+      <Link href={`/post/${_id}`}>
+        <div className="px-3 pb-3 flex gap-1">
           <div
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(postContent),
+              __html: DOMPurify.sanitize(postContent?.slice(0,100)),
             }}
-          />
+          /><span className="font-semibold">...</span>
         </div>
+        </Link>
         <span className="pl-2 text-default-500 mt-2">#{category}</span>
         {/* image */}
         <div className="w-full ">
@@ -198,14 +200,14 @@ const myData=userdata?.data
                   <span className="text-xl">
                     <AiFillLike />
                   </span>
-                  <span className="font-medium">Like</span>
+                  <span className="hidden md:flex">Like</span>
                 </span>
               ) : (
                 <span className="flex gap-1 items-center">
                   <span className="text-xl">
                     <AiOutlineLike />
                   </span>
-                  <span className="">Like</span>
+                  <span className="hidden md:flex">Like</span>
                 </span>
               )}
             </Button>
@@ -221,7 +223,7 @@ const myData=userdata?.data
             <span className="text-xl">
               <FaRegComment />
             </span>{" "}
-            <span>Comment</span>
+            <span className="hidden md:flex">Comment</span>
           </Button>
           {/* view post */}
           <Link href={`/post/${_id}`}>
@@ -234,7 +236,7 @@ const myData=userdata?.data
               <span className="text-xl">
                 <FaArrowsToEye />
               </span>{" "}
-              <span>see post</span>
+              <span className="hidden md:flex">see post</span>
             </Button>
           </Link>
         </div>

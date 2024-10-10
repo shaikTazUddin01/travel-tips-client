@@ -8,14 +8,13 @@ export const siteConfig = {
       label: "For You",
       href: "/",
     },
-
-    {
-      label: "Following People",
-      href: "/followingpeople",
-    },
     {
       label: "Premium",
       href: "/premium",
+    },
+    {
+      label: "Non-Premium",
+      href: "/non-premium",
     },
     {
       label: "About",
@@ -33,8 +32,24 @@ export const siteConfig = {
     },
 
     {
+      label: "Premium",
+      href: "/premium",
+    },
+    {
+      label: "Non-Premium",
+      href: "/non-premium",
+    },
+    {
       label: "About",
       href: "/about",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+    },
+    {
+      label: "Change Password",
+      href: "/changePassword",
     },
     {
       label: "Logout",

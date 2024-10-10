@@ -16,22 +16,10 @@ import login1 from "@/src/assets/login1.jpg";
 import loginImage from "@/src/assets/travelLogin.jpg";
 import TDSelect from "@/src/components/form/TDSelect";
 import { signupValidation } from "@/src/validation/signupValidation";
+import { genderOptions } from "@/src/constant/options";
 // import { readFile } from "fs";
 
-export const genderOptions = [
-  {
-    key: "Male",
-    label: "Male",
-  },
-  {
-    key: "Female",
-    label: "Female",
-  },
-  {
-    key: "Other",
-    label: "Other",
-  },
-];
+
 
 const SignUp = () => {
   const [createUser, {isLoading}] = useSignupApiMutation();
@@ -76,20 +64,20 @@ const SignUp = () => {
 
   return (
     <div
-      className=" min-h-screen w-full p-20 bg-cover"
+      className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
-      <div className="bg-white rounded-2xl h-full  grid grid-cols-2 shadow items-center  mx-auto">
+      <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto">
         <div>
           <Image
-            alt="login image"
-            className="rounded-2xl object-cover w-full h-full"
+            alt="sign image"
+            className="rounded-2xl hidden lg:flex object-cover w-full h-full"
             src={loginImage}
           />
         </div>
-        <div className="text-center mx-auto w-[80%] p-10">
+        <div className="text-center mx-auto w-full lg:w-[90%] p-10 md:min-w-[550px] lg:min-w-[300px]">
           <div className="space-y-1 mb-2">
-            <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
+            <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold">Wellcome</h1>
             <p>signup with your Information</p>
           </div>
           <TDForm resolver={zodResolver(signupValidation)} onSubmit={handleSignUp}>

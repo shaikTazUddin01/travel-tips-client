@@ -10,7 +10,7 @@ import { TUser } from "@/src/types";
 const MyFollowing = () => {
   const pathname = usePathname();
   const { data, isLoading } = useGetMyFollowingQuery(undefined);
-  console.log(pathname);
+  // console.log(pathname);
   if (isLoading) {
     return <p>Loading...</p>;
   }

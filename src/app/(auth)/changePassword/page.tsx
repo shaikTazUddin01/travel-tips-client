@@ -13,6 +13,8 @@ import { useChangePasswordMutation } from "@/src/redux/features/auth/authApi";
 import { TResponse } from "@/src/types";
 import { useAppDispatch } from "@/src/redux/hooks";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { changePassValidation } from "@/src/validation/changePasswordValidation.";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
 const ChangePassword = () => {
@@ -43,23 +45,23 @@ const dispatch=useAppDispatch()
 
   return (
     <div
-      className=" min-h-screen w-full p-20 bg-cover"
+      className=" min-h-screen w-full lg:p-20 bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
-      <div className="bg-white rounded-2xl h-full  grid grid-cols-2 shadow items-center  mx-auto">
+      <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto ">
         <div>
           <Image
             alt="login image"
-            className="rounded-2xl object-cover w-full h-full"
+            className="rounded-2xl hidden lg:flex object-cover w-full h-full"
             src={loginImage}
           />
         </div>
-        <div className="text-center mx-auto w-[80%] p-10">
+        <div className="text-center mx-auto w-full lg:w-[80%] p-10">
           <div className="space-y-1 mb-2">
-            <h1 className="text-sky-600 text-5xl font-bold ">Wellcome</h1>
+            <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold ">Wellcome</h1>
             <p>Change your password</p>
           </div>
-          <TDForm onSubmit={handleChangePass}>
+          <TDForm resolver={zodResolver(changePassValidation)} onSubmit={handleChangePass}>
             <div className="space-y-2 text-left" >
               <TDInput
                 label="Email"

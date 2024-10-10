@@ -10,7 +10,7 @@ const layout = ({ children }: { children: ReactNode }) => {
       <div className="relative flex flex-col min-h-screen">
         {/* <Navbar /> */}
         <main className="container mx-auto max-w-7xl px-6 flex-grow ">
-          <div className="flex flex-col lg:flex-row gap-10 ">
+          <div className="flex flex-col lg:flex-row gap-5 ">
             {/* left sidebar */}
             <div
               className="w-[100%] lg:w-[25%] border shadow-md rounded-xl lg:h-[85vh] lg:sticky top-20 overflow-y-auto 
@@ -22,7 +22,8 @@ const layout = ({ children }: { children: ReactNode }) => {
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
  [&::-webkit-scrollbar-thumb]:rounded-full
  [&::-webkit-scrollbar-track]:rounded-full
-            "
+ hidden
+ lg:flex            "
             >
               <LeftSideBar />
             </div>
@@ -38,7 +39,8 @@ const layout = ({ children }: { children: ReactNode }) => {
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500
  [&::-webkit-scrollbar-thumb]:rounded-full
  [&::-webkit-scrollbar-track]:rounded-full
-            "
+hidden lg:flex
+ "
             >
               <RightSideBar />
             </div>

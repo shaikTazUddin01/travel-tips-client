@@ -24,14 +24,17 @@ import SearchBox from "../lib/queryOperation/SearchBox";
 
 import { siteConfig } from "@/src/config/site";
 import { Logo } from "@/src/assets/icons";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
   const [profileNavToggle, setProfileNavToggle] = useState(false);
   const { user } = useUser();
-
+  const router = useRouter();
   const handleLogout = () => {
     dispatch(logout());
+    document.cookie = `accessToken=; path=/; secure; SameSite=Strict; expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
+    router.push("/login");
   };
 
   return (
@@ -104,7 +107,9 @@ export const Navbar = () => {
                       <Button
                         className="w-full flex items-center gap-2 justify-start"
                         variant="light"
-                      >Change Password</Button>
+                      >
+                        Change Password
+                      </Button>
                     </Link>
                   </NavbarItem>
 
@@ -143,17 +148,7 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
+              <Link className="text-black hover:text-blue-600" href={item?.href} size="lg">
                 {item.label}
               </Link>
             </NavbarMenuItem>

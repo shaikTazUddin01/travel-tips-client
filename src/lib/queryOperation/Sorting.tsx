@@ -9,12 +9,12 @@ const Sorting = () => {
     const dispatch=useAppDispatch()
   const handleSorting = (e:any) => {
     
-    console.log(e.target.value);
+    // console.log(e.target.value);
     dispatch(setSorting(e.target.value))
   };
   return (
-    <form action="" className="mb-2" >
-      <Select className="max-w-xs" label="find by upvote" variant="bordered" onChange={handleSorting}>
+    <form action="" className="mb-2 " >
+      <Select className="full" label="find by upvote" variant="bordered" onChange={handleSorting}>
         {sortIngOptions.map((sortitem) => (
           <SelectItem key={sortitem.key} value={sortitem.key}>
             {sortitem.label}

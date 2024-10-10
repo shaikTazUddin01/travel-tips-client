@@ -8,10 +8,6 @@ import {
   Avatar,
   Button,
   Divider,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
   Image,
 } from "@nextui-org/react";
 import DOMPurify from "dompurify";
@@ -20,7 +16,6 @@ import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
 import { FaComment, FaCrown, FaRegComment } from "react-icons/fa";
 import { MdOutlinePublic, MdSend } from "react-icons/md";
 import { toast } from "sonner";
@@ -33,10 +28,16 @@ import {
 } from "@/src/redux/features/post/postApi";
 import CommentBox from "@/src/components/ui/newsfeed/CommentBox";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
-
+import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
+import useUser from "@/src/hooks/user/useShowUser";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import {useRef} from 'react'
+import { PiDownloadSimpleBold } from "react-icons/pi";
 export default function ViewPost() {
   const { id } = useParams();
   const { data: specificPost, isLoading } = useGetSinglePostQuery(id as string);
+  const pdfRef :any=useRef()
 
   const [isClickToComment, setIsClickToComment] = useState(false);
   const [upvoteDownvote, { isLoading: upDoLoading }] =
@@ -46,7 +47,9 @@ export default function ViewPost() {
   const [isUpvote, setIsUpvote] = useState<boolean>();
   // show comment under ther post
   const [showComment, setShowComment] = useState(false);
-
+  // user 
+  const {user : userInFo}=useUser()
+  const currentUserId=userInFo?.userId
   const {
     category,
     image,
@@ -76,6 +79,32 @@ export default function ViewPost() {
     setIsUpvote(!!isUserUpvote);
   }, [isUserUpvote]);
 
+// download pfd
+const downloadPDF = () => {
+  const input = pdfRef.current;  
+  html2canvas(input, { scale: 2 }).then((canvas) => {
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+
+    const imgWidth = canvas.width;
+    const imgHeight = canvas.height;
+
+
+    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+
+    const finalImgWidth = imgWidth * ratio;
+    const finalImgHeight = imgHeight * ratio;
+
+    
+    pdf.addImage(imgData, "PNG", 0, 0, finalImgWidth, finalImgHeight);
+    
+    pdf.save("post-content.pdf"); 
+  });
+};
   // handle comment submit
   const handleCommentSubmit: SubmitHandler<FieldValues> = async (e) => {
     e.preventDefault();
@@ -100,9 +129,10 @@ export default function ViewPost() {
     );
   }
 
+  // const
   return (
-    <Card className="w-full mb-6 border">
-      <CardHeader className="justify-between">
+    <Card ref={pdfRef} className="w-full mb-6 border">
+      <CardHeader className="justify-between"> 
         <div className="flex gap-3">
           <Avatar isBordered radius="full" size="md" src={user?.image} />
           <div className="flex flex-col gap-1 items-start justify-center">
@@ -129,6 +159,7 @@ export default function ViewPost() {
           </div>
         </div>
 
+{/* 
         <Dropdown>
           <DropdownTrigger>
             <Button
@@ -145,6 +176,11 @@ export default function ViewPost() {
             <DropdownItem key="copy">Copy link</DropdownItem>
           </DropdownMenu>
         </Dropdown>
+ */}
+{currentUserId == user?._id && (
+          <DeleteAndEditPost postItem={specificPost?.data }/>
+        )}
+
       </CardHeader>
       {/* post content */}
       <CardBody className="px-0 py-0 text-small w-[100%]">
@@ -164,6 +200,7 @@ export default function ViewPost() {
             src={image}
           />
         </div>
+        
       </CardBody>
       {/* all like */}
       <CardFooter className="gap-3 flex-col">
@@ -187,7 +224,7 @@ export default function ViewPost() {
         </div>
 
         <Divider />
-        <div className="flex w-full justify-between gap-10">
+        <div className="flex w-full justify-between gap-4 md:gap-10">
           {/* like section */}
           {upDoLoading ? (
             <Button
@@ -208,14 +245,14 @@ export default function ViewPost() {
                   <span className="text-xl">
                     <AiFillLike />
                   </span>
-                  <span className="font-medium">Like</span>
+                  <span className="font-medium hidden md:flex">Like</span>
                 </span>
               ) : (
                 <span className="flex gap-1 items-center">
                   <span className="text-xl">
                     <AiOutlineLike />
                   </span>
-                  <span className="">Like</span>
+                  <span className=" hidden md:flex">Like</span>
                 </span>
               )}
             </Button>
@@ -231,8 +268,22 @@ export default function ViewPost() {
             <span className="text-xl">
               <FaRegComment />
             </span>{" "}
-            <span>Comment</span>
+            <span className="hidden md:flex">Comment</span>
           </Button>
+          {/* pdf */}
+          <Button
+            className="flex-1 text-[16px]"
+            size="sm"
+            variant="flat"
+            onClick={downloadPDF}
+          >
+            <span className="text-xl">
+              <PiDownloadSimpleBold />
+            </span>{" "}
+            <span className="hidden md:flex">pdf file</span>
+          </Button>
+
+
         </div>
       </CardFooter>
       {/* showing comment */}

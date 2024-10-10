@@ -1,13 +1,9 @@
-// 'use client'
-// import { useGetSingleUserQuery } from '@/src/redux/features/user/userApi';
-// import { useAppSelector } from '@/src/redux/hooks';
-// import React from 'react';
+import { useAppSelector } from "@/src/redux/hooks";
 
-// const useCurrentUser = () => {
-//   const user = useAppSelector((state) => state?.auth);
-//   const { data: userData } = useGetSingleUserQuery(user?.user?.userId as string);
+const User = () => {
+  const user = useAppSelector((state) => state?.auth?.user);
 
-// return userData?.data
-// };
+  return user;
+};
 
-// export default useCurrentUser;
+export default User;

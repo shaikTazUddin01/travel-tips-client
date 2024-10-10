@@ -18,7 +18,7 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
   const userInFo: TUser = userData?.data;
   // all post
   const posts=post?.data
-  console.log(posts);
+  // console.log(posts);
   return (
     <div>
       {/* main section */}

@@ -30,7 +30,7 @@ const FollowCard = ({ people, pathname, id }: any) => {
 
   return (
     <div className="w-full px-5 mt-3">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col md:flex-row items-center justify-center md:items-start md:justify-between gap-2">
         <div className="flex gap-2">
           <Avatar isBordered radius="full" size="lg" src={people?.image} />
           <div className="flex flex-col gap-1 items-start justify-center">
@@ -38,11 +38,11 @@ const FollowCard = ({ people, pathname, id }: any) => {
               {people.name}
             </h4>
             <h5 className="text-small tracking-tight text-default-400">
-              @zoeylang
+              {/* @zoeylang */}
             </h5>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex  gap-2">
           {/* unfollowing */}
           <Button
             className="rounded-full"

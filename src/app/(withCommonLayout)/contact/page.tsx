@@ -1,9 +1,5 @@
 "use client";
-import Image from "next/image";
-import login1 from "@/src/assets/login1.jpg";
-import Link from "next/link";
-import TDInput from "@/src/components/form/TDInput";
-import TDForm from "@/src/components/form/TDForm";
+
 import { Button } from "@nextui-org/button";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import {
@@ -15,10 +11,14 @@ import {
   FaLinkedin,
   FaTwitter,
 } from "react-icons/fa";
-import TDTextArea from "@/src/components/form/TDTextArea";
 import { MdSend } from "react-icons/md";
 import { SlSocialSkype } from "react-icons/sl";
 import { toast } from "sonner";
+
+import TDTextArea from "@/src/components/form/TDTextArea";
+import TDInput from "@/src/components/form/TDInput";
+import login1 from "@/src/assets/login1.jpg";
+import TDForm from "@/src/components/form/TDForm";
 
 const ContactPage = () => {
   // Form submission handler
@@ -30,13 +30,13 @@ const ContactPage = () => {
 
   return (
     <div
-      className="min-h-screen w-full p-8 lg:p-12 bg-cover bg-gray-100"
+      className="min-h-screen sticky -mt-10 w-full p-8 lg:p-12 bg-cover bg-gray-100"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
-      <div className="bg-white rounded-2xl shadow-xl mx-auto grid grid-cols-1 md:grid-cols-2 p-5 lg:p-12 gap-10 max-w-screen-lg">
-        {/* Left Section: Contact Details */}
-        <div className="space-y-8">
-          <h2 className="text-4xl font-semibold text-gray-800">
+      <div className="bg-white rounded-2xl shadow-xl mx-auto grid grid-cols-1 md:grid-cols-2 p-5 lg:p-12 gap-10 max-w-screen-lg mt-8">
+        {/* left side */}
+        <div className="space-y-4 lg:space-y-8">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800">
             Contact Information
           </h2>
           <p className="text-lg text-gray-500">
@@ -60,8 +60,8 @@ const ContactPage = () => {
               <li className="flex items-center space-x-3">
                 <FaEnvelope className="text-2xl " />
                 <a
-                  href="mailto:adbsr@travertips.com"
                   className="hover:underline"
+                  href="mailto:adbsr@travertips.com"
                 >
                   adbsr@travertips.com
                 </a>
@@ -78,9 +78,9 @@ const ContactPage = () => {
           </div>
         </div>
 
-        {/* Right Section: Contact Form */}
+        {/*right side */}
         <div>
-          <h2 className="text-4xl font-semibold text-gray-800 mb-6">
+          <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800 mb-2 lg:mb-6">
             Get in Touch
           </h2>
           <p className="text-gray-500 mb-8">
@@ -107,12 +107,12 @@ const ContactPage = () => {
               <TDTextArea
                 label="Message"
                 name="message"
+                placeholdertext="Write your message here.."
                 required={true}
                 type="textarea"
                 variant="bordered"
-                placeholdertext="Write your message here.."
               />
-              <Button className="w-full text-lg" type="submit" color="primary">
+              <Button className="w-full text-lg" color="primary" type="submit">
                 <span>Send Message</span>
                 <span>
                   <MdSend />

@@ -49,7 +49,7 @@
       }
     ],
     "import/order": [
-      "warn",
+      "off",
       {
         "groups": [
           "type",
@@ -90,6 +90,9 @@
         "prev": ["const", "let", "var"],
         "next": ["const", "let", "var"]
       }
-    ]
+    ],
+    // add extra rule
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off"
   }
 }
