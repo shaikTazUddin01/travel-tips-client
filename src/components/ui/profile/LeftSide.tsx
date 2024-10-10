@@ -1,12 +1,13 @@
 "use client";
 // import useCurrentUser from "@/src/hooks/user/useCurrentUser";
-import { IoLocationOutline } from "react-icons/io5";
 import { MdEmail, MdLocationPin, MdPhone } from "react-icons/md";
+import Image from "next/image";
+
 import EditProfile from "./EditProfile";
+
 import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
 // import { Image } from "@nextui-org/react";
 import { TPost } from "@/src/types";
-import Image from "next/image";
 import useUser from "@/src/hooks/user/useShowUser";
 
 const LeftSide = () => {
@@ -57,7 +58,7 @@ const LeftSide = () => {
        myPost?.data?.length >0 ?
        myPost?.data?.map((item:TPost)=>{
         return(
-            <Image src={item?.image} key={item?._id} height={100} width={100} alt="photos" className="size-[97] object-cover"/>
+            <Image key={item?._id} alt="photos" className="size-[97] object-cover" height={100} src={item?.image} width={100}/>
         )
        })
        :

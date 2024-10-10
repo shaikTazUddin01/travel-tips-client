@@ -1,21 +1,17 @@
 "use client";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
-import Link from "next/link";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import loginImage from "@/src/assets/travelLogin.jpg";
 import login1 from "@/src/assets/login1.jpg";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
-import { useChangePasswordMutation, useForgotPasswordMutation, useLoginApiMutation } from "@/src/redux/features/auth/authApi";
+import { useForgotPasswordMutation } from "@/src/redux/features/auth/authApi";
 import { TResponse } from "@/src/types";
-import { decodedToken } from "@/src/utils/decodedToken";
 import { useAppDispatch } from "@/src/redux/hooks";
-import { loginValidation } from "@/src/validation/loginValidation";
 import { authInfo } from "@/src/redux/features/auth/authSlice";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 

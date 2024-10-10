@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Divider,
   Dropdown,
   DropdownItem,
@@ -11,9 +10,7 @@ import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { toast } from "sonner";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-
-import TDForm from "../../form/TDForm";
-import TDInput from "../../form/TDInput";
+import { MdSend } from "react-icons/md";
 
 import { IComment, TResponse } from "@/src/types";
 import {
@@ -21,7 +18,7 @@ import {
   useUpdateCommentMutation,
 } from "@/src/redux/features/post/postApi";
 import useUser from "@/src/hooks/user/useShowUser";
-import { MdSend } from "react-icons/md";
+
 
 const CommentBox = ({
   comment,
@@ -143,10 +140,10 @@ const CommentBox = ({
                   onSubmit={handleCommentUpdate}
                 >
                   <textarea
-                    id="comment"
-                    name="comment"
                     className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
                     defaultValue={item?.comment}
+                    id="comment"
+                    name="comment"
                     rows={1}
                   />
                   <button

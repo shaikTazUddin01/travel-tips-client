@@ -2,12 +2,12 @@
 import { Button } from "@nextui-org/button";
 import { Avatar } from "@nextui-org/react";
 import { toast } from "sonner";
+import { BiSolidBadgeCheck } from "react-icons/bi";
 
 import { TResponse, TUser } from "@/src/types";
 import {
   useMarkFollowingMutation,
 } from "@/src/redux/features/following/followingApi";
-import { BiSolidBadgeCheck } from "react-icons/bi";
 
 const MoreProfile = ({users}:any) => {
   

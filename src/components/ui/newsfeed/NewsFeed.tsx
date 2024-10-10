@@ -1,8 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
+
 import LoadingSkeleton from "../LoadingSkeleton/LoadingSkeleton";
+
 import NewsFeedCard from "./Card";
+
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
 import { useAppSelector } from "@/src/redux/hooks";
@@ -55,14 +58,14 @@ const NewsFeed = () => {
     <div>
       <InfiniteScroll
         dataLength={posts.length}
-        next={fetchMorePosts}
-        hasMore={hasMore}
-        loader={<LoadingSkeleton />} 
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>No data found.!</b>
           </p>
         }
+        hasMore={hasMore}
+        loader={<LoadingSkeleton />} 
+        next={fetchMorePosts}
       >
         {posts.map((data: TPost,idx) => (
           <div key={idx}>

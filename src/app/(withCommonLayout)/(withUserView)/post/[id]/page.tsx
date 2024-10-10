@@ -2,15 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 
-import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
-import CommentBox from "@/src/components/ui/newsfeed/CommentBox";
 // import useCurrentUser from "@/src/hooks/user/useCurrentUser";
-import {
-  useCommentToPostMutation,
-  useGetSinglePostQuery,
-  useUpvoteDownvoteMutation,
-} from "@/src/redux/features/post/postApi";
-import { TResponse } from "@/src/types";
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import {
   Avatar,
@@ -23,7 +15,6 @@ import {
   Image,
 } from "@nextui-org/react";
 import DOMPurify from "dompurify";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
@@ -31,9 +22,17 @@ import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { FaComment, FaCrown, FaRegComment } from "react-icons/fa";
-import { FaArrowsToEye } from "react-icons/fa6";
 import { MdOutlinePublic, MdSend } from "react-icons/md";
 import { toast } from "sonner";
+
+import { TResponse } from "@/src/types";
+import {
+  useCommentToPostMutation,
+  useGetSinglePostQuery,
+  useUpvoteDownvoteMutation,
+} from "@/src/redux/features/post/postApi";
+import CommentBox from "@/src/components/ui/newsfeed/CommentBox";
+import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 
 export default function ViewPost() {
   const { id } = useParams();
@@ -255,9 +254,9 @@ export default function ViewPost() {
             onSubmit={handleCommentSubmit}
           >
             <textarea
+              className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
               id="comment"
               name="comment"
-              className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
               placeholder="Write a comment..."
               rows={3}
             />

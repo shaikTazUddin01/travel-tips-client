@@ -2,14 +2,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client"
-import { useUpdateProfileImageMutation } from "@/src/redux/features/user/userApi";
-import { TResponse, TUser } from "@/src/types";
 import { Button, Image } from "@nextui-org/react";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { FaImages } from "react-icons/fa";
 import { IoIosCamera } from "react-icons/io";
 import { toast } from "sonner";
+
+import { TResponse, TUser } from "@/src/types";
+import { useUpdateProfileImageMutation } from "@/src/redux/features/user/userApi";
 
 const EditImage = ({ user }: { user: TUser }) => {
   const [trigger, setTrigger] = useState(false);
@@ -118,7 +119,7 @@ const EditImage = ({ user }: { user: TUser }) => {
 
                   {/* Submit button */}
                   {imagePreview && !isLoading && (
-                    <Button type="submit" className="w-full">
+                    <Button className="w-full" type="submit">
                       Update
                     </Button>
                   )}

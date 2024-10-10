@@ -1,4 +1,4 @@
-import { Input, Textarea } from "@nextui-org/input";
+import { Textarea } from "@nextui-org/input";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -8,7 +8,7 @@ interface IProps {
     label?: string;
   type?: string;
   defaultvalue?: string;
-  placeholder?: string;
+  placeholdertext?: string;
   variant?: "bordered" | "flat" | "faded" | "underlined";
 }
 
@@ -18,7 +18,7 @@ const TDTextArea = ({
   variant = "flat",
   required = false,
   defaultvalue,
-  placeholder = "write your commemt",
+  placeholdertext,
 }: IProps) => {
   const {
     register,
@@ -37,7 +37,7 @@ const TDTextArea = ({
     //   errorMessage={errors[name]?.message as string | undefined}
     //   isInvalid={!!errors[name]}
       isRequired={required}
-      placeholder={placeholder}
+      placeholder={placeholdertext}
     />
   );
 };

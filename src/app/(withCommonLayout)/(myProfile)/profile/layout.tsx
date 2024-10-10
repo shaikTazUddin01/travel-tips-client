@@ -1,6 +1,7 @@
+import React, { ReactNode } from "react";
+
 import LeftSide from "@/src/components/ui/profile/LeftSide";
 import ProfileHeader from "@/src/components/ui/profile/ProfileHeader";
-import React, { ReactNode } from "react";
 
 const layout = ({ children }: { children: ReactNode }) => {
   return (

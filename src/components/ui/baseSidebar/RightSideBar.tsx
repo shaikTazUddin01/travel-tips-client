@@ -1,5 +1,8 @@
 "use client";
 
+
+import { useEffect, useState } from "react";
+
 import MoreProfile from "../moreProfiles/MoreProfile";
 import ShowMoreProfileLoading from "../LoadingSkeleton/ShowMoreProfileLoading";
 import VerifyAccount from "../verifyAccount/VerifyAccount";
@@ -11,13 +14,10 @@ import {
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import useUser from "@/src/hooks/user/useShowUser";
 import { TPost, TUser } from "@/src/types";
-import PostCategories from "../newsfeed/PostCategories";
-import { Select, SelectItem } from "@nextui-org/react";
-import { sortIngOptions } from "@/src/constant/options";
 import Sorting from "@/src/lib/queryOperation/Sorting";
 import CategoryFilter from "@/src/lib/queryOperation/CategoryFilter";
 import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
-import { useEffect, useState } from "react";
+
 
 const RightSideBar = () => {
   const { data: allUsers, isLoading } = useAlluserQuery(undefined);

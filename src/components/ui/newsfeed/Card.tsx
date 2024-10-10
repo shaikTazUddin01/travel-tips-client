@@ -10,26 +10,18 @@ import {
   Button,
   Image,
   Divider,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
 } from "@nextui-org/react";
 import DOMPurify from "dompurify";
 import { AiOutlineLike } from "react-icons/ai";
 import { FaArrowsToEye, FaCrown, FaRegComment } from "react-icons/fa6";
-import { PiShareFat } from "react-icons/pi";
 import { FaComment } from "react-icons/fa6";
 import { AiFillLike } from "react-icons/ai";
 import { MdOutlinePublic, MdSend } from "react-icons/md";
 import { BiSolidBadgeCheck } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { FieldValues, SubmitHandler } from "react-hook-form";
-
-import TDForm from "../../form/TDForm";
-import TDInput from "../../form/TDInput";
+import Link from "next/link";
 
 import CommentBox from "./CommentBox";
 
@@ -38,8 +30,8 @@ import {
   useCommentToPostMutation,
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
-import TDTextArea from "../../form/TDTextArea";
-import Link from "next/link";
+
+
 // import useCurrentUser from "@/src/hooks/user/useCurrentUser";
 import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
 import useUser from "@/src/hooks/user/useShowUser";
@@ -263,9 +255,9 @@ const myData=userdata?.data
               onSubmit={handleCommentSubmit}
             >
               <textarea
+                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
                 id="comment"
                 name="comment"
-                className="w-full p-2  resize-none border-none focus:ring-0 focus:outline-none"
                 placeholder="Write a comment..."
                 rows={3}
               />

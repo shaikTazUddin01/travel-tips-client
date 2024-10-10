@@ -30,6 +30,7 @@ const MyFollowing = () => {
             followings?.map((followingPeople: TUser) => (
               <FollowCard
                 key={followingPeople?._id}
+                id={followingPeople?._id}
                 pathname={pathname}
                 people={followingPeople}
               />

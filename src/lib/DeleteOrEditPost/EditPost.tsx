@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 import useDebounce from "@/src/hooks/useDebounce";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
-import { IPostProps, TPost, TResponse } from "@/src/types";
+import { TPost, TResponse } from "@/src/types";
 import useUser from "@/src/hooks/user/useShowUser";
 import { categoryOptions } from "@/src/constant/categoryOptions";
 import QuillEditor from "@/src/components/Home/QuillEditor";

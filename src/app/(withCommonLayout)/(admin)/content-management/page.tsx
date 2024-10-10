@@ -23,7 +23,7 @@ import {
 import AdminUpdatePost from "@/src/components/ui/post/AdminUpdatePost";
 
 export default function ContentManagement() {
-  const { data: allPost } = useGetPostQuery(undefined);
+  const { data: allPost } = useGetPostQuery({});
   const [deletePost] = useDeleteSpecificPostMutation();
 
   const handleDeletePost = async (id: string) => {

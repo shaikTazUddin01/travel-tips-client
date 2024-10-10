@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 
-import RightSideBar from "@/src/components/ui/baseSidebar/RightSideBar";
 
 const page = ({ children }: { children: ReactNode }) => {
   return (

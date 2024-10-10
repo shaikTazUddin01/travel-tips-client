@@ -1,14 +1,17 @@
 "use client";
 import { IoMdAdd } from "react-icons/io";
+import Link from "next/link";
+
 import CreatePostModal from "../../Home/CreatePostModal";
+
 import EditProfile from "./EditProfile";
+import EditImage from "./EditImage";
+
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import useUser from "@/src/hooks/user/useShowUser";
-import EditImage from "./EditImage";
 import bg from "@/src/assets/login1.jpg";
 import { useGetMyFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
-import Link from "next/link";
 
 const ProfileHeader = () => {
   const { user } = useUser();

@@ -1,10 +1,5 @@
 "use client";
 import {
-  useDeletePostMutation,
-  useUpdateSpecificPostMutation,
-} from "@/src/redux/features/post/postApi";
-import { TPost, TResponse } from "@/src/types";
-import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -19,16 +14,20 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+
 import TDSelect from "@/src/components/form/TDSelect";
 import { categoryOptions } from "@/src/constant/categoryOptions";
 import TDForm from "@/src/components/form/TDForm";
 import QuillEditor from "@/src/components/Home/QuillEditor";
-import { FieldValues, SubmitHandler } from "react-hook-form";
-import TDTextArea from "@/src/components/form/TDTextArea";
+import { TPost, TResponse } from "@/src/types";
+import {
+  useDeletePostMutation,
+  useUpdateSpecificPostMutation,
+} from "@/src/redux/features/post/postApi";
 
 const DeleteAndEditPost = ({ postItem }: { postItem: TPost }) => {
   //   console.log(postId);
@@ -118,25 +117,25 @@ const DeleteAndEditPost = ({ postItem }: { postItem: TPost }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1"></ModalHeader>
+              <ModalHeader className="flex flex-col gap-1" />
               <ModalBody>
                 <QuillEditor setDiscription={setDiscription} />
                 <TDForm onSubmit={handleUpdatePost}>
                   <div className="space-y-2">
                     <TDSelect
+                      defaultValue={postItem?.category}
                       label="Category"
                       name="category"
                       options={categoryOptions}
-                      defaultValue={postItem?.category}
                     />
                     <TDSelect
+                      defaultValue={postItem?.type}
                       label="Content Type"
                       name="type"
                       options={[
                         { key: "Premium", label: "Premiun" },
                         { key: "Non-Premium", label: "Non-Premiun" },
                       ]}
-                      defaultValue={postItem?.type}
                     />
                     <Button className="w-full" color="primary" type="submit">
                       update

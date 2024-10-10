@@ -9,9 +9,7 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
@@ -22,10 +20,10 @@ import { useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { logout } from "../redux/features/auth/authSlice";
 import useUser from "../hooks/user/useShowUser";
+import SearchBox from "../lib/queryOperation/SearchBox";
 
 import { siteConfig } from "@/src/config/site";
-import { SearchIcon, Logo } from "@/src/assets/icons";
-import SearchBox from "../lib/queryOperation/SearchBox";
+import { Logo } from "@/src/assets/icons";
 
 export const Navbar = () => {
   const dispatch = useAppDispatch();
