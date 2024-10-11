@@ -56,6 +56,50 @@ export const siteConfig = {
       href: "/logout",
     },
   ],
+  adminNavMenuItems: [
+    {
+      label: "Home",
+      href: "/",
+    },
+
+    {
+      label: "Premium",
+      href: "/premium",
+    },
+    {
+      label: "Non-Premium",
+      href: "/non-premium",
+    },
+    {
+      label: "About",
+      href: "/about",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
+    },
+    {
+      label: "user Management",
+      href: "/all-user",
+    },
+    {
+      label: "Content Management",
+      href: "/content-management",
+    },
+    {
+      label: "Payment Management",
+      href: "/payment-management",
+    },
+    
+    {
+      label: "Change Password",
+      href: "/changePassword",
+    },
+    {
+      label: "Logout",
+      href: "/logout",
+    },
+  ],
 
   // links: {
   //   github: "https://github.com/nextui-org/nextui",

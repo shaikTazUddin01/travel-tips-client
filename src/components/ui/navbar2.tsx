@@ -44,24 +44,26 @@ export default function Navbar2() {
         className="py-1"
         maxWidth="xl"
       >
-        {/* toggle button */}
-        <NavbarContent
-          className="sm:hidden w-full"
-          justify="start"
-        >
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          />
+        {/* icon for small screen */}
+        <NavbarContent justify="start" className="lg:hidden">
+          <Link href="/" className="text-black">
+            <NavbarBrand className="text-xl flex justify-end">
+              <Logo />
+              <p className="font-bold text-inherit">AGMT</p>
+            </NavbarBrand>
+          </Link>
         </NavbarContent>
 
-        
         {/* large srceen */}
-        <NavbarContent className="hidden sm:flex gap-4" justify="start">
+        <NavbarContent className="hidden lg:flex gap-4" justify="start">
+            
           <NavbarBrand className="">
+            <Link href="/" className="text-black">
             <div className="text-xl flex items-center">
-            <Logo />
-            <p className="font-bold text-inherit">AGMT</p>
+              <Logo />
+              <p className="font-bold text-inherit">AGMT</p>
             </div>
+            </Link>
             <div className="ml-2 w-[60%]">
               <NavbarItem className="hidden lg:flex w-full">
                 <SearchBox />
@@ -70,17 +72,17 @@ export default function Navbar2() {
           </NavbarBrand>
         </NavbarContent>
 
-
         <NavbarContent justify="end" className="">
           {/* lg menu */}
           <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
             {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
-                <Link onClick={() => setColor(item?.label)} href={item.href}
-                className={`${color==item?.label?"text-blue-900":"text-black"} text-[18px]`}
+                <Link
+                  onClick={() => setColor(item?.label)}
+                  href={item.href}
+                  className={`${color == item?.label ? "text-blue-900" : "text-black"} text-[18px]`}
                 >
                   {item.label}
-                  
                 </Link>
               </NavbarItem>
             ))}
@@ -142,30 +144,64 @@ export default function Navbar2() {
             </NavbarItem>
           </ul>
         </NavbarContent>
-          {/* small screen nav end */}
 
-        <NavbarContent justify="end" className="md:hidden">
-        <NavbarBrand className="text-xl flex justify-end">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
-          </NavbarBrand>
-        
-      </NavbarContent>
+        {/* small screen nav end toggle button */}
+        <NavbarContent className="lg:hidden w-full" justify="end">
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          />
+        </NavbarContent>
 
         {/* small screen */}
-        <NavbarMenu>
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={index}>
+        <NavbarMenu className="pt-5 space-y-0">
+          <SearchBox />
+          {user?.role == "ADMIN"
+            ? siteConfig.adminNavMenuItems.map((item, index) => (
+                <NavbarMenuItem
+                  key={index}
+                  className={`${color == item?.label ? "text-blue-700" : "text-black"}`}
+                  onClick={() => setColor(item?.label)}
+                >
+                  <Link
+                    className="w-full hover:text-blue text-black rounded p-1 -mt-1"
+                    href={item?.href}
+                    size="lg"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item?.label}
+                  </Link>
+                </NavbarMenuItem>
+              ))
+            : siteConfig.navMenuItems.map((item, index) => (
+                <NavbarMenuItem
+                  key={index}
+                  className={`${color == item?.label ? "text-blue-700" : "text-black"}`}
+                  onClick={() => setColor(item?.label)}
+                >
+                  <Link
+                    className="w-full hover:text-blue text-black rounded p-1 -mt-1"
+                    href={item?.href}
+                    size="lg"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item?.label}
+                  </Link>
+                </NavbarMenuItem>
+              ))}
+          {/* {siteConfig.navMenuItems.map((item, index) => (
+            <NavbarMenuItem key={index} className={`${color==item?.label?"text-blue-700":"text-black"}`} onClick={()=>setColor(item?.label)}>
               <Link
-                className="w-full hover:blue text-black"
+                className="w-full hover:text-blue text-black rounded p-1 -mt-1"
                 href={item?.href}
                 size="lg"
                 onClick={() => setIsMenuOpen(false)}
               >
+                
                 {item?.label}
+                
               </Link>
             </NavbarMenuItem>
-          ))}
+          ))} */}
         </NavbarMenu>
       </Navbar>
     </div>

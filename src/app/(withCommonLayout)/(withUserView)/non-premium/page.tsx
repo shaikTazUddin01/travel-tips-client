@@ -11,9 +11,9 @@ import { TPost } from "@/src/types";
 const page = () => {
   const {
     data: postData,
-    isError,
+    // isError,
     isLoading,
-    isFetching,
+    // isFetching,
   } = useGetPostQuery({type:"Non-Premium"});
 
 //   console.log("postData-->", postData);

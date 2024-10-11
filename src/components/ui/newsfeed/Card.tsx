@@ -102,6 +102,7 @@ const myData=userdata?.data
     const res = (await postComment(commentInFo)) as TResponse<any>;
     if (res?.data) {
       toast.success("your comment post succefully..", { duration: 1000 });
+      e.target.comment.value = ""; 
     }
     // console.log(res);
   };
@@ -250,7 +251,7 @@ const myData=userdata?.data
       {isClickToComment && (
         <div className="p-5 flex gap-2 items-start ">
           <div className="mt-2">
-            <Avatar isBordered radius="full" size="md" src={user?.image} />
+            <Avatar isBordered radius="full" size="md" src={userInFo?.image} />
           </div>
 
           <div className="flex-1">
