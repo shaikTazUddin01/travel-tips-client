@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
@@ -22,7 +23,7 @@ import {
 } from "@/src/redux/features/user/userApi";
 import EditUser from "@/src/components/ui/allUser/EditUser";
 
-export default function AllUser() {
+export default function page() {
   const { data: allUser } = useAlluserQuery(undefined);
   const [deleteUser] = useDeleteUserMutation();
 
@@ -70,7 +71,7 @@ export default function AllUser() {
           return (
             <TableRow key={user?._id}>
               <TableCell>
-                <Image className="size-10" src={user?.image} />
+                <Image className="size-10" src={user?.image} alt="user" />
               </TableCell>
               <TableCell>{user?.name}</TableCell>
               <TableCell>{user?.role}</TableCell>

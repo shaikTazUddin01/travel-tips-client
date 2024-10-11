@@ -30,6 +30,7 @@ const SearchBox = () => {
       classNames={{
         inputWrapper: "bg-default-100",
         input: "text-sm",
+        
       }}
       endContent={
         <Kbd className="hidden lg:inline-block" keys={["command"]}>

@@ -19,8 +19,11 @@ import { TPost, TResponse } from "@/src/types";
 import useUser from "@/src/hooks/user/useShowUser";
 import { categoryOptions } from "@/src/constant/categoryOptions";
 import QuillEditor from "@/src/components/Home/QuillEditor";
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 import TDForm from "@/src/components/form/TDForm";
 import TDSelect from "@/src/components/form/TDSelect";
+import dynamic from "next/dynamic";
 
 export default function Edit({postItem}:{postItem:TPost}) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -99,6 +102,7 @@ export default function Edit({postItem}:{postItem:TPost}) {
                 </div>
               </ModalHeader>
               <ModalBody>
+            
                 <QuillEditor setDiscription={setDiscription} />
                 <TDForm onSubmit={onSubmit}>
                   <div className="space-y-2">

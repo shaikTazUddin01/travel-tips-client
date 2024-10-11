@@ -82,7 +82,9 @@ const myData=userdata?.data
     }
   };
 
-  const isUserUpvote = like.find((item) => item == user?._id);
+  const isUserUpvote = like.find((item) => item == myData?._id);
+
+  // console.log("--->",isUserUpvote);
 
   useEffect(() => {
     setIsUpvote(!!isUserUpvote);
@@ -141,10 +143,11 @@ const myData=userdata?.data
       <Link href={`/post/${_id}`}>
         <div className="px-3 pb-3 flex gap-1">
           <div
+          
             dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(postContent?.slice(0,100)),
+              __html: DOMPurify.sanitize(`${postContent?.slice(0,120)}<span style="color:blue"}> more....</span>`),
             }}
-          /><span className="font-semibold">...</span>
+          />
         </div>
         </Link>
         <span className="pl-2 text-default-500 mt-2">#{category}</span>
@@ -228,7 +231,7 @@ const myData=userdata?.data
           {/* view post */}
           <Link href={`/post/${_id}`}>
             <Button
-              className={`flex-1 text-[16px] ${myData?.isVerify ?"cursor-pointer":"cursor-not-allowed"}`}
+              className="flex-1 text-[16px] cursor-pointer"
               size="sm"
               variant="flat"
               onClick={() => setIsClickToComment(!isClickToComment)}

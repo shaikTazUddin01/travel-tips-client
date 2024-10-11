@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
@@ -20,7 +21,7 @@ import { loginValidation } from "@/src/validation/loginValidation";
 // import { cookies } from "next/headers";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
-const Login = () => {
+const page = () => {
   const [login] = useLoginApiMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -114,4 +115,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default page;

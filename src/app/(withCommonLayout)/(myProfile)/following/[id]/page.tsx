@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useParams } from "next/navigation";
 import { Image } from "@nextui-org/react";
@@ -9,7 +10,7 @@ import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
 import LeftSide from "@/src/components/ui/profile/LeftSide";
 
-const FollowingProfile = () => {
+const page = () => {
   const { id } = useParams();
   // get followers info
   const { data: userData, isLoading:userLoading } = useGetSingleUserQuery(id as string);
@@ -70,4 +71,4 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
   );
 };
 
-export default FollowingProfile;
+export default page;

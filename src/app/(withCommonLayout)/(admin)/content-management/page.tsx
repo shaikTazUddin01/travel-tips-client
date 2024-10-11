@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
@@ -18,12 +19,13 @@ import Swal from "sweetalert2";
 import { TPost, TResponse } from "@/src/types";
 import {
   useDeleteSpecificPostMutation,
+  useGetPostByAdminQuery,
   useGetPostQuery,
 } from "@/src/redux/features/post/postApi";
 import AdminUpdatePost from "@/src/components/ui/post/AdminUpdatePost";
 
-export default function ContentManagement() {
-  const { data: allPost } = useGetPostQuery({});
+export default function page() {
+  const { data: allPost } = useGetPostByAdminQuery(undefined);
   const [deletePost] = useDeleteSpecificPostMutation();
 
   const handleDeletePost = async (id: string) => {

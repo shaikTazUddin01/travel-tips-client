@@ -1,6 +1,8 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import ReactQuill from "react-quill";
+// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 type TProps = {
   setDiscription: (description: string) => void;

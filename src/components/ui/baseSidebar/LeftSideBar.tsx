@@ -74,7 +74,7 @@ const LeftSideBar = () => {
               <span className="text-2xl p-1">
                 <FaUsersCog />
               </span>
-              <span>All User</span>
+              <span>User Management</span>
             </div>
           </Link>
 

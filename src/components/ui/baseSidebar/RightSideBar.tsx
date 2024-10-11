@@ -55,7 +55,7 @@ const RightSideBar = () => {
   // console.log("user--->", myData);
 
   return (
-    <div>
+    <div className="w-full">
       {/* sorting */}
       <Sorting />
       {myInfo?.data?.isVerify==false && totallike>0  &&  <VerifyAccount />}

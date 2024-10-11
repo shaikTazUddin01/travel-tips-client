@@ -57,9 +57,7 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        {/* <NavbarItem className="hidden sm:flex gap-2">
-          <ThemeSwitch />
-        </NavbarItem> */}
+        
         {/* lg menu */}
         <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
          
@@ -72,6 +70,7 @@ export const Navbar = () => {
                 )}
                 color="foreground"
                 href={item.href}
+                
               >
                 {item.label}
               </NextLink>

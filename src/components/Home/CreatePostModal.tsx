@@ -9,7 +9,7 @@ import {
   Avatar,
   Image,
 } from "@nextui-org/react";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -17,12 +17,13 @@ import TDForm from "../form/TDForm";
 import TDSelect from "../form/TDSelect";
 
 import QuillEditor from "./QuillEditor";
-
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import useDebounce from "@/src/hooks/useDebounce";
 import { useCreatePostMutation } from "@/src/redux/features/post/postApi";
 import { IPostProps, TResponse } from "@/src/types";
 import useUser from "@/src/hooks/user/useShowUser";
 import { categoryOptions } from "@/src/constant/categoryOptions";
+import dynamic from "next/dynamic";
 
 export default function CreatePostModal({
   buttonText,
@@ -36,6 +37,7 @@ export default function CreatePostModal({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // const { isOpen, onOpen, onOpenChange, setIsOpen } = useDisclosure();
   const { user } = useUser();
+  
   const [discription, setDiscription] = useState<string>("");
   //  create post hooks
   const [createPost, isLoading] = useCreatePostMutation();
@@ -122,6 +124,7 @@ export default function CreatePostModal({
                 </div>
               </ModalHeader>
               <ModalBody>
+              
                 <QuillEditor setDiscription={setDiscription} />
                 <TDForm onSubmit={onSubmit}>
                   <div className="space-y-2">

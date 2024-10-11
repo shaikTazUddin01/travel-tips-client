@@ -6,7 +6,7 @@ import { FaEye } from "react-icons/fa";
 import loginImage from "@/src/assets/travelLogin.jpg";
 import login1 from "@/src/assets/login1.jpg";
 
-const AboutPage = () => {
+const page = () => {
   return (
     <div
       className="min-h-[94vh] -mt-10 w-full p-8 lg:pt-12 bg-cover bg-gray-100"
@@ -65,4 +65,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default page;

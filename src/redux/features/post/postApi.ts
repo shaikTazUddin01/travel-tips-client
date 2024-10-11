@@ -23,6 +23,16 @@ export const postApi = baseApi.injectEndpoints({
       },
       providesTags: ["Post"],
     }),
+    // get all post by admin
+    getPostByAdmin: builder.query({
+      query: () =>{
+        return  ({
+          url: "/post/all-post-byAdmin",
+          method: "GET",
+        })
+      },
+      providesTags: ["Post"],
+    }),
     // get my post
     getMyPost: builder.query({
       query: (query: string | undefined) => ({
@@ -57,12 +67,23 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
-    // get specific data
+    // update specific data
     updateSpecificPost: builder.mutation({
       query: ({ id, updateInFo }: { id: string; updateInFo: any }) => {
         
         return({
         url: `/post/updatePost/${id}`,
+        method: "PATCH",
+        body:updateInFo
+      })},
+      invalidatesTags: ["Post"],
+    }),
+    // get specific data
+    updateSpecificPostByAdmin: builder.mutation({
+      query: ({ id, updateInFo }: { id: string; updateInFo: any }) => {
+        // console.log(id,updateInFo);
+        return({
+        url: `/post/updatePostByAdmin/${id}`,
         method: "PATCH",
         body:updateInFo
       })},
@@ -127,5 +148,7 @@ export const {
   useDeleteCommentMutation,
   useUpdateCommentMutation,
   useGetSinglePostQuery,
-  useDeletePostMutation
+  useDeletePostMutation,
+  useUpdateSpecificPostByAdminMutation,
+  useGetPostByAdminQuery
 } = postApi;

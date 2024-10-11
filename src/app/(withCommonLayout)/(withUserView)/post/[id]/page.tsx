@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
@@ -34,7 +35,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import {useRef} from 'react'
 import { PiDownloadSimpleBold } from "react-icons/pi";
-export default function ViewPost() {
+export default function page() {
   const { id } = useParams();
   const { data: specificPost, isLoading } = useGetSinglePostQuery(id as string);
   const pdfRef :any=useRef()
@@ -61,6 +62,8 @@ export default function ViewPost() {
     user,
     _id,
   } = specificPost?.data || {};
+
+  console.log(specificPost?.data);
 
   const handleUpvote = async (id: string) => {
     // const toastId=toast.loading("loading...")

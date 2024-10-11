@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import React from "react";
 
@@ -7,7 +8,7 @@ import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
 
-const NonPremiumContent = () => {
+const page = () => {
   const {
     data: postData,
     isError,
@@ -42,4 +43,4 @@ const NonPremiumContent = () => {
   );
 };
 
-export default NonPremiumContent;
+export default page;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
@@ -21,7 +22,7 @@ import { genderOptions } from "@/src/constant/options";
 
 
 
-const SignUp = () => {
+const page = () => {
   const [createUser, {isLoading}] = useSignupApiMutation();
   const [imageFile, setImageFile] = useState<any>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -177,4 +178,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default page;

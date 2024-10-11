@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import {
   Spinner,
@@ -15,7 +16,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import { useGetAllVerifyInFoQuery } from "@/src/redux/features/userVerify/verifyApi";
 
-const PaymentManagement = () => {
+const page = () => {
   const { data: verifyedInFo, isLoading } = useGetAllVerifyInFoQuery(undefined);
   const { register, handleSubmit, watch } = useForm();
 
@@ -79,4 +80,4 @@ const PaymentManagement = () => {
   );
 };
 
-export default PaymentManagement;
+export default page;

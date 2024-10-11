@@ -1,7 +1,7 @@
 # <center>Assignment - 06</center>
  **Project Name : Travel Tips & Destination Guides** <br>
 
- **Live Link(front end) : []()** 
+ **Live Link(front end) : [https://travel-tips-seven.vercel.app](https://travel-tips-seven.vercel.app)** 
 
  **Live Link(back end) : [https://travel-tips-server.vercel.app](https://travel-tips-server.vercel.app/)**
 
@@ -12,15 +12,17 @@
 
 ## Features
 
-1. **User Can Sign up**
-2. **User Can log in**
-3. **Different view of admin and user**
-4. **User can view post and give like and comment**
-5. **User can varify his account**
-6. **Onlu varify user can access the premium post**
+1. **User can create a account useing email**
+2. **User can log in**
+3. **User can view post and give like and comment**
+4. **User can varify his account**
+5. **User can edit his information**
+6. **Only varify user can access the premium post**
 7. **user can follow and unfollow another user**
 8. **user can forgot his password**
-9. **user can change his password**
+9. **Admin can control the all post and user**
+10. **Admin can show all payment history**
+11. **user can change his password**
 
 
 ## Technology Used
@@ -32,7 +34,7 @@
 5. **NextUi**
 6. **React Hook Form**
 7. **Redux Persist**
-8. **AamerPay Payment Method**
+8. **AamerPay Payment Getway**
 
 
 

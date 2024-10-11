@@ -9,7 +9,7 @@ const AdminRoutes = ["/all-user", "/content-management", "payment-management"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log(pathname);
+  // console.log(pathname);
   const accessToken = request.cookies.get("accessToken")?.value;
  
 

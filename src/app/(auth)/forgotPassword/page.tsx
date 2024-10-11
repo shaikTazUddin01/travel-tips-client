@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { Button } from "@nextui-org/button";
 import Image from "next/image";
@@ -17,7 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { forgotPassValidation } from "@/src/validation/forgotPasswordValidation";
 // import { userInfo } from "@/src/redux/features/auth/authSlice";
 
-const ChangePassword = () => {
+const page = () => {
   
 const router=useRouter()
 const [forgotpass]=useForgotPasswordMutation()
@@ -91,4 +92,4 @@ const dispatch=useAppDispatch()
   );
 };
 
-export default ChangePassword;
+export default page;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { Divider } from "@nextui-org/divider";
 import { usePathname } from "next/navigation";
@@ -7,7 +8,7 @@ import FollowCard from "@/src/components/ui/follow/FollowCard";
 import { useGetMyFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 import { TUser } from "@/src/types";
 
-const Followers = () => {
+const page = () => {
   const pathname=usePathname()
   const {data:followersData,isLoading}=useGetMyFollowersQuery(undefined)
   const followers=followersData?.data?.followers
@@ -42,4 +43,4 @@ const Followers = () => {
   );
 };
 
-export default Followers;
+export default page;

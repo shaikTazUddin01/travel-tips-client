@@ -20,7 +20,7 @@ import TDInput from "@/src/components/form/TDInput";
 import login1 from "@/src/assets/login1.jpg";
 import TDForm from "@/src/components/form/TDForm";
 
-const ContactPage = () => {
+const page = () => {
   // Form submission handler
   const handleSubmit: SubmitHandler<FieldValues> = (data) => {
     toast.success("we successfully received your message");
@@ -126,4 +126,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default page;

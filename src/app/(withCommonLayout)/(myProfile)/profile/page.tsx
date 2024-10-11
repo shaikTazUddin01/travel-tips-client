@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import CreatePost from "@/src/components/Home/CreatePost";
@@ -6,7 +7,7 @@ import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton
 import { TPost } from "@/src/types";
 // import ProfileHeader from "@/src/components/ui/profile/ProfileHeader";
 
-const Profile = () => {
+const page = () => {
   const { data: mypost, isLoading } = useGetMyPostQuery(undefined);
   return (
     <div>
@@ -38,4 +39,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default page;

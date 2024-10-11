@@ -16,7 +16,7 @@ import TDForm from "../../form/TDForm";
 import TDSelect from "../../form/TDSelect";
 
 import { TPost, TResponse } from "@/src/types";
-import { useUpdateSpecificPostMutation } from "@/src/redux/features/post/postApi";
+import { useUpdateSpecificPostByAdminMutation, useUpdateSpecificPostMutation } from "@/src/redux/features/post/postApi";
 
 export default function AdminUpdatePost({
   id,
@@ -27,7 +27,7 @@ export default function AdminUpdatePost({
 }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   // update post
-  const [updatePost, { isSuccess }] = useUpdateSpecificPostMutation();
+  const [updatePost, { isSuccess }] = useUpdateSpecificPostByAdminMutation();
 
   //   console.log("--->",data);
   const handleSubmit: SubmitHandler<FieldValues> = async (data) => {
