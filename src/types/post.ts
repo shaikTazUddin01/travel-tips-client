@@ -35,7 +35,7 @@ export interface TUser {
   status?: "Active" | "Blocked";
   phoneNumber: string;
   __v: number;
-}
+} 
 
 // create post type
 export interface IPostProps {

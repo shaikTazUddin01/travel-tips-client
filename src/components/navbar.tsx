@@ -62,6 +62,7 @@ export const Navbar = () => {
         </NavbarItem> */}
         {/* lg menu */}
         <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
+         
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink

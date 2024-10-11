@@ -7,6 +7,7 @@ import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
+import LeftSide from "@/src/components/ui/profile/LeftSide";
 
 const FollowingProfile = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
             <div className="flex justify-between items-start flex-1">
               <div>
                 <h1 className="font-medium text-xl">{userInFo?.name}</h1>
-                <p className="text-sm text-default-600">@tazahmedcs23</p>
+                {/* <p className="text-sm text-default-600">@tazahmedcs23</p> */}
                 <p className="flex gap-4 text-blue-600 items-center">
                   <span>120 Followers</span>
                   {/* <span>- 150 Following</span> */}
@@ -48,12 +49,22 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
           </div>
         </div>
       </div>
-      {/* content section */}
-      <div className="mt-5 mx-5">
-        {
-          posts?.length >0 && posts?.map((postItem :TPost)=><NewsFeedCard key={postItem?._id} postItem={postItem}/>
-        )
-        }
+      <div className="flex flex-col md:flex-row mt-5">
+        {/* LeftSide */}
+        <div className="w-[100%] lg:w-[35%]  h-auto lg:sticky lg:top-20 ">
+          <LeftSide myPost={posts} user={userInFo} iscardLoading={userLoading} isImageLoading={postLoading}/>
+        </div>
+
+        {/* content section */}
+        <div className=" mx-5 w-[100%] lg:w-[65%]">
+          {posts?.length > 0 ?
+            posts?.map((postItem: TPost) => (
+              <NewsFeedCard key={postItem?._id} postItem={postItem} />
+            ))
+          :
+          <h1 className="text-center">No Post added .!</h1>
+          }
+        </div>
       </div>
     </div>
   );
