@@ -11,7 +11,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import moment from "moment";
+import moment from "moment-timezone";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import { useGetAllVerifyInFoQuery } from "@/src/redux/features/userVerify/verifyApi";
@@ -37,7 +37,7 @@ const page = () => {
   return (
     <>
       <div className="flex justify-end">
-        <div className="w-[200px]">
+        <div className="w-full pb-2 md:w-[300] lg:w-[200px]">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Select
               label="Select a month"
@@ -68,7 +68,7 @@ const page = () => {
           {filteredData?.map((item: any) => (
             <TableRow key={item?._id}>
               <TableCell>{item?.user?.email}</TableCell>
-              <TableCell>{moment(item?.date).format("lll")}</TableCell>
+              <TableCell>{moment(item?.date).tz("Asia/Dhaka").format("lll")}</TableCell>
               <TableCell>{item?.totalPay}</TableCell>
               <TableCell>{item?.transactionId}</TableCell>
               <TableCell>{item?.payment_processor}</TableCell>

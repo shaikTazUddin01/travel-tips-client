@@ -12,7 +12,7 @@ const layout = ({ children }: { children: ReactNode }) => {
           <div className="flex flex-col lg:flex-row gap-10 ">
             {/* left sidebar */}
             <div
-              className="w-[100%] lg:w-[25%] border shadow-md rounded-xl lg:h-[85vh] lg:sticky top-20 overflow-y-auto 
+              className="w-[100%] lg:w-[25%] border shadow-md rounded-xl lg:h-[85vh] lg:sticky top-20 overflow-y-auto hidden lg:flex
             [&::-webkit-scrollbar]:w-2
   [&::-webkit-scrollbar]:h-2
   [&::-webkit-scrollbar-track]:bg-gray-100

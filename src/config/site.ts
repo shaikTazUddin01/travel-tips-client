@@ -51,10 +51,7 @@ export const siteConfig = {
       label: "Change Password",
       href: "/changePassword",
     },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
+    
   ],
   adminNavMenuItems: [
     {
@@ -95,10 +92,7 @@ export const siteConfig = {
       label: "Change Password",
       href: "/changePassword",
     },
-    {
-      label: "Logout",
-      href: "/logout",
-    },
+   
   ],
 
   // links: {

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 import React, { useState } from "react";
 import {
@@ -36,6 +38,15 @@ export default function Navbar2() {
     router.push("/login");
   };
 
+  // navigate for smaill menu
+  const handleNavigate = async (href: string) => {
+    await router.push(href);
+
+    setTimeout(()=>{
+    setIsMenuOpen(false);
+    },700)
+  };
+
   return (
     <div className="bg-white shadow-md fixed w-full z-50">
       <Navbar
@@ -56,13 +67,12 @@ export default function Navbar2() {
 
         {/* large srceen */}
         <NavbarContent className="hidden lg:flex gap-4" justify="start">
-            
           <NavbarBrand className="">
             <Link href="/" className="text-black">
-            <div className="text-xl flex items-center">
-              <Logo />
-              <p className="font-bold text-inherit">AGMT</p>
-            </div>
+              <div className="text-xl flex items-center">
+                <Logo />
+                <p className="font-bold text-inherit">AGMT</p>
+              </div>
             </Link>
             <div className="ml-2 w-[60%]">
               <NavbarItem className="hidden lg:flex w-full">
@@ -153,55 +163,54 @@ export default function Navbar2() {
         </NavbarContent>
 
         {/* small screen */}
-        <NavbarMenu className="pt-5 space-y-0">
+        <NavbarMenu className=" space-y-0">
+          <div className="mt-4">
           <SearchBox />
           {user?.role == "ADMIN"
             ? siteConfig.adminNavMenuItems.map((item, index) => (
                 <NavbarMenuItem
                   key={index}
-                  className={`${color == item?.label ? "text-blue-700" : "text-black"}`}
+                  className=""
                   onClick={() => setColor(item?.label)}
                 >
-                  <Link
-                    className="w-full hover:text-blue text-black rounded p-1 -mt-1"
-                    href={item?.href}
-                    size="lg"
-                    onClick={() => setIsMenuOpen(false)}
+                  <h1
+                    className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color==item?.label ?"text-blue-700":"text-black"}`}
+                    onClick={() => handleNavigate(item?.href)}
                   >
                     {item?.label}
-                  </Link>
+                  </h1>
                 </NavbarMenuItem>
               ))
             : siteConfig.navMenuItems.map((item, index) => (
                 <NavbarMenuItem
                   key={index}
-                  className={`${color == item?.label ? "text-blue-700" : "text-black"}`}
+                 
                   onClick={() => setColor(item?.label)}
                 >
-                  <Link
-                    className="w-full hover:text-blue text-black rounded p-1 -mt-1"
-                    href={item?.href}
-                    size="lg"
-                    onClick={() => setIsMenuOpen(false)}
+                  <h1
+                    className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color==item?.label ?"text-blue-700":"text-black"}`}
+                    onClick={() => handleNavigate(item?.href)}
                   >
                     {item?.label}
-                  </Link>
+                  </h1>
                 </NavbarMenuItem>
               ))}
-          {/* {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={index} className={`${color==item?.label?"text-blue-700":"text-black"}`} onClick={()=>setColor(item?.label)}>
-              <Link
-                className="w-full hover:text-blue text-black rounded p-1 -mt-1"
-                href={item?.href}
-                size="lg"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                
-                {item?.label}
-                
-              </Link>
-            </NavbarMenuItem>
-          ))} */}
+              <NavbarMenuItem>
+              <NavbarItem>
+                      <Button
+                        className="w-full flex items-center gap-2 text-[16px] mb-6"
+                        
+                        onClick={() => handleLogout()}
+                      >
+                        <span>
+                          <LuLogOut />
+                        </span>
+                        <span>logout</span>
+                      </Button>
+                    </NavbarItem>
+              </NavbarMenuItem>
+          </div>
+         
         </NavbarMenu>
       </Navbar>
     </div>
