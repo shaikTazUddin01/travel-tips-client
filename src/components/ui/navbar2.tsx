@@ -90,7 +90,7 @@ export default function Navbar2() {
                 <Link
                   onClick={() => setColor(item?.label)}
                   href={item.href}
-                  className={`${color == item?.label ? "text-blue-900" : "text-black"} text-[18px]`}
+                  className={`${color == item?.label ? "text-blue-900" : "text-black"} text-[17px]`}
                 >
                   {item.label}
                 </Link>

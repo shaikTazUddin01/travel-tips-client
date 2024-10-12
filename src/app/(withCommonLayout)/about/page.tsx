@@ -9,10 +9,10 @@ import login1 from "@/src/assets/login1.jpg";
 const page = () => {
   return (
     <div
-      className="min-h-[94vh] -mt-10 w-full p-8 lg:pt-12 bg-cover bg-gray-100"
+      className="min-h-[95vh] -mt-10 w-full bg-cover p-5 lg:p-0 flex justify-center items-center"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
-      <div className="bg-white rounded-2xl shadow-xl mx-auto  p-5 lg:p-8  max-w-screen-lg mt-8">
+      <div className="bg-white rounded-2xl shadow-xl mx-auto  p-5 md:p-10 lg:p-8  max-w-screen-lg mt-8">
         {/* first section */}
         <div className="grid grid-cols-1  md:grid-cols-2 gap-1 justify-between">
           {/* left */}

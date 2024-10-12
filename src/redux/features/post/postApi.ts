@@ -133,6 +133,15 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    // delete post by admin
+    deletePostByAdmin: builder.mutation({
+      query: (id) => ({
+        url: `/post/delete-post-byAdmin/${id}`,
+        method: "DELETE",
+        
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -150,5 +159,6 @@ export const {
   useGetSinglePostQuery,
   useDeletePostMutation,
   useUpdateSpecificPostByAdminMutation,
-  useGetPostByAdminQuery
+  useGetPostByAdminQuery,
+  useDeletePostByAdminMutation
 } = postApi;

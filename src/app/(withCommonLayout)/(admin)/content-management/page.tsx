@@ -18,15 +18,14 @@ import Swal from "sweetalert2";
 
 import { TPost, TResponse } from "@/src/types";
 import {
-  useDeleteSpecificPostMutation,
+  useDeletePostByAdminMutation,
   useGetPostByAdminQuery,
-  useGetPostQuery,
 } from "@/src/redux/features/post/postApi";
 import AdminUpdatePost from "@/src/components/ui/post/AdminUpdatePost";
 
 export default function page() {
   const { data: allPost } = useGetPostByAdminQuery(undefined);
-  const [deletePost] = useDeleteSpecificPostMutation();
+  const [deletePost] = useDeletePostByAdminMutation();
 
   const handleDeletePost = async (id: string) => {
     try {
@@ -45,6 +44,7 @@ export default function page() {
 
           // delete mutation
           const res = (await deletePost(id)) as TResponse<any>;
+          console.log(res);
           if (res?.data) {
             toast.warning("Delete Success", { id: toastId, duration: 1000 });
           } else {

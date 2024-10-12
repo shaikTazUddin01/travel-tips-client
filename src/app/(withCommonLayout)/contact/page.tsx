@@ -30,7 +30,7 @@ const page = () => {
 
   return (
     <div
-      className="min-h-screen sticky -mt-10 w-full p-8 lg:p-12 bg-cover bg-gray-100"
+      className="min-h-[95vh] -mt-10 w-full bg-cover p-5 lg:p-0 flex justify-center items-center"
       style={{ backgroundImage: `url(${login1.src})` }}
     >
       <div className="bg-white rounded-2xl shadow-xl mx-auto grid grid-cols-1 md:grid-cols-2 p-5 lg:p-12 gap-10 max-w-screen-lg mt-8">

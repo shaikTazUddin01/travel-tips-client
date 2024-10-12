@@ -31,11 +31,10 @@ const dispatch=useAppDispatch()
       // console.log(res?.data?.data?.accessToken);
       if (res?.data) {
         toast.success("password change successfully");
-
-       
-        dispatch(authInfo({ data: null, token: null }));
         router.push('/login')
-        // console.log(decoded);
+        // dispatch(authInfo({ data: null, token: null }));
+        document.cookie = "accessToken=''; path=/; secure; SameSite=Strict ;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        toast.success("login again");
       } else {
         toast.error(res?.error?.data?.message);
       }
