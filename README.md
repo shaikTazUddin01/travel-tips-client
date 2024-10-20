@@ -1,4 +1,4 @@
- **Project Name : Travel Tips & Destination Guides** <br>
+ ## Project Name : Travel Tips & Destination Guides
 
  **Live Link(front end) : [https://travel-tips-seven.vercel.app](https://travel-tips-seven.vercel.app)** 
 
