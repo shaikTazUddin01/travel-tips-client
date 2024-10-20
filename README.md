@@ -5,9 +5,6 @@
  **Live Link(back end) : [https://travel-tips-server.vercel.app](https://travel-tips-server.vercel.app/)**
 
 
-**Admin email : tihan@gmail.com**</br>
-**Admin Password : 1234567**
-
 
 ## Features
 
