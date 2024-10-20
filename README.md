@@ -1,4 +1,3 @@
-# <center>Assignment - 06</center>
  **Project Name : Travel Tips & Destination Guides** <br>
 
  **Live Link(front end) : [https://travel-tips-seven.vercel.app](https://travel-tips-seven.vercel.app)** 
