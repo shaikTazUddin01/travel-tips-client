@@ -48,8 +48,18 @@ export const userApi = baseApi.injectEndpoints({
       })},
       invalidatesTags:["user"]
     }),
+    sendFriendRequest: builder.mutation({
+      query: (payload) =>{ 
+        console.log('object-->',payload);
+        return({
+        url: '/user/sendRequest',
+        method: "POST",
+        body:{userId:payload}
+      })},
+      invalidatesTags:["user"]
+    }),
     
   }),
 });
 
-export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery} = userApi;
+export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery,useSendFriendRequestMutation} = userApi;

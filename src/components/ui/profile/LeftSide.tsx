@@ -29,7 +29,7 @@ const LeftSide = ({
   const { email, phoneNumber, address, _id }: any = user || [];
 
   return (
-    <div className="flex flex-col md:flex-row lg:flex-col md:gap-5 lg:gap-0  justify-items-center">
+    <div className="flex flex-col lg:flex-row lg:flex-col md:gap-5 lg:gap-0  justify-items-center">
       {iscardLoading ? (
         <InFoCardSkeleton />
       ) : (
