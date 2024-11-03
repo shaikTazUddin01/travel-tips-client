@@ -1,13 +1,9 @@
-# <center>Assignment - 06</center>
- **Project Name : Travel Tips & Destination Guides** <br>
+ ## Project Name : Travel Tips & Destination Guides
 
  **Live Link(front end) : [https://travel-tips-seven.vercel.app](https://travel-tips-seven.vercel.app)** 
 
  **Live Link(back end) : [https://travel-tips-server.vercel.app](https://travel-tips-server.vercel.app/)**
 
-
-**Admin email : tihan@gmail.com**</br>
-**Admin Password : 1234567**
 
 
 ## Features
