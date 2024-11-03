@@ -9,7 +9,7 @@ import EditImage from "./EditImage";
 
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import useUser from "@/src/hooks/user/useShowUser";
-import bg from "@/src/assets/login1.jpg";
+import bg from "@/src/assets/login1.webp";
 import { useGetMyFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 

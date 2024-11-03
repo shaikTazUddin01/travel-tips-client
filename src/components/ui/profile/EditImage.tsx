@@ -63,9 +63,10 @@ const EditImage = ({ user }: { user: TUser }) => {
         onClick={() => setTrigger(!trigger)}
       >
         <Image
-          className="size-[160px] -mt-3 border-3 border-white"
+          className="size-[150px] -mt-3 border-3 border-white"
           radius="full"
           src={user?.image}
+          alt={user?.name}
         />
         <span className="absolute top-24 right-0 z-20 bg-white rounded-full p-1 text-2xl">
           <IoIosCamera />

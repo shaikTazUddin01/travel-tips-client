@@ -3,8 +3,8 @@ import { Card, Image } from "@nextui-org/react";
 import { AiFillCodepenCircle, AiFillSlackCircle } from "react-icons/ai";
 import { FaEye } from "react-icons/fa";
 
-import loginImage from "@/src/assets/travelLogin.jpg";
-import login1 from "@/src/assets/login1.jpg";
+import loginImage from "@/src/assets/travelLogin.webp";
+import login1 from "@/src/assets/login1.webp";
 
 const page = () => {
   return (

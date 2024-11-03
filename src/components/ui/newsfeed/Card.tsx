@@ -31,7 +31,6 @@ import {
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
 
-
 // import useCurrentUser from "@/src/hooks/user/useCurrentUser";
 import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
 import useUser from "@/src/hooks/user/useShowUser";
@@ -40,13 +39,12 @@ import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
   // const { _id: currentUserId } = useCurrentUser();
-  const {user : userInFo}=useUser()
-  const currentUserId=userInFo?.userId
-// get single user
-const {data:userdata}=useGetSingleUserQuery(currentUserId as string)
+  const { user: userInFo } = useUser();
+  const currentUserId = userInFo?.userId;
+  // get single user
+  const { data: userdata } = useGetSingleUserQuery(currentUserId as string);
 
-const myData=userdata?.data
-
+  const myData = userdata?.data;
 
   const [upvoteDownvote, { isLoading: upDoLoading }] =
     useUpvoteDownvoteMutation();
@@ -102,7 +100,7 @@ const myData=userdata?.data
     const res = (await postComment(commentInFo)) as TResponse<any>;
     if (res?.data) {
       toast.success("your comment post succefully..", { duration: 1000 });
-      e.target.comment.value = ""; 
+      e.target.comment.value = "";
     }
     // console.log(res);
   };
@@ -111,10 +109,14 @@ const myData=userdata?.data
     <Card className={`w-full mb-6 border`}>
       <CardHeader className="justify-between">
         <div className="flex gap-3">
-          <Avatar isBordered radius="full" size="md" src={user?.image} />
+          <Link href={`/${user?._id}`}>
+            <Avatar isBordered radius="full" size="md" src={user?.image} />
+          </Link>
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-[16px] font-semibold leading-none text-default-600 flex items-center ">
-              <span>{user?.name}</span>
+              <Link href={`/${user?._id}`}>
+                <span>{user?.name}</span>
+              </Link>
               {user?.isVerify && (
                 <span className="text-blue-600">
                   <BiSolidBadgeCheck />
@@ -136,20 +138,23 @@ const myData=userdata?.data
           </div>
         </div>
         {currentUserId == user?._id && (
-          <DeleteAndEditPost postItem={postItem}/>
+          <DeleteAndEditPost postItem={postItem} />
         )}
       </CardHeader>
       {/* post content */}
-      <CardBody className={`px-0 py-0 text-small w-[100%] ${myData?.isVerify==false && type =="Premium" && 'blur-2xl' }`}>
-      <Link href={`/post/${_id}`}>
-        <div className="px-3 pb-3 flex gap-1">
-          <div
-          
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(`${postContent?.slice(0,120)}<span style="color:blue"}> more....</span>`),
-            }}
-          />
-        </div>
+      <CardBody
+        className={`px-0 py-0 text-small w-[100%] ${myData?.isVerify == false && type == "Premium" && "blur-2xl"}`}
+      >
+        <Link href={`/post/${_id}`}>
+          <div className="px-3 pb-3 flex gap-1">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  `${postContent?.slice(0, 120)}<span style="color:blue"}> more....</span>`
+                ),
+              }}
+            />
+          </div>
         </Link>
         <span className="pl-2 text-default-500 mt-2">#{category}</span>
         {/* image */}
@@ -162,7 +167,9 @@ const myData=userdata?.data
         </div>
       </CardBody>
       {/* all like */}
-      <CardFooter className={`gap-3 flex-col  ${myData?.isVerify==false && type =="Premium" && 'blur-2xl' }`}>
+      <CardFooter
+        className={`gap-3 flex-col  ${myData?.isVerify == false && type == "Premium" && "blur-2xl"}`}
+      >
         <div className="flex w-full justify-between">
           <h1 className="flex items-center gap-1">
             <span className="text-white bg-blue-600 rounded-full p-[3px]">
@@ -247,7 +254,7 @@ const myData=userdata?.data
       </CardFooter>
       {/* showing comment */}
       {showComment ? <CommentBox comment={comment} postId={_id} /> : ""}
-      {/* handle comment */}
+      {/* handle send comment */}
       {isClickToComment && (
         <div className="p-5 flex gap-2 items-start ">
           <div className="mt-2">

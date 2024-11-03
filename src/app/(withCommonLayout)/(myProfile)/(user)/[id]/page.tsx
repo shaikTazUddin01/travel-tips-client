@@ -23,7 +23,7 @@ const page = () => {
   const userInFo: TUser = userData?.data;
   // all post
   const posts = post?.data;
-  // console.log("--->",postLoading);
+  // console.log(posts);
   return (
     <div>
       {/* main section */}
@@ -67,9 +67,9 @@ const page = () => {
 
         {/* content section */}
         <div className=" mx-5 w-[100%] lg:w-[65%]">
-          {postLoading ?<LoadingSkeletor/>
-          :
-          posts?.length > 0 ? (
+          {postLoading ? (
+            <LoadingSkeletor />
+          ) : posts?.length > 0 ? (
             posts?.map((postItem: TPost) => (
               <NewsFeedCard key={postItem?._id} postItem={postItem} />
             ))

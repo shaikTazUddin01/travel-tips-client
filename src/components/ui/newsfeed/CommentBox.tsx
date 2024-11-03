@@ -5,6 +5,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Link,
 } from "@nextui-org/react";
 import React, { useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
@@ -18,7 +19,6 @@ import {
   useUpdateCommentMutation,
 } from "@/src/redux/features/post/postApi";
 import useUser from "@/src/hooks/user/useShowUser";
-
 
 const CommentBox = ({
   comment,
@@ -87,22 +87,25 @@ const CommentBox = ({
         return (
           <div key={item?._id} className=" pb-4 px-2 w-[100%]">
             <div className="flex gap-2 w-[100%] items-center justify-start">
-              <Avatar
-                isBordered
-                className=""
-                radius="full"
-                size="md"
-                src={item?.userId?.image}
-              />
-
+              <Link href={`/${item?.userId?._id}`}>
+                <Avatar
+                  isBordered
+                  className=""
+                  radius="full"
+                  size="md"
+                  src={item?.userId?.image}
+                />
+              </Link>
               {editCommentId !== item?._id ? (
                 // content and dropdown
                 <div className="flex gap-5 items-start justify-between  bg-default-200 rounded-xl p-2">
                   {/* content */}
                   <div>
-                    <h4 className="text-small font-semibold leading-none text-default-600">
-                      {item?.userId?.name}
-                    </h4>
+                    <Link href={`/${item?.userId?._id}`}>
+                      <h4 className="text-small font-semibold leading-none text-default-600">
+                        {item?.userId?.name}
+                      </h4>
+                    </Link>
                     <h5 className="text-small ">{item?.comment}</h5>
                   </div>
                   {/* edit delete action */}

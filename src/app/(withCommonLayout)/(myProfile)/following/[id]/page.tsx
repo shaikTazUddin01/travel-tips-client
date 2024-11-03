@@ -3,12 +3,13 @@
 import { useParams } from "next/navigation";
 import { Image } from "@nextui-org/react";
 
-import bg from "@/src/assets/login1.jpg";
+import bg from "@/src/assets/login1.webp";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
 import LeftSide from "@/src/components/ui/profile/LeftSide";
+import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 
 const page = () => {
   const { id } = useParams();
@@ -29,12 +30,13 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
           className="h-[250px] w-100% bg-stone-200 rounded-xl object-cover bg-cover"
           style={{ backgroundImage: `url(${bg.src})` }}
          />
-        <div className="-mt-4 mx-5">
+        <div className="-mt-6 mx-5">
           <div className="flex gap-1 items-center">
             <Image
-              className="size-[120px] border-3 border-white"
+              className="size-[140px] border-3 border-white"
               radius="full"
               src={userInFo?.image}
+              alt={userInFo?.name}
             />
             <div className="flex justify-between items-start flex-1">
               <div>
@@ -58,7 +60,11 @@ const {data:post,isLoading:postLoading}=useGetSpecificPostQuery(id)
 
         {/* content section */}
         <div className=" mx-5 w-[100%] lg:w-[65%]">
-          {posts?.length > 0 ?
+          {
+          
+          postLoading ?<LoadingSkeletor/>
+          :
+          posts?.length > 0 ?
             posts?.map((postItem: TPost) => (
               <NewsFeedCard key={postItem?._id} postItem={postItem} />
             ))

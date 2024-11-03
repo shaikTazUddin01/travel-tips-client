@@ -17,7 +17,7 @@ import { toast } from "sonner";
 
 import TDTextArea from "@/src/components/form/TDTextArea";
 import TDInput from "@/src/components/form/TDInput";
-import login1 from "@/src/assets/login1.jpg";
+import login1 from "@/src/assets/login1.webp";
 import TDForm from "@/src/components/form/TDForm";
 
 const page = () => {

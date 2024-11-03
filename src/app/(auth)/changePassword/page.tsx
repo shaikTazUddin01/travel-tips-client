@@ -6,8 +6,8 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-import loginImage from "@/src/assets/travelLogin.jpg";
-import login1 from "@/src/assets/login1.jpg";
+import loginImage from "@/src/assets/travelLogin.webp";
+import login1 from "@/src/assets/login1.webp";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
 import { useChangePasswordMutation } from "@/src/redux/features/auth/authApi";

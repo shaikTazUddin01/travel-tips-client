@@ -8,8 +8,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import loginImage from "@/src/assets/travelLogin.jpg";
-import login1 from "@/src/assets/login1.jpg";
+import loginImage from "@/src/assets/travelLogin.webp";
+import login1 from "@/src/assets/login1.webp";
 import TDForm from "@/src/components/form/TDForm";
 import TDInput from "@/src/components/form/TDInput";
 import { useLoginApiMutation } from "@/src/redux/features/auth/authApi";
@@ -59,7 +59,7 @@ const page = () => {
       style={{ backgroundImage: `url(${login1.src})` }}
     >
       <div className="bg-white rounded-2xl h-full  grid  grid-cols-1 lg:grid-cols-2 shadow items-center mx-auto ">
-        <div>
+        <div className="min-w-[500px]">
           <Image
             alt="login image"
             className="rounded-2xl hidden lg:flex object-cover w-full h-full"

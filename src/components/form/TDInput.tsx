@@ -36,6 +36,7 @@ const TDInput = ({
       errorMessage={ errors[name]?.message as string | undefined }
       isInvalid={!!errors[name]}
       isRequired={required}
+      className="md:min-w-[250px]"
     />
   );
 };
