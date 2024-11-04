@@ -9,7 +9,7 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Friends",
+      label: "Network",
       href: "/network",
     },
     {

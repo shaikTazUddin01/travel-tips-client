@@ -8,6 +8,7 @@ import Link from "next/link";
 import CreatePostModal from "../../Home/CreatePostModal";
 
 import useUser from "@/src/hooks/user/useShowUser";
+import { PiUsersThreeFill } from "react-icons/pi";
 
 const LeftSideBar = () => {
   const { user } = useUser();
@@ -26,7 +27,7 @@ const LeftSideBar = () => {
       <Link href={"/followers"}>
         <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer ">
           <span className="text-2xl p-1">
-            <FaUserFriends />
+            <PiUsersThreeFill />
           </span>
           <span>Followers</span>
         </div>
@@ -38,6 +39,15 @@ const LeftSideBar = () => {
             <RiUserFollowFill />
           </span>
           <span>Following</span>
+        </div>
+      </Link>
+      {/* friends */}
+      <Link href={"/friends"}>
+        <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
+          <span className="text-2xl p-1">
+          <FaUserFriends />
+          </span>
+          <span>Friends</span>
         </div>
       </Link>
       {/* saved feed */}

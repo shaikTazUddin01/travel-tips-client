@@ -61,7 +61,7 @@ const page = () => {
             {/* send request */}
             <div className="flex gap-1">
               <SendRequest userId={userInFo?._id}/>
-              <Button variant="bordered" className="flex items-center gap-1">
+              <Button variant="bordered" className="flex items-center gap-1 w-full">
                 {" "}
                 <span className="text-xl">
                   <RiUserFollowFill />{" "}

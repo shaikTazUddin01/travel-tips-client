@@ -18,6 +18,12 @@ const SendRequest = ({ userId }: { userId: string }) => {
   const { data: myInfo, isLoading: myDataLoading } = useGetMyInFoQuery(
     user?._id
   );
+
+
+
+
+
+
   // 
   const handleFriendRequest = async () => {
     const toastId = toast.loading("sending...");
@@ -37,9 +43,14 @@ const SendRequest = ({ userId }: { userId: string }) => {
       toast.error(error?.message, { id: toastId });
     }
   };
+
+  // console.log(myInfo?.data);
+  const isALreadySend=myInfo?.data?.sendFriendRequest?.find((item:any)=>item?._id ==userId)
+
+  
   // update state value each request
   useEffect(() => {
-    if (myInfo?.data?.sendFriendRequest?.includes(userId)) {
+    if (isALreadySend) {
       setAlreadySend(true);
     }else{
       setAlreadySend(false);
@@ -48,18 +59,18 @@ const SendRequest = ({ userId }: { userId: string }) => {
   }, [myInfo?.data?.sendFriendRequest]);
 
 
-  // console.log("already send-->",alreadySend);
+  console.log("already send-->",alreadySend);
 
   return (
-    <div>
+    <div className="w-full">
       {isLoading || myDataLoading ? (
-        <Button color="primary" isLoading>
+        <Button color="primary" isLoading className="w-full">
           sending..
         </Button>
       ) : alreadySend ? (
         <Button
           color="primary"
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 w-full"
           onClick={() => {
             handleFriendRequest();
           }}
@@ -73,7 +84,7 @@ const SendRequest = ({ userId }: { userId: string }) => {
       ) : (
         <Button
           color="primary"
-          className="flex items-center gap-1"
+          className="flex items-center gap-1 w-full"
           onClick={() => {
             handleFriendRequest();
           }}
