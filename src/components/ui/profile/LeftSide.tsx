@@ -29,11 +29,11 @@ const LeftSide = ({
   const { email, phoneNumber, address, _id }: any = user || [];
 
   return (
-    <div className="flex flex-col lg:flex-row lg:flex-col md:gap-5 lg:gap-0  justify-items-center">
+    <div className="flex flex-col md:gap-5 lg:gap-0  justify-items-center">
       {iscardLoading ? (
         <InFoCardSkeleton />
       ) : (
-        <div className="rounded-xl border shadow-xl  p-3 flex-1 ">
+        <div className="rounded-xl border shadow-lg  p-3 flex-1 ">
           <h1 className="text-[22px] font-semibold">Intro</h1>
           <div className="space-y-2 mt-2">
             <h1 className="flex items-start gap-1">
@@ -73,7 +73,7 @@ const LeftSide = ({
       {isImageLoading ? (
         <InFoImageCardSkeleton />
       ) : (
-        <div className="rounded-xl border shadow-xl  p-3 mt-5 md:mt-0 lg:mt-5 flex-1 ">
+        <div className="rounded-xl border shadow-lg  p-3 mt-5 md:mt-0 lg:mt-5 flex-1 ">
           <h1 className="text-[22px] font-semibold">Photos</h1>
           <div className="flex flex-wrap gap-2 rounded-xl overflow-hidden">
             {myPost?.length > 0 ? (

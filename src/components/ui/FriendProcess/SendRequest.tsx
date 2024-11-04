@@ -15,14 +15,21 @@ const SendRequest = ({ userId }: { userId: string }) => {
   const { user } = useUser();
   //   is already request send
   const [alreadySend, setAlreadySend] = useState(false);
-  const { data: myInfo } = useGetMyInFoQuery(user?._id);
-  const handleSendFriendRequest = async () => {
+  const { data: myInfo, isLoading: myDataLoading } = useGetMyInFoQuery(
+    user?._id
+  );
+  // 
+  const handleFriendRequest = async () => {
     const toastId = toast.loading("sending...");
     try {
       // console.log(userId);
       const res = (await sendFriendRequest(userId)) as TResponse<any>;
       if (res?.data) {
-        toast.success("request sent", { id: toastId, duration: 1000 });
+        if (alreadySend) {
+          toast.success("request cancel", { id: toastId, duration: 1000 });
+        }else{
+          toast.success("request send", { id: toastId, duration: 1000 });
+        }
       } else {
         toast.error(res?.error?.data?.message, { id: toastId });
       }
@@ -30,21 +37,31 @@ const SendRequest = ({ userId }: { userId: string }) => {
       toast.error(error?.message, { id: toastId });
     }
   };
-  // console.log(myInfo?.data?.sendFriendRequest);
+  // update state value each request
   useEffect(() => {
     if (myInfo?.data?.sendFriendRequest?.includes(userId)) {
       setAlreadySend(true);
+    }else{
+      setAlreadySend(false);
+
     }
   }, [myInfo?.data?.sendFriendRequest]);
 
+
+  // console.log("already send-->",alreadySend);
+
   return (
     <div>
-      {alreadySend ? (
+      {isLoading || myDataLoading ? (
+        <Button color="primary" isLoading>
+          sending..
+        </Button>
+      ) : alreadySend ? (
         <Button
           color="primary"
           className="flex items-center gap-1"
           onClick={() => {
-            handleSendFriendRequest();
+            handleFriendRequest();
           }}
         >
           {" "}
@@ -58,7 +75,7 @@ const SendRequest = ({ userId }: { userId: string }) => {
           color="primary"
           className="flex items-center gap-1"
           onClick={() => {
-            handleSendFriendRequest();
+            handleFriendRequest();
           }}
         >
           {" "}

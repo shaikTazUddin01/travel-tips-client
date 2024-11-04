@@ -10,7 +10,7 @@ import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
 import LeftSide from "@/src/components/ui/profile/LeftSide";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
-import { FaUserPlus } from "react-icons/fa";
+// import { FaUserPlus } from "react-icons/fa";
 import { RiUserFollowFill } from "react-icons/ri";
 import SendRequest from "@/src/components/ui/FriendProcess/SendRequest";
 
@@ -50,7 +50,7 @@ const page = () => {
                 <div>
                   <h1 className="font-medium text-xl">{userInFo?.name}</h1>
                   {/* <p className="text-sm text-default-600">@tazahmedcs23</p> */}
-                  <p className="flex gap-4 text-blue-600 items-center justify-center">
+                  <p className="flex gap-4 text-blue-600 justify-center md:justify-start">
                     <span>120 Followers</span>
                     {/* <span>- 150 Following</span> */}
                   </p>
@@ -84,7 +84,7 @@ const page = () => {
         </div>
 
         {/* content section */}
-        <div className=" mx-5 w-[100%] lg:w-[65%]">
+        <div className=" mt-5 md:mt-0 md:mx-5 w-[100%] lg:w-[65%]">
           {postLoading ? (
             <LoadingSkeletor />
           ) : posts?.length > 0 ? (

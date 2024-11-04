@@ -9,6 +9,10 @@ export const siteConfig = {
       href: "/",
     },
     {
+      label: "Friends",
+      href: "/network",
+    },
+    {
       label: "Premium",
       href: "/premium",
     },
