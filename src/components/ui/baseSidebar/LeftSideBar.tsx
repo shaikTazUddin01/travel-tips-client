@@ -13,7 +13,7 @@ const LeftSideBar = () => {
   const { user } = useUser();
 
   return (
-    <div className="px-4 py-3 flex flex-col gap-2">
+    <div className="px-4 py-3 flex flex-col gap-2 flex-1">
       <Link href={"/profile"}>
         <div className="flex items-center gap-2 p-1 hover:bg-slate-200 rounded-md cursor-pointer">
           <Avatar isBordered radius="full" size="sm" src={user?.image} />
@@ -98,7 +98,7 @@ const LeftSideBar = () => {
         </>
       )}
       {/* create Post */}
-      <div className="w-full">
+      <div className="w-full ">
         {/* <Button color="primary" className="w-full rounded-full">Create Post</Button> */}
         <CreatePostModal
           btnClass="rounded-full w-full"

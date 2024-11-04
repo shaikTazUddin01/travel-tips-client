@@ -38,6 +38,7 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags:["user"]
     }),
+    // update image
     updateProfileImage: builder.mutation({
       query: (payload) =>{ 
         // console.log('object-->',payload);
@@ -48,11 +49,23 @@ export const userApi = baseApi.injectEndpoints({
       })},
       invalidatesTags:["user"]
     }),
+    // send request
     sendFriendRequest: builder.mutation({
       query: (payload) =>{ 
-        console.log('object-->',payload);
+        // console.log('object-->',payload);
         return({
         url: '/user/sendRequest',
+        method: "POST",
+        body:{userId:payload}
+      })},
+      invalidatesTags:["user"]
+    }),
+    // confirm request
+    confirmRequest: builder.mutation({
+      query: (payload) =>{ 
+        // console.log('object-->',payload);
+        return({
+        url: '/user/confirmRequest',
         method: "POST",
         body:{userId:payload}
       })},
@@ -62,4 +75,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery,useSendFriendRequestMutation} = userApi;
+export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery,useSendFriendRequestMutation,useConfirmRequestMutation} = userApi;
