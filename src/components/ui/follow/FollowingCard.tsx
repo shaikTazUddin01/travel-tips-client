@@ -2,7 +2,7 @@ import { Avatar, Button, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import UnFollow from "../followingProcess/UnFollow";
 
-const FollowCard = ({ people, id }: any) => {
+const FollowIngCard = ({ people, id }: any) => {
   // console.log(id);
 
 
@@ -26,7 +26,7 @@ const FollowCard = ({ people, id }: any) => {
         </div>
         <div className="flex  gap-2">
           {/* unfollowing */}
-          <UnFollow userId={id}/>
+          {/* <UnFollow userId={id}/> */}
           {/* view profile */}
           <Link href={`/${people._id}`}>
             <Button className="rounded-full" color="primary" variant="flat">
@@ -42,4 +42,4 @@ const FollowCard = ({ people, id }: any) => {
   );
 };
 
-export default FollowCard;
+export default FollowIngCard;

@@ -7,6 +7,7 @@ import React from "react";
 import FollowCard from "@/src/components/ui/follow/FollowCard";
 import { useGetMyFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 import { TUser } from "@/src/types";
+import FollowIngCard from "@/src/components/ui/follow/FollowingCard";
 
 const page = () => {
   const pathname=usePathname()
@@ -26,17 +27,10 @@ const page = () => {
         <div className="mt-2">
           {
             
-              followers?.map((follower :TUser)=><FollowCard key={follower?._id} pathname={pathname} people={follower}/>)
+              followers?.map((follower :TUser)=><FollowIngCard key={follower?._id}  people={follower}/>)
             
           }
-       {/* <FollowCard/>
-       <FollowCard/>
-       <FollowCard/>
-       <FollowCard/>
-       <FollowCard/>
-       <FollowCard/>
-       <FollowCard/>
-       <FollowCard/> */}
+       
         </div>
       </div>
     </div>

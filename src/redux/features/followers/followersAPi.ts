@@ -8,7 +8,8 @@ const followersApi=baseApi.injectEndpoints({
             query:()=>({
                 url:'/followers/myFollowers',
                 method:"GET"
-            })
+            }),
+            providesTags:["Followers"]
         })
     })
 })

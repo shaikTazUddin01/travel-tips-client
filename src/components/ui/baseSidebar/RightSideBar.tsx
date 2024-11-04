@@ -67,7 +67,7 @@ const RightSideBar = () => {
           <ShowMoreProfileLoading />
         ) : (
           allUserWithoutMeOrFollowing?.length > 0 && (
-            <MoreProfile users={allUserWithoutMeOrFollowing} />
+            <MoreProfile users={allUserWithoutMeOrFollowing} variant="flat"/>
           )
         )}
       </div>

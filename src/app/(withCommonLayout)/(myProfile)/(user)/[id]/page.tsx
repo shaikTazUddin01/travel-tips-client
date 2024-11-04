@@ -13,15 +13,41 @@ import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton
 // import { FaUserPlus } from "react-icons/fa";
 import { RiUserFollowFill } from "react-icons/ri";
 import SendRequest from "@/src/components/ui/FriendProcess/SendRequest";
+import Follow from "@/src/components/ui/followingProcess/Follow";
+
+import { useEffect, useState } from "react";
+import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
+import UnFollow from "@/src/components/ui/followingProcess/UnFollow";
+import { FaUserTimes } from "react-icons/fa";
 
 const page = () => {
   const { id } = useParams();
+  const [following, setAlreadyFollowing] = useState(false);
   // get followers info
   const { data: userData, isLoading: userLoading } = useGetSingleUserQuery(
     id as string
   );
   // get followers post
   const { data: post, isLoading: postLoading } = useGetSpecificPostQuery(id);
+  // get my following Info
+
+  const { data, isLoading: followingLoading } =
+    useGetMyFollowingQuery(undefined);
+
+  console.log(data?.data?.following);
+
+  useEffect(() => {
+    const isAlreadyFollowing = data?.data?.following?.find(
+      (item: TUser) => item?._id == id
+    );
+
+    if (isAlreadyFollowing) {
+      setAlreadyFollowing(true);
+    } else {
+      setAlreadyFollowing(false);
+    }
+  }, [data?.data?.following]);
+
   // user info
   const userInFo: TUser = userData?.data;
   // all post
@@ -60,14 +86,27 @@ const page = () => {
             </div>
             {/* send request */}
             <div className="flex gap-1">
-              <SendRequest userId={userInFo?._id}/>
-              <Button variant="bordered" className="flex items-center gap-1 w-full">
-                {" "}
-                <span className="text-xl">
-                  <RiUserFollowFill />{" "}
-                </span>{" "}
-                <span>Follow</span>
-              </Button>
+              <SendRequest userId={userInFo?._id} />
+              {following ? (
+                <UnFollow
+                  userId={userInFo?._id}
+                  radius="md"
+                  color="default"
+                  varient="ghost"
+                  size="md"
+                  icon={<FaUserTimes/> }
+                />
+              ) : (
+                <Follow
+                  userId={userInFo?._id}
+                  radius="md"
+                  color="default"
+                  varient="ghost"
+                  size="md"
+                  icon={<RiUserFollowFill />}
+                />
+              )}
+              
             </div>
           </div>
         </div>

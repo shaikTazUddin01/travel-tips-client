@@ -1,30 +1,12 @@
 "use client";
-import { Button } from "@nextui-org/button";
 import { Avatar, Link } from "@nextui-org/react";
-import { toast } from "sonner";
 import { BiSolidBadgeCheck } from "react-icons/bi";
 
-import { TResponse, TUser } from "@/src/types";
-import { useMarkFollowingMutation } from "@/src/redux/features/following/followingApi";
+import { TUser } from "@/src/types";
+import Follow from "../followingProcess/Follow";
 
 const MoreProfile = ({ users }: any) => {
-  const [makeFollowing] = useMarkFollowingMutation();
-
   // console.log('--->>',users);
-  // Handle following
-  const handleFollowing = async (id: string) => {
-    const toastId = toast.loading("loading...");
-    try {
-      const res = (await makeFollowing({ following: id })) as TResponse<any>;
-      if (res?.data?.success) {
-        toast.success("Following", { id: toastId });
-      } else {
-        toast.error(res?.error?.data?.message);
-      }
-    } catch (error: any) {
-      toast.error(error?.message, { id: toastId });
-    }
-  };
 
   return (
     <div className="border rounded-xl shadow-md min-h-[250px] px-3 py-3">
@@ -58,15 +40,7 @@ const MoreProfile = ({ users }: any) => {
                     </h5>
                   </div>
                 </div>
-                <Button
-                  className={"border-default-200"}
-                  color="primary"
-                  radius="full"
-                  size="sm"
-                  onClick={() => handleFollowing(user?._id)}
-                >
-                  Follow
-                </Button>
+                <Follow userId={user?._id} />
               </div>
             );
           })}
