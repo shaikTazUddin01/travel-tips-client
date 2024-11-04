@@ -1,4 +1,6 @@
 "use client";
+import AcceptRequest from "@/src/components/ui/FriendProcess/AcceptRequest";
+import DeleteRequest from "@/src/components/ui/FriendProcess/DeleteRequest";
 import SendRequest from "@/src/components/ui/FriendProcess/SendRequest";
 import RequestLoading from "@/src/components/ui/LoadingSkeleton/RequestLoading";
 import useUser from "@/src/hooks/user/useShowUser";
@@ -14,9 +16,7 @@ import { toast } from "sonner";
 const Network = () => {
   //   const { user } = useUser();
   const { data: userData, isLoading } = useGetMyInFoQuery(undefined);
-  // confirm request mutation
-  const [confirmRequest, { isLoading: confirmRequestLoading }] =
-    useConfirmRequestMutation();
+  
   //show all user
   const { data: alluser, isLoading: userLoading } = useAlluserQuery({});
   const allusers = alluser?.data;
@@ -28,21 +28,9 @@ const Network = () => {
 
   // console.log(moreProfile);
 
-  // handle confirm request
-  const handleConfirm = async (id: string) => {
-    const toastId = toast.loading("confirm...");
-    try {
-      // console.log(userId);
-      const res = (await confirmRequest(id)) as TResponse<any>;
-      if (res?.data) {
-        toast.success("Accept Request", { id: toastId, duration: 1000 });
-      } else {
-        toast.error(res?.error?.data?.message, { id: toastId });
-      }
-    } catch (error: any) {
-      toast.error(error?.message, { id: toastId });
-    }
-  };
+  
+
+
 
   return (
     <div className="mt-5">
@@ -85,21 +73,8 @@ const Network = () => {
                             {user?.address}
                           </p>
                           <div className="space-y-1 mt-1">
-                            <Button
-                              className="w-full text-sm"
-                              color="primary"
-                              size="sm"
-                              onClick={() => handleConfirm(user?._id)}
-                            >
-                              Confirm Request
-                            </Button>
-                            <Button
-                              className="w-full text-sm"
-                              variant="bordered"
-                              size="sm"
-                            >
-                              Delete Request
-                            </Button>
+                            <AcceptRequest userId={user?._id}/>
+                            <DeleteRequest userId={user?._id} />
                           </div>
                         </div>
                       </div>
@@ -145,7 +120,8 @@ const Network = () => {
                           <p className="font-medium">{user?.name}</p>
                         </Link>
                         <p className="text-small text-[#2e2e2e]">
-                          {user?.address?.slice(0,20)}{user?.address?.length>20 && "..."}
+                          {user?.address?.slice(0, 20)}
+                          {user?.address?.length > 20 && "..."}
                         </p>
                         <div className="space-y-1 mt-1 w-full">
                           <SendRequest userId={user?._id} />
