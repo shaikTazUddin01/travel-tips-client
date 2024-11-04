@@ -71,7 +71,7 @@ export const userApi = baseApi.injectEndpoints({
       })},
       invalidatesTags:["user"]
     }),
-    // confirm request
+    //delete request
     deleteRequest: builder.mutation({
       query: (payload) =>{ 
         // console.log('object-->',payload);
@@ -82,8 +82,19 @@ export const userApi = baseApi.injectEndpoints({
       })},
       invalidatesTags:["user"]
     }),
+    //unfriend
+    unfriend: builder.mutation({
+      query: (payload) =>{ 
+        // console.log('object-->',payload);
+        return({
+        url: '/user/unfriend',
+        method: "POST",
+        body:{userId:payload}
+      })},
+      invalidatesTags:["user"]
+    }),
     
   }),
 });
 
-export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery,useSendFriendRequestMutation,useConfirmRequestMutation,useDeleteRequestMutation} = userApi;
+export const {useAlluserQuery,useGetSingleUserQuery,useDeleteUserMutation,useUpdateUserMutation,useUpdateProfileImageMutation,useGetMyInFoQuery,useSendFriendRequestMutation,useConfirmRequestMutation,useDeleteRequestMutation,useUnfriendMutation} = userApi;

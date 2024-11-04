@@ -55,7 +55,6 @@ export const siteConfig = {
       label: "Change Password",
       href: "/changePassword",
     },
-    
   ],
   adminNavMenuItems: [
     {
@@ -91,12 +90,11 @@ export const siteConfig = {
       label: "Payment Management",
       href: "/payment-management",
     },
-    
+
     {
       label: "Change Password",
       href: "/changePassword",
     },
-   
   ],
 
   // links: {

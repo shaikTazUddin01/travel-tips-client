@@ -5,13 +5,16 @@ import { Button, Image } from "@nextui-org/react";
 
 import bg from "@/src/assets/login1.webp";
 import NewsFeedCard from "@/src/components/ui/newsfeed/Card";
-import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
+import {
+  useGetMyInFoQuery,
+  useGetSingleUserQuery,
+} from "@/src/redux/features/user/userApi";
 import { TPost, TUser } from "@/src/types";
 import { useGetSpecificPostQuery } from "@/src/redux/features/post/postApi";
 import LeftSide from "@/src/components/ui/profile/LeftSide";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 // import { FaUserPlus } from "react-icons/fa";
-import { RiUserFollowFill } from "react-icons/ri";
+import { RiUserFollowFill, RiUserUnfollowFill } from "react-icons/ri";
 import SendRequest from "@/src/components/ui/FriendProcess/SendRequest";
 import Follow from "@/src/components/ui/followingProcess/Follow";
 
@@ -19,22 +22,23 @@ import { useEffect, useState } from "react";
 import { useGetMyFollowingQuery } from "@/src/redux/features/following/followingApi";
 import UnFollow from "@/src/components/ui/followingProcess/UnFollow";
 import { FaUserTimes } from "react-icons/fa";
+import UnFriend from "@/src/components/ui/FriendProcess/UnFriend";
 
 const page = () => {
   const { id } = useParams();
+  // const my account info
+  const { data: myInfo } = useGetMyInFoQuery(undefined);
   const [following, setAlreadyFollowing] = useState(false);
-  // get followers info
+  const [alreadyFriend, setAlreadyFriend] = useState(false);
+  // get this profile user info
   const { data: userData, isLoading: userLoading } = useGetSingleUserQuery(
     id as string
   );
   // get followers post
   const { data: post, isLoading: postLoading } = useGetSpecificPostQuery(id);
   // get my following Info
-
   const { data, isLoading: followingLoading } =
     useGetMyFollowingQuery(undefined);
-
-  console.log(data?.data?.following);
 
   useEffect(() => {
     const isAlreadyFollowing = data?.data?.following?.find(
@@ -53,6 +57,21 @@ const page = () => {
   // all post
   const posts = post?.data;
   // console.log(posts);
+
+  //my information
+
+  useEffect(() => {
+    const isAlreadyFriend = myInfo?.data?.myFriendList?.find(
+      (item: TUser) => item?._id == id
+    );
+
+    if (isAlreadyFriend) {
+      setAlreadyFriend(true);
+    } else {
+      setAlreadyFriend(false);
+    }
+  }, [myInfo?.data?.myFriendList]);
+
   return (
     <div>
       {/* main section */}
@@ -86,7 +105,7 @@ const page = () => {
             </div>
             {/* send request */}
             <div className="flex gap-1">
-              <SendRequest userId={userInFo?._id} />
+              {alreadyFriend ? <UnFriend userId={userInFo?._id} radius="md" icon={<FaUserTimes />}/> : <SendRequest userId={userInFo?._id} />}
               {following ? (
                 <UnFollow
                   userId={userInFo?._id}
@@ -94,7 +113,7 @@ const page = () => {
                   color="default"
                   varient="ghost"
                   size="md"
-                  icon={<FaUserTimes/> }
+                  icon={<RiUserUnfollowFill />}
                 />
               ) : (
                 <Follow
@@ -106,7 +125,6 @@ const page = () => {
                   icon={<RiUserFollowFill />}
                 />
               )}
-              
             </div>
           </div>
         </div>
