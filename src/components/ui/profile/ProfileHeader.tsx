@@ -22,6 +22,8 @@ const ProfileHeader = () => {
   const { data: following } = useGetMyFollowingQuery(undefined);
   const userInFo = userData?.data;
 
+  // console.log(userInFo);
+
   return (
     <div className="relative ">
       <div
@@ -38,23 +40,24 @@ const ProfileHeader = () => {
               <h1 className="font-medium text-xl">{userInFo?.name}</h1>
               {/* <p className="text-sm text-default-600">@tazahmedcs23</p> */}
               <p className=" text-blue-600 flex gap-2 items-center mt-1">
-                <Link href={'/followers'}>
+                <Link href={'/friends'}>
                 <span className="border-r-2 border-blue-500 pr-2 ">
+                  {userInFo?.myFriendList?.length
+                    ? userInFo?.myFriendList?.length
+                    : "0"}{" "}
+                  Friends
+                </span>
+                </Link>
+                <Link href={'/followers'}>
+                <span className=" ">
                   {myfollowers?.data?.followers?.length
                     ? myfollowers?.data?.followers?.length
                     : "0"}{" "}
                   Followers
                 </span>
                 </Link>
-                <Link href={'/following'}>
-                <span>
-                  {following?.data?.following?.length
-                    ? following?.data?.following?.length
-                    : "0"}{" "}
-                  Following
-                </span>
-                </Link>
                 {/* <span>- 150 Following</span> */}
+                
               </p>
             </div>
             {/* button */}

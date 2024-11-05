@@ -13,6 +13,14 @@ export const siteConfig = {
       href: "/network",
     },
     {
+      label: "Page",
+      href: "/network",
+    },
+    {
+      label: "Group",
+      href: "/network",
+    },
+    {
       label: "Premium",
       href: "/premium",
     },
@@ -20,21 +28,24 @@ export const siteConfig = {
       label: "Non-Premium",
       href: "/non-premium",
     },
-    {
-      label: "About",
-      href: "/about",
-    },
-    {
-      label: "Contact",
-      href: "/contact",
-    },
+    // {
+    //   label: "About",
+    //   href: "/about",
+    // },
+    // {
+    //   label: "Contact",
+    //   href: "/contact",
+    // },
   ],
   navMenuItems: [
     {
       label: "Home",
       href: "/",
     },
-
+    {
+      label: "Network",
+      href: "/network",
+    },
     {
       label: "Premium",
       href: "/premium",
@@ -44,11 +55,11 @@ export const siteConfig = {
       href: "/non-premium",
     },
     {
-      label: "About",
+      label: "Privacy Policy",
       href: "/about",
     },
     {
-      label: "Contact",
+      label: "Help Center",
       href: "/contact",
     },
     {
@@ -61,7 +72,10 @@ export const siteConfig = {
       label: "Home",
       href: "/",
     },
-
+    {
+      label: "Network",
+      href: "/network",
+    },
     {
       label: "Premium",
       href: "/premium",
@@ -71,7 +85,7 @@ export const siteConfig = {
       href: "/non-premium",
     },
     {
-      label: "About",
+      label: "Policy",
       href: "/about",
     },
     {

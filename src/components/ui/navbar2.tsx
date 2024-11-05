@@ -42,9 +42,9 @@ export default function Navbar2() {
   const handleNavigate = async (href: string) => {
     await router.push(href);
 
-    setTimeout(()=>{
-    setIsMenuOpen(false);
-    },700)
+    setTimeout(() => {
+      setIsMenuOpen(false);
+    }, 700);
   };
 
   return (
@@ -84,7 +84,7 @@ export default function Navbar2() {
 
         <NavbarContent justify="end" className="">
           {/* lg menu */}
-          <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
+          <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end ">
             {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
                 <Link
@@ -124,6 +124,29 @@ export default function Navbar2() {
                         </div>
                       </Link>
                     </NavbarItem>
+                    {/* about */}
+                    <NavbarItem>
+                      <Link className="w-full" href="/about">
+                        <Button
+                          className="w-full flex items-center gap-2 justify-start"
+                          variant="light"
+                        >
+                          Privacy Policy
+                        </Button>
+                      </Link>
+                    </NavbarItem>
+                    {/* contact */}
+                    <NavbarItem>
+                      <Link className="w-full" href="/contact">
+                        <Button
+                          className="w-full flex items-center gap-2 justify-start"
+                          variant="light"
+                        >
+                          Help Center
+                        </Button>
+                      </Link>
+                    </NavbarItem>
+                    {/* change pass */}
                     <NavbarItem>
                       <Link className="w-full" href="/changePassword">
                         <Button
@@ -165,52 +188,51 @@ export default function Navbar2() {
         {/* small screen */}
         <NavbarMenu className=" space-y-0">
           <div className="mt-4">
-          <SearchBox />
-          {user?.role == "ADMIN"
-            ? siteConfig.adminNavMenuItems.map((item, index) => (
-                <NavbarMenuItem
-                  key={index}
-                  className=""
-                  onClick={() => setColor(item?.label)}
-                >
-                  <h1
-                    className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color==item?.label ?"text-blue-700":"text-black"}`}
-                    onClick={() => handleNavigate(item?.href)}
+            {/* <SearchBox /> */}
+            <div className="mt-3">
+            {user?.role == "ADMIN"
+              ? siteConfig.adminNavMenuItems.map((item, index) => (
+                  <NavbarMenuItem
+                    key={index}
+                    className=""
+                    onClick={() => setColor(item?.label)}
                   >
-                    {item?.label}
-                  </h1>
-                </NavbarMenuItem>
-              ))
-            : siteConfig.navMenuItems.map((item, index) => (
-                <NavbarMenuItem
-                  key={index}
-                 
-                  onClick={() => setColor(item?.label)}
-                >
-                  <h1
-                    className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color==item?.label ?"text-blue-700":"text-black"}`}
-                    onClick={() => handleNavigate(item?.href)}
+                    <h1
+                      className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color == item?.label ? "text-blue-700" : "text-black"}`}
+                      onClick={() => handleNavigate(item?.href)}
+                    >
+                      {item?.label}
+                    </h1>
+                  </NavbarMenuItem>
+                ))
+              : siteConfig.navMenuItems.map((item, index) => (
+                  <NavbarMenuItem
+                    key={index}
+                    onClick={() => setColor(item?.label)}
                   >
-                    {item?.label}
-                  </h1>
-                </NavbarMenuItem>
-              ))}
-              <NavbarMenuItem>
+                    <h1
+                      className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color == item?.label ? "text-blue-700" : "text-black"}`}
+                      onClick={() => handleNavigate(item?.href)}
+                    >
+                      {item?.label}
+                    </h1>
+                  </NavbarMenuItem>
+                ))}
+            <NavbarMenuItem>
               <NavbarItem>
-                      <Button
-                        className="w-full flex items-center gap-2 text-[16px] mb-6"
-                        
-                        onClick={() => handleLogout()}
-                      >
-                        <span>
-                          <LuLogOut />
-                        </span>
-                        <span>logout</span>
-                      </Button>
-                    </NavbarItem>
-              </NavbarMenuItem>
+                <Button
+                  className="w-full flex items-center gap-2 text-[16px] mb-6"
+                  onClick={() => handleLogout()}
+                >
+                  <span>
+                    <LuLogOut />
+                  </span>
+                  <span>logout</span>
+                </Button>
+              </NavbarItem>
+            </NavbarMenuItem>
+            </div>
           </div>
-         
         </NavbarMenu>
       </Navbar>
     </div>

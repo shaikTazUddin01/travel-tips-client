@@ -5,10 +5,15 @@ import { PiArticleNyTimesFill } from "react-icons/pi";
 
 import CreatePostModal from "./CreatePostModal";
 
+// import { useGetMyInFoQuery } from "@/src/redux/features/user/userApi";
 import useUser from "@/src/hooks/user/useShowUser";
 
 const CreatePost = () => {
   const { user } = useUser();
+
+  // const {data}=useGetMyInFoQuery(undefined)
+
+  // const user=data?.data
   
 
   return (

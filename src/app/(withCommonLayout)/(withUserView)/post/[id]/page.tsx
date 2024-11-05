@@ -63,7 +63,7 @@ export default function page() {
     _id,
   } = specificPost?.data || {};
 
-  console.log(specificPost?.data);
+  // console.log(specificPost?.data);
 
   const handleUpvote = async (id: string) => {
     // const toastId=toast.loading("loading...")
@@ -76,10 +76,10 @@ export default function page() {
     }
   };
 
-  const isUserUpvote = like?.find((item: any) => item == user?._id);
+  const isUserUpvote = like?.includes(currentUserId)
 
   useEffect(() => {
-    setIsUpvote(!!isUserUpvote);
+    setIsUpvote(isUserUpvote);
   }, [isUserUpvote]);
 
 // download pfd

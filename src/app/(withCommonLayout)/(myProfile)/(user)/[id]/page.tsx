@@ -23,6 +23,7 @@ import { useGetMyFollowingQuery } from "@/src/redux/features/following/following
 import UnFollow from "@/src/components/ui/followingProcess/UnFollow";
 import { FaUserTimes } from "react-icons/fa";
 import UnFriend from "@/src/components/ui/FriendProcess/UnFriend";
+import { useGetSpecificFollowersQuery } from "@/src/redux/features/followers/followersAPi";
 
 const page = () => {
   const { id } = useParams();
@@ -39,6 +40,9 @@ const page = () => {
   // get my following Info
   const { data, isLoading: followingLoading } =
     useGetMyFollowingQuery(undefined);
+
+  // get followers InFo
+  const {data:followers}=useGetSpecificFollowersQuery(id)
 
   useEffect(() => {
     const isAlreadyFollowing = data?.data?.following?.find(
@@ -59,6 +63,7 @@ const page = () => {
   // console.log(posts);
 
   //my information
+  console.log(followers);
 
   useEffect(() => {
     const isAlreadyFriend = myInfo?.data?.myFriendList?.find(
@@ -96,7 +101,13 @@ const page = () => {
                   <h1 className="font-medium text-xl">{userInFo?.name}</h1>
                   {/* <p className="text-sm text-default-600">@tazahmedcs23</p> */}
                   <p className="flex gap-4 text-blue-600 justify-center md:justify-start">
-                    <span>120 Followers</span>
+                    {/* followers */}
+                    <span className=" ">
+                  {followers?.data?.followers?.length
+                    ? followers?.data?.followers?.length
+                    : "0"}{" "}
+                  Followers
+                </span>
                     {/* <span>- 150 Following</span> */}
                   </p>
                 </div>

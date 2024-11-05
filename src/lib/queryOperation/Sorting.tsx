@@ -14,7 +14,7 @@ const Sorting = () => {
   };
   return (
     <form action="" className="mb-2 " >
-      <Select className="full" label="find by upvote" variant="bordered" onChange={handleSorting}>
+      <Select className="full" label="find by React" variant="bordered" onChange={handleSorting}>
         {sortIngOptions.map((sortitem) => (
           <SelectItem key={sortitem.key} value={sortitem.key}>
             {sortitem.label}

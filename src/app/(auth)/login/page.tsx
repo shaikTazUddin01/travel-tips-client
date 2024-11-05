@@ -68,8 +68,10 @@ const page = () => {
         </div>
         <div className="text-center mx-auto w-full lg:w-[80%] p-10">
           <div className="space-y-1 mb-2">
-            <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold ">Wellcome</h1>
-            <p>Login with Email</p>
+            <h1 className="text-sky-600 text-3xl lg:text-5xl font-bold ">
+              Wellcome
+            </h1>
+            <p>Log in as a test user</p>
           </div>
           <TDForm
             resolver={zodResolver(loginValidation)}
@@ -82,6 +84,7 @@ const page = () => {
                 required={true}
                 type="email"
                 variant="bordered"
+                defaultvalue="sakib@gmail.com"
               />
               <TDInput
                 label="Password"
@@ -89,6 +92,7 @@ const page = () => {
                 required={true}
                 type="password"
                 variant="bordered"
+                defaultvalue="1234567"
               />
               <Link href={"/forgotPassword"}>
                 <p className="text-right text-[14px] text-default-500 hover:text-blue-600">

@@ -20,10 +20,10 @@ const Network = () => {
   //show all user
   const { data: alluser, isLoading: userLoading } = useAlluserQuery({});
   const allusers = alluser?.data;
-  // console.log(allusers);
+  
 
   const moreProfile = allusers?.filter(
-    (item: TUser) => !item?.sendFriendRequest?.includes(userData?.data?._id)
+    (item: TUser) => !item?.sendFriendRequest?.includes(userData?.data?._id) && item?._id !==userData?.data?._id &&  !item?.myFriendList?.includes(userData?.data?._id)
   );
 
   // console.log(moreProfile);
@@ -35,7 +35,11 @@ const Network = () => {
   return (
     <div className="mt-5">
       {/* friend Rquest */}
+      {
+        userData?.data?.receivedFriendRequest?.length>0 &&
+      
       <div>
+
         <h1 className="text-xl font-medium">Friend Request</h1>
         {/* request card */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-5">
@@ -44,13 +48,13 @@ const Network = () => {
             isLoading
               ? Array(4)
                   ?.fill(null)
-                  ?.map((_, idx) => <RequestLoading key={idx} />)
+                  ?.map((_, idx) => <RequestLoading key={`loda${idx}`} />)
               : // data feacting
                 userData?.data?.receivedFriendRequest?.map(
                   (user: TUser, idx: number) => {
                     return (
                       <div
-                        key={idx}
+                        key={user?._id}
                         className="border rounded-lg shadow overflow-hidden"
                       >
                         <div className="w-full object-contain flex justify-center ">
@@ -84,8 +88,9 @@ const Network = () => {
           }
         </div>
       </div>
+}
       {/* my friends Rquest */}
-      <div className="mt-5">
+      <div className="mt-10">
         <h1 className="text-xl font-medium">Find More Friend</h1>
 
         {/* request card */}
@@ -100,7 +105,7 @@ const Network = () => {
                 moreProfile?.map((user: TUser, idx: number) => {
                   return (
                     <div
-                      key={idx}
+                      key={idx+1}
                       className="border rounded-lg shadow overflow-hidden"
                     >
                       <div className="w-full object-contain flex justify-center ">

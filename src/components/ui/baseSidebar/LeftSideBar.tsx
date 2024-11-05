@@ -12,6 +12,7 @@ import { PiUsersThreeFill } from "react-icons/pi";
 
 const LeftSideBar = () => {
   const { user } = useUser();
+  
 
   return (
     <div className="px-4 py-3 flex flex-col gap-2 flex-1">

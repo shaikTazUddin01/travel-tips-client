@@ -31,7 +31,7 @@ console.log(mydata);
                 </h1>
               </div>
             )}
-            {/* <FollowCard /> */}
+          
           </div>
         </div>
       </div>
