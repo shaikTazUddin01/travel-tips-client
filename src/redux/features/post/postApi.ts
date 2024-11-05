@@ -142,6 +142,16 @@ export const postApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Post"],
     }),
+    // share post 
+    sharePost: builder.mutation({
+      query: (data) => ({
+        url: "/post/sharePost",
+        method: "PATCH",
+        body:data
+        
+      }),
+      invalidatesTags: ["Post"],
+    }),
   }),
 });
 
@@ -160,5 +170,6 @@ export const {
   useDeletePostMutation,
   useUpdateSpecificPostByAdminMutation,
   useGetPostByAdminQuery,
-  useDeletePostByAdminMutation
+  useDeletePostByAdminMutation,
+  useSharePostMutation
 } = postApi;

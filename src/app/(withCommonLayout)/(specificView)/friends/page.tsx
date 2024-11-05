@@ -9,7 +9,7 @@ const Friends = () => {
          const{data,isLoading}=useGetMyInFoQuery(undefined)
 const mydata=data?.data
 
-console.log(mydata);
+// console.log(mydata);
 
     return (
         <div>

@@ -28,6 +28,7 @@ import CommentBox from "./CommentBox";
 import { TPost, TResponse } from "@/src/types";
 import {
   useCommentToPostMutation,
+  useSharePostMutation,
   useUpvoteDownvoteMutation,
 } from "@/src/redux/features/post/postApi";
 
@@ -35,9 +36,14 @@ import {
 import DeleteAndEditPost from "@/src/lib/DeleteOrEditPost/DeleteAndEditPost";
 import useUser from "@/src/hooks/user/useShowUser";
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
+import { PiShareFat, PiShareFatFill } from "react-icons/pi";
 
 export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
+
+  // share post mutation
+  const [sharePost] = useSharePostMutation();
+
   // const { _id: currentUserId } = useCurrentUser();
   const { user: userInFo } = useUser();
   const currentUserId = userInFo?.userId;
@@ -103,6 +109,25 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
       e.target.comment.value = "";
     }
     // console.log(res);
+  };
+
+  // share post
+  const handleSharePost = async () => {
+    const data = {
+      postId: postItem?._id,
+      userId: myData?._id,
+    };
+    const toastId = toast.loading("sharing...");
+    try {
+      const res = (await sharePost(data)) as TResponse<any>;
+      if (res?.data) {
+        toast.success("yor share this post", { id: toastId, duration: 1500 });
+      } else {
+        toast.error(res?.error?.data?.message, { id: toastId, duration: 1500 });
+      }
+    } catch (error: any) {
+      toast.error(error?.message, { id: toastId, duration: 1500 });
+    }
   };
 
   return (
@@ -178,6 +203,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <span>{like?.length}</span>
           </h1>
 
+<div className="flex justify-center items-center gap-3">
           <button
             className="flex items-center gap-1"
             onClick={() => setShowComment(!showComment)}
@@ -187,6 +213,17 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             </span>{" "}
             <span>{comment?.length}</span>
           </button>
+          <button
+            className="flex items-center gap-1"
+            onClick={() => setShowComment(!showComment)}
+          >
+            <span>
+            <PiShareFatFill/>
+
+            </span>{" "}
+            <span>{share?.length?share?.length:"0"}</span>
+          </button>
+          </div>
         </div>
 
         <Divider />
@@ -237,19 +274,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <span className="hidden md:flex">Comment</span>
           </Button>
           {/* view post */}
-          <Link href={`/post/${_id}`}>
-            <Button
-              className="flex-1 text-[16px] cursor-pointer"
-              size="sm"
-              variant="flat"
-              onClick={() => setIsClickToComment(!isClickToComment)}
-            >
-              <span className="text-xl">
-                <FaArrowsToEye />
-              </span>{" "}
-              <span className="hidden md:flex">see post</span>
-            </Button>
-          </Link>
+          {/* <Link href={`/post/${_id}`}> */}
+          <Button
+            className="flex-1 text-[16px] cursor-pointer"
+            size="sm"
+            variant="flat"
+            onClick={() => handleSharePost()}
+          >
+            <span className="text-xl">
+              <PiShareFat />
+            </span>{" "}
+            <span className="hidden md:flex">Share</span>
+          </Button>
+          {/* </Link> */}
         </div>
       </CardFooter>
       {/* showing comment */}

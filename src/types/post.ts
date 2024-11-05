@@ -16,7 +16,7 @@ export interface TPost {
   type: string;
   like: [string];
   comment: [IComment] | [];
-  share: number;
+  share: [string];
   createdAt: string;
   updatedAt: string;
   status: string;

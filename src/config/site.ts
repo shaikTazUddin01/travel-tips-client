@@ -12,14 +12,10 @@ export const siteConfig = {
       label: "Network",
       href: "/network",
     },
-    {
-      label: "Page",
-      href: "/network",
-    },
-    {
-      label: "Group",
-      href: "/network",
-    },
+    // {
+    //   label: "Group",
+    //   href: "/group",
+    // },
     {
       label: "Premium",
       href: "/premium",
@@ -32,10 +28,10 @@ export const siteConfig = {
     //   label: "About",
     //   href: "/about",
     // },
-    // {
-    //   label: "Contact",
-    //   href: "/contact",
-    // },
+    {
+      label: "Help Center",
+      href: "/contact",
+    },
   ],
   navMenuItems: [
     {
