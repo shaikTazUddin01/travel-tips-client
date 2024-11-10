@@ -38,8 +38,9 @@ import useUser from "@/src/hooks/user/useShowUser";
 import { useGetSingleUserQuery } from "@/src/redux/features/user/userApi";
 import { PiShareFat, PiShareFatFill } from "react-icons/pi";
 import Sharing from "./Sharing";
+import PostById from "./PostById";
 
-export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
+export default function SharedPostCard({ postItem }: { postItem: TPost }) {
   const [isClickToComment, setIsClickToComment] = useState(false);
   const [isAlreadyShare, setIsAlreadyShate] = useState(false);
   // share post mutation
@@ -65,15 +66,16 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     image,
     like,
     comment,
-    postContent,
+    shareDetails,
     type,
     share,
     user,
+    postId,
     // isVerify,
     _id,
   } = postItem || {};
 
-  // console.log(currentUserId);
+  //   console.log(postItem);
 
   const handleUpvote = async (id: string) => {
     // const toastId=toast.loading("loading...")
@@ -111,7 +113,6 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     // console.log(res);
   };
 
- 
   const IsShare = share?.find((item: any) => item?._id == myData?._id);
 
   // console.log('--->',IsAlreadyShare);
@@ -143,8 +144,8 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
               )}
             </h4>
             <h5 className="text-small tracking-tight text-default-400 flex items-center gap-1">
-              <span>{type}</span>
-              {type == "Premium" ? (
+              <span>{postId?.type}</span>
+              {postId?.type == "Premium" ? (
                 <span className="text-yellow-500">
                   <FaCrown />
                 </span>
@@ -157,32 +158,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           </div>
         </div>
         {currentUserId == user?._id && (
-          <DeleteAndEditPost postItem={postItem} />
+          <DeleteAndEditPost postItem={postItem} edit="disable"/>
         )}
       </CardHeader>
       {/* post content */}
       <CardBody
         className={`px-0 py-0 text-small w-[100%] ${myData?.isVerify == false && type == "Premium" && "blur-2xl"}`}
       >
-        <Link href={`/post/${_id}`}>
-          <div className="px-3 pb-3 flex gap-1">
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(
-                  `${postContent?.slice(0, 120)}<span style="color:blue"}> more....</span>`
-                ),
-              }}
-            />
-          </div>
-        </Link>
-        <span className="pl-2 text-default-500 mt-2">#{category}</span>
-        {/* image */}
-        <div className="w-full ">
-          <Image
-            alt="post image"
-            className="object-cover w-[1000px] rounded-none h-[300px]"
-            src={image}
-          />
+        {/* <Link href={`/post/${_id}`}> */}
+          <div className="px-3 pb-3 flex gap-1">{shareDetails}</div>
+        {/* </Link> */}
+        {/* shared card */}
+        <div className="">
+          <PostById postItem={postItem} />
         </div>
       </CardBody>
       {/* all like */}
@@ -270,20 +258,19 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
           {/* <Link href={`/post/${_id}`}> */}
           {/* {isAlreadyShare ? (
             <Tooltip content="You've already shared this post">
-            <Button
-              className="flex-1 text-[16px] cursor-not-allowed"
-              size="sm"
-              variant="flat"
-              
-            >
-              <span className="text-xl">
-                <PiShareFat />
-              </span>{" "}
-              <span className="hidden md:flex">Shared</span>
-            </Button>
+              <Button
+                className="flex-1 text-[16px] cursor-not-allowed"
+                size="sm"
+                variant="flat"
+              >
+                <span className="text-xl">
+                  <PiShareFat />
+                </span>{" "}
+                <span className="hidden md:flex">Shared</span>
+              </Button>
             </Tooltip>
           ) : ( */}
-           <Sharing postDetails={postItem}/>
+            <Sharing postDetails={postItem} />
           {/* )} */}
 
           {/* </Link> */}

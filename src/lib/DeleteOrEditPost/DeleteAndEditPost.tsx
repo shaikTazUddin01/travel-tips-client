@@ -29,7 +29,13 @@ import {
   useUpdateSpecificPostMutation,
 } from "@/src/redux/features/post/postApi";
 
-const DeleteAndEditPost = ({ postItem }: { postItem: TPost }) => {
+const DeleteAndEditPost = ({
+  postItem,
+  edit,
+}: {
+  postItem: TPost;
+  edit?: string;
+}) => {
   //   console.log(postId);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [deletePost] = useDeletePostMutation();
@@ -105,9 +111,11 @@ const DeleteAndEditPost = ({ postItem }: { postItem: TPost }) => {
           <DropdownItem key="deletePost" onClick={() => handleDeletePost()}>
             Delete Post
           </DropdownItem>
-          <DropdownItem key="editPost" onPress={onOpen}>
-            Edit Post
-          </DropdownItem>
+          {edit !== "disable" && (
+            <DropdownItem key="editPost" onPress={onOpen}>
+              Edit Post
+            </DropdownItem>
+          )}
         </DropdownMenu>
       </Dropdown>
 

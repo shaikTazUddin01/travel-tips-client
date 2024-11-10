@@ -5,6 +5,7 @@ import CreatePost from "@/src/components/Home/CreatePost";
 import { useGetMyPostQuery } from "@/src/redux/features/post/postApi";
 import LoadingSkeletor from "@/src/components/ui/LoadingSkeleton/LoadingSkeleton";
 import { TPost } from "@/src/types";
+import FilterPost from "@/src/components/ui/newsfeed/VarifyPost";
 // import ProfileHeader from "@/src/components/ui/profile/ProfileHeader";
 
 const page = () => {
@@ -26,7 +27,8 @@ const page = () => {
             {mypost?.data?.map((data: TPost) => {
               return (
                 <div key={data?._id}>
-                  <NewsFeedCard postItem={data} />
+                  {/* <NewsFeedCard postItem={data} /> */}
+                  <FilterPost postItem={data}/>
                 </div>
               );
             })}

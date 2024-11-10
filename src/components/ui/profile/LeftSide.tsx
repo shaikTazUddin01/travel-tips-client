@@ -28,6 +28,7 @@ const LeftSide = ({
   // const {data:myPost}=useGetMyPostQuery(undefined)
   const { email, phoneNumber, address, _id }: any = user || [];
 
+  // console.log("my post--->", myPost);
   return (
     <div className="flex flex-col md:gap-5 lg:gap-0  justify-items-center">
       {iscardLoading ? (
@@ -75,20 +76,23 @@ const LeftSide = ({
       ) : (
         <div className="rounded-xl border shadow-lg  p-3 mt-5 md:mt-0 lg:mt-5 flex-1 ">
           <h1 className="text-[22px] font-semibold">Photos</h1>
-          <div className="flex flex-wrap gap-2 rounded-xl overflow-hidden">
+          <div className="grid grid-cols-3 justify-between  gap-1 rounded-xl overflow-hidden">
             {myPost?.length > 0 ? (
-              myPost?.map((item: TPost) => {
-                return (
-                  <Image
-                    key={item?._id}
-                    alt="photos"
-                    className="size-[97] object-cover"
-                    height={100}
-                    src={item?.image}
-                    width={100}
-                  />
-                );
-              })
+              myPost?.map(
+                (item: TPost) =>
+                  !item?.isThisPostShare && (
+                    <div key={item?._id} className="col-span-1  border-2">
+                      <Image
+                        key={item?._id}
+                        alt="photos"
+                        className="h-20 w-full object-cover"
+                        height={100}
+                        src={item?.image}
+                        width={100}
+                      />
+                    </div>
+                  )
+              )
             ) : (
               <p className="">No photo added.!</p>
             )}

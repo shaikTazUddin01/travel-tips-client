@@ -9,6 +9,7 @@ import NewsFeedCard from "./Card";
 import { useGetPostQuery } from "@/src/redux/features/post/postApi";
 import { TPost } from "@/src/types";
 import { useAppSelector } from "@/src/redux/hooks";
+import FilterPost from "./VarifyPost";
 
 const NewsFeed = () => {
   const category = useAppSelector((state) => state.queryOperation.category);
@@ -69,7 +70,8 @@ const NewsFeed = () => {
       >
         {posts.map((data: TPost,idx) => (
           <div key={idx}>
-            <NewsFeedCard postItem={data} />
+            <FilterPost postItem={data}/>
+            {/* <NewsFeedCard postItem={data} /> */}
           </div>
         ))}
       </InfiniteScroll>

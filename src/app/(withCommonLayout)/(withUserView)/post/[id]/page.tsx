@@ -10,6 +10,7 @@ import {
   Button,
   Divider,
   Image,
+  Link,
 } from "@nextui-org/react";
 import DOMPurify from "dompurify";
 import { useParams } from "next/navigation";
@@ -63,6 +64,7 @@ export default function page() {
     _id,
   } = specificPost?.data || {};
 
+  // console.log(share);
   // console.log(specificPost?.data);
 
   const handleUpvote = async (id: string) => {
@@ -137,10 +139,14 @@ const downloadPDF = () => {
     <Card ref={pdfRef} className="w-full mb-6 border">
       <CardHeader className="justify-between"> 
         <div className="flex gap-3">
+        <Link href={`/${user?._id}`} >
           <Avatar isBordered radius="full" size="md" src={user?.image} />
+          </Link>
           <div className="flex flex-col gap-1 items-start justify-center">
             <h4 className="text-[16px] font-semibold leading-none text-default-600 flex items-center ">
-              <span>{user?.name}</span>
+              <Link href={`/${user?._id}`} >
+              <span className="text-default-800">{user?.name}</span>
+              </Link>
               {user?.isVerify && (
                 <span className="text-blue-600">
                   <BiSolidBadgeCheck />
@@ -162,24 +168,7 @@ const downloadPDF = () => {
           </div>
         </div>
 
-{/* 
-        <Dropdown>
-          <DropdownTrigger>
-            <Button
-              className="text-xl font-semibold"
-              radius="full"
-              size="sm"
-              variant="light"
-            >
-              <BsThreeDots />
-            </Button>
-          </DropdownTrigger>
-          <DropdownMenu aria-label="Static Actions">
-            <DropdownItem key="new">New file</DropdownItem>
-            <DropdownItem key="copy">Copy link</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
- */}
+
 {currentUserId == user?._id && (
           <DeleteAndEditPost postItem={specificPost?.data }/>
         )}

@@ -20,6 +20,10 @@ export interface TPost {
   createdAt: string;
   updatedAt: string;
   status: string;
+  shareDetails?:string|null;
+  authId?:TUser;
+  postId?:TPost;
+  isThisPostShare?:boolean;
   __v: number;
 }
 
