@@ -76,6 +76,7 @@ export const Navbar = () => {
               </NextLink>
             </NavbarItem>
           ))}
+          
           <NavbarItem className="hidden sm:flex gap-2">
             {/* <ThemeSwitch /> */}
             <Avatar

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
@@ -24,9 +25,11 @@ import { useAppDispatch } from "@/src/redux/hooks";
 import { logout } from "@/src/redux/features/auth/authSlice";
 import useUser from "@/src/hooks/user/useShowUser";
 import { useRouter } from "next/navigation";
+import { IoMdArrowDropdown, IoMdNotifications } from "react-icons/io";
+import { PiChatCircleDotsFill } from "react-icons/pi";
 export default function Navbar2() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [color, setColor] = useState("");
+  const [active, setactive] = useState("");
   const dispatch = useAppDispatch();
 
   const [profileNavToggle, setProfileNavToggle] = useState(false);
@@ -52,7 +55,7 @@ export default function Navbar2() {
       <Navbar
         isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
-        className="py-1"
+        className=""
         maxWidth="xl"
       >
         {/* icon for small screen */}
@@ -66,7 +69,7 @@ export default function Navbar2() {
         </NavbarContent>
 
         {/* large srceen */}
-        <NavbarContent className="hidden lg:flex gap-4" justify="start">
+        <NavbarContent className="hidden lg:flex" justify="start">
           <NavbarBrand className="">
             <Link href="/" className="text-black">
               <div className="text-xl flex items-center">
@@ -83,28 +86,68 @@ export default function Navbar2() {
         </NavbarContent>
 
         <NavbarContent justify="end" className="">
-          {/* lg menu */}
-          <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end ">
+          {/* lg navbar menu */}
+          <ul className="hidden lg:flex gap-0  w-full ml-2 items-center justify-end ">
             {siteConfig.navItems.map((item) => (
               <NavbarItem key={item.href}>
                 <Link
-                  onClick={() => setColor(item?.label)}
+                  onClick={() => setactive(item?.label)}
                   href={item.href}
-                  className={`${color == item?.label ? "text-blue-900" : "text-black"} text-[17px]`}
+                  className={`${active == item?.label ? "text-blue-900" : "text-black"}`}
                 >
-                  {item.label}
+                  <span className="flex flex-col items-center justify-center mx-4">
+                    <span className="text-[26px]">{item?.icon}</span>
+                    <span
+                      className={`text-[12px]  tracking-wide -mt-[3px] ${active == item?.label ? "text-blue-900" : "text-[#414141]"}`}
+                    >
+                      {item?.label}
+                    </span>
+                  </span>
+                  {/* bottom line */}
+                  {active === item?.label && (
+                    <span className="absolute -bottom-[9px] h-[3px] w-full bg-blue-900 rounded-full transition-all duration-300 ease-in-out"></span>
+                  )}
                 </Link>
               </NavbarItem>
             ))}
+            {/* messages */}
+            <NavbarItem className="flex flex-col justify-center items-center mx-4">
+              <span className="text-[26px]">
+                <PiChatCircleDotsFill />
+              </span>
+              <span className="text-[12px] text-[#414141] tracking-wide -mt-[3px]">
+                Messaging
+              </span>
+            </NavbarItem>
+            {/* notification */}
+            <NavbarItem className="flex flex-col justify-center items-center mx-4">
+              <span className="text-[26px]">
+                <IoMdNotifications />
+              </span>
+              <span className="text-[12px] text-[#414141] tracking-wide -mt-[3px]">
+                Notifications
+              </span>
+            </NavbarItem>
+
+            {/* user profile */}
             <NavbarItem className="hidden sm:flex gap-2">
               {/* <ThemeSwitch /> */}
-              <Avatar
-                isBordered
-                radius="full"
-                size="md"
-                src={user?.image}
+              <span
+                className="flex flex-col justify-center items-center cursor-pointer"
                 onClick={() => setProfileNavToggle(!profileNavToggle)}
-              />
+              >
+                <Avatar
+                  radius="full"
+                  // size="sm"
+                  className="h-[28px] w-[28px]"
+                  src={user?.image}
+                />
+                <p
+                  className={`text-[12px]  tracking-wide -mt-[3px] flex justify-center items-center ${profileNavToggle ? "text-blue-900" : "text-[#414141]"}`}
+                >
+                  Me <IoMdArrowDropdown className="text-xl" />
+                </p>
+              </span>
               {/* toggle navbar */}
               {profileNavToggle && (
                 <div className="min-w-[200px] min-h-[150px] border-1 shadow-lg p-5 absolute top-14 rounded-md right-0 bg-default-50">
@@ -190,47 +233,47 @@ export default function Navbar2() {
           <div className="mt-4">
             {/* <SearchBox /> */}
             <div className="mt-3">
-            {user?.role == "ADMIN"
-              ? siteConfig.adminNavMenuItems.map((item, index) => (
-                  <NavbarMenuItem
-                    key={index}
-                    className=""
-                    onClick={() => setColor(item?.label)}
-                  >
-                    <h1
-                      className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color == item?.label ? "text-blue-700" : "text-black"}`}
-                      onClick={() => handleNavigate(item?.href)}
+              {user?.role == "ADMIN"
+                ? siteConfig.adminNavMenuItems.map((item, index) => (
+                    <NavbarMenuItem
+                      key={index}
+                      className=""
+                      onClick={() => setactive(item?.label)}
                     >
-                      {item?.label}
-                    </h1>
-                  </NavbarMenuItem>
-                ))
-              : siteConfig.navMenuItems.map((item, index) => (
-                  <NavbarMenuItem
-                    key={index}
-                    onClick={() => setColor(item?.label)}
-                  >
-                    <h1
-                      className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${color == item?.label ? "text-blue-700" : "text-black"}`}
-                      onClick={() => handleNavigate(item?.href)}
+                      <h1
+                        className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${active == item?.label ? "text-blue-700" : "text-black"}`}
+                        onClick={() => handleNavigate(item?.href)}
+                      >
+                        {item?.label}
+                      </h1>
+                    </NavbarMenuItem>
+                  ))
+                : siteConfig.navMenuItems.map((item, index) => (
+                    <NavbarMenuItem
+                      key={index}
+                      onClick={() => setactive(item?.label)}
                     >
-                      {item?.label}
-                    </h1>
-                  </NavbarMenuItem>
-                ))}
-            <NavbarMenuItem>
-              <NavbarItem>
-                <Button
-                  className="w-full flex items-center gap-2 text-[16px] mb-6"
-                  onClick={() => handleLogout()}
-                >
-                  <span>
-                    <LuLogOut />
-                  </span>
-                  <span>logout</span>
-                </Button>
-              </NavbarItem>
-            </NavbarMenuItem>
+                      <h1
+                        className={`w-full hover:text-blue hover:bg-slate-100 rounded p-1 -mt-1 ${active == item?.label ? "text-blue-700" : "text-black"}`}
+                        onClick={() => handleNavigate(item?.href)}
+                      >
+                        {item?.label}
+                      </h1>
+                    </NavbarMenuItem>
+                  ))}
+              <NavbarMenuItem>
+                <NavbarItem>
+                  <Button
+                    className="w-full flex items-center gap-2 text-[16px] mb-6"
+                    onClick={() => handleLogout()}
+                  >
+                    <span>
+                      <LuLogOut />
+                    </span>
+                    <span>logout</span>
+                  </Button>
+                </NavbarItem>
+              </NavbarMenuItem>
             </div>
           </div>
         </NavbarMenu>

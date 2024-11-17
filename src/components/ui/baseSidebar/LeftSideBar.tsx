@@ -2,7 +2,7 @@
 import { Avatar } from "@nextui-org/react";
 import { MdOutlineManageHistory, MdWorkspacePremium } from "react-icons/md";
 import { FaCreativeCommonsNc, FaUserFriends, FaUsersCog } from "react-icons/fa";
-import { RiSecurePaymentLine, RiUserFollowFill } from "react-icons/ri";
+import { RiCreativeCommonsNcFill, RiMoneyDollarCircleFill, RiSecurePaymentLine, RiUserFollowFill } from "react-icons/ri";
 import Link from "next/link";
 
 import CreatePostModal from "../../Home/CreatePostModal";
@@ -63,7 +63,7 @@ const LeftSideBar = () => {
       <Link href={"/premium"}>
         <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
           <span className="text-2xl p-1">
-            <MdWorkspacePremium />
+          <RiMoneyDollarCircleFill />
           </span>
           <span>Premium</span>
         </div>
@@ -72,7 +72,7 @@ const LeftSideBar = () => {
       <Link href={"/non-premium"}>
         <div className="gap-2 flex items-center p-1 hover:bg-slate-200 rounded-md cursor-pointer">
           <span className="text-2xl p-1">
-            <FaCreativeCommonsNc />
+          <RiCreativeCommonsNcFill />
           </span>
           <span>Non-Premium</span>
         </div>
