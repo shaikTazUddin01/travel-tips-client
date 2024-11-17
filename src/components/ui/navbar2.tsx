@@ -27,8 +27,10 @@ import useUser from "@/src/hooks/user/useShowUser";
 import { useRouter } from "next/navigation";
 import { IoMdArrowDropdown, IoMdNotifications } from "react-icons/io";
 import { PiChatCircleDotsFill } from "react-icons/pi";
+import Notification from "./Notification/Notification";
 export default function Navbar2() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [showNotification, setShowNotification] = useState<boolean>(false);
   const [active, setactive] = useState("");
   const dispatch = useAppDispatch();
 
@@ -95,7 +97,7 @@ export default function Navbar2() {
                   href={item.href}
                   className={`${active == item?.label ? "text-blue-900" : "text-black"}`}
                 >
-                  <span className="flex flex-col items-center justify-center mx-4">
+                  <span className="flex flex-col items-center justify-center mx-3">
                     <span className="text-[26px]">{item?.icon}</span>
                     <span
                       className={`text-[12px]  tracking-wide -mt-[3px] ${active == item?.label ? "text-blue-900" : "text-[#414141]"}`}
@@ -111,7 +113,7 @@ export default function Navbar2() {
               </NavbarItem>
             ))}
             {/* messages */}
-            <NavbarItem className="flex flex-col justify-center items-center mx-4">
+            <NavbarItem className="flex flex-col justify-center items-center mx-3">
               <span className="text-[26px]">
                 <PiChatCircleDotsFill />
               </span>
@@ -120,17 +122,26 @@ export default function Navbar2() {
               </span>
             </NavbarItem>
             {/* notification */}
-            <NavbarItem className="flex flex-col justify-center items-center mx-4">
-              <span className="text-[26px]">
-                <IoMdNotifications />
-              </span>
-              <span className="text-[12px] text-[#414141] tracking-wide -mt-[3px]">
-                Notifications
-              </span>
+            <NavbarItem
+              className=" relative cursor-pointer"
+              onClick={() => setShowNotification(!showNotification)}
+            >
+              <div
+                className={`flex flex-col justify-center items-center mx-3 `}
+              >
+                <span className={`text-[26px] ${showNotification as boolean && "text-blue-900"}`}>
+                  <IoMdNotifications />
+                </span>
+                <span
+                  className={`text-[12px] ${showNotification ? "text-blue-900" : "text-[#414141]"} tracking-wide -mt-[3px]`}
+                >
+                  Notifications
+                </span>
+              </div>
             </NavbarItem>
 
             {/* user profile */}
-            <NavbarItem className="hidden sm:flex gap-2">
+            <NavbarItem className="hidden sm:flex gap-2 ml-3">
               {/* <ThemeSwitch /> */}
               <span
                 className="flex flex-col justify-center items-center cursor-pointer"
@@ -278,6 +289,10 @@ export default function Navbar2() {
           </div>
         </NavbarMenu>
       </Navbar>
+
+      {/* notfication sidebar */}
+
+      {showNotification && <Notification />}
     </div>
   );
 }
