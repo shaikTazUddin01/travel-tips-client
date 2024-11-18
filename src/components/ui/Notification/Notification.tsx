@@ -1,13 +1,26 @@
-import { useGetMyNotificationQuery } from "@/src/redux/features/notification/notificationApi";
+import { useGetMyNotificationQuery, useUpdateNotificationMutation,  } from "@/src/redux/features/notification/notificationApi";
 import { INotification } from "@/src/types/notification";
 import { Avatar } from "@nextui-org/react";
 import { formatDistanceToNow } from "date-fns";
 import NotificationSkeleton from "../LoadingSkeleton/NotificationSkeleton";
+import { useEffect } from "react";
 
 const Notification = () => {
+  const[updateNotification] =useUpdateNotificationMutation()
   const { data: notifications, isLoading } =
     useGetMyNotificationQuery(undefined);
-  console.log(notifications);
+
+    useEffect(() => {
+      const markAsRead = async () => {
+        try {
+          await updateNotification({});
+        } catch (error) {
+          console.error("Error updating notifications:", error);
+        }
+      };
+  
+      markAsRead();
+    }, [updateNotification]);
   return (
     <div className="min-h-[85vh] max-h-[500px] w-[320px] rounded-lg bg-white shadow-lg border z-50 absolute end-5 overflow-auto -mt-1">
       <div className="flex justify-between items-center px-4 py-3 border-b bg-gray-100">

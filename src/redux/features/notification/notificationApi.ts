@@ -11,7 +11,16 @@ export const notificationAPi = baseApi.injectEndpoints({
       }),
       providesTags: ["notification"],
     }),
+    updateNotification: builder.mutation({
+      query: () => ({
+        url: "/notification/isread",
+        method: "PATCH",
+        body:{}
+        
+      }),
+      invalidatesTags: ["notification"],
+    }),
   }),
 });
 
-export const { useGetMyNotificationQuery} = notificationAPi;
+export const { useGetMyNotificationQuery,useUpdateNotificationMutation} = notificationAPi;

@@ -28,7 +28,12 @@ import { useRouter } from "next/navigation";
 import { IoMdArrowDropdown, IoMdNotifications } from "react-icons/io";
 import { PiChatCircleDotsFill } from "react-icons/pi";
 import Notification from "./Notification/Notification";
+import { useGetMyNotificationQuery } from "@/src/redux/features/notification/notificationApi";
+import { INotification } from "@/src/types/notification";
 export default function Navbar2() {
+  // get notification
+  const { data: notification, isLoading: notifacationLoading } =
+    useGetMyNotificationQuery(undefined);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [showNotification, setShowNotification] = useState<boolean>(false);
   const [active, setactive] = useState("");
@@ -52,6 +57,12 @@ export default function Navbar2() {
     }, 700);
   };
 
+  // filter not read notification
+  const readNotifi = notification?.data?.filter(
+    (item: INotification) => !item?.isRead
+  );
+  // console.log(readNotifi, notification);
+
   return (
     <div className="bg-white shadow-md fixed w-full z-50">
       <Navbar
@@ -65,7 +76,7 @@ export default function Navbar2() {
           <Link href="/" className="text-black">
             <NavbarBrand className="text-xl flex justify-end">
               <Logo />
-              <p className="font-bold text-inherit">AGMT</p>
+              <p className="font-bold text-inherit">WISH</p>
             </NavbarBrand>
           </Link>
         </NavbarContent>
@@ -76,7 +87,7 @@ export default function Navbar2() {
             <Link href="/" className="text-black">
               <div className="text-xl flex items-center">
                 <Logo />
-                <p className="font-bold text-inherit">AGMT</p>
+                <p className="font-bold text-inherit">WISH</p>
               </div>
             </Link>
             <div className="ml-2 w-[60%]">
@@ -113,14 +124,14 @@ export default function Navbar2() {
               </NavbarItem>
             ))}
             {/* messages */}
-            <NavbarItem className="flex flex-col justify-center items-center mx-3">
+            {/* <NavbarItem className="flex flex-col justify-center items-center mx-3">
               <span className="text-[26px]">
                 <PiChatCircleDotsFill />
               </span>
               <span className="text-[12px] text-[#414141] tracking-wide -mt-[3px]">
                 Messaging
               </span>
-            </NavbarItem>
+            </NavbarItem> */}
             {/* notification */}
             <NavbarItem
               className=" relative cursor-pointer"
@@ -129,7 +140,9 @@ export default function Navbar2() {
               <div
                 className={`flex flex-col justify-center items-center mx-3 `}
               >
-                <span className={`text-[26px] ${showNotification as boolean && "text-blue-900"}`}>
+                <span
+                  className={`text-[26px] ${(showNotification as boolean) && "text-blue-900"}`}
+                >
                   <IoMdNotifications />
                 </span>
                 <span
@@ -138,6 +151,12 @@ export default function Navbar2() {
                   Notifications
                 </span>
               </div>
+
+              {readNotifi?.length > 0 && (
+                <span className="absolute -top-[2px] end-[34%] text-[11px] bg-red-500 rounded-full text-white h-4 w-4 flex justify-center items-center">
+                  {readNotifi?.length}
+                </span>
+              )}
             </NavbarItem>
 
             {/* user profile */}
