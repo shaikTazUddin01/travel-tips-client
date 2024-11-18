@@ -8,7 +8,7 @@ import { RiCreativeCommonsNcFill, RiMoneyDollarCircleFill } from "react-icons/ri
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "travel tips",
+  name: "WanderWise",
   description: "Make beautiful websites regardless of your design experience.",
   navItems: [
     {

@@ -5,8 +5,8 @@ import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
   baseUrl:
-  // "http://localhost:5000/api/v1"
-  "https://travel-tips-server.vercel.app/api/v1"
+  "http://localhost:5000/api/v1"
+  // "https://travel-tips-server.vercel.app/api/v1"
   ,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
@@ -23,5 +23,5 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQuery,
   endpoints: (builder) => ({}),
-  tagTypes: ["Post", "Following", "user", "verify", "messages","Followers"],
+  tagTypes: ["Post", "Following", "user", "verify", "messages","Followers","notification"],
 });
