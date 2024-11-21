@@ -61,7 +61,7 @@ export default function Navbar2() {
   const readNotifi = notification?.data?.filter(
     (item: INotification) => !item?.isRead
   );
-  // console.log(readNotifi, notification);
+  console.log(readNotifi, notification);
 
   return (
     <div className="bg-white shadow-md fixed w-full z-50">
@@ -102,7 +102,9 @@ export default function Navbar2() {
           {/* lg navbar menu */}
           <ul className="hidden lg:flex gap-0  w-full ml-2 items-center justify-end ">
             {siteConfig.navItems.map((item) => (
-              <NavbarItem key={item.href}>
+              <NavbarItem key={item.href}
+              onClick={() => setShowNotification(false)}
+              >
                 <Link
                   onClick={() => setactive(item?.label)}
                   href={item.href}
@@ -160,7 +162,9 @@ export default function Navbar2() {
             </NavbarItem>
 
             {/* user profile */}
-            <NavbarItem className="hidden sm:flex gap-2 ml-3">
+            <NavbarItem className="hidden sm:flex gap-2 ml-3"
+            onClick={() => setShowNotification(false)}
+            >
               {/* <ThemeSwitch /> */}
               <span
                 className="flex flex-col justify-center items-center cursor-pointer"

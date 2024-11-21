@@ -100,14 +100,14 @@ export default function SharedPostCard({ postItem }: { postItem: TPost }) {
   const handleCommentSubmit: SubmitHandler<FieldValues> = async (e) => {
     e.preventDefault();
     const commentfield = e.target.comment.value;
-
+const toastId=toast.loading("commenting..")
     const commentInFo = {
       postId: _id,
       comment: commentfield,
     };
     const res = (await postComment(commentInFo)) as TResponse<any>;
     if (res?.data) {
-      toast.success("your comment post succefully..", { duration: 1000 });
+      toast.success("your comment post succefully..", { duration: 1000 ,id:toastId});
       e.target.comment.value = "";
     }
     // console.log(res);

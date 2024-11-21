@@ -96,8 +96,10 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
 
   // handle comment submit
   const handleCommentSubmit: SubmitHandler<FieldValues> = async (e) => {
+    // console.log("object-->");
     e.preventDefault();
     const commentfield = e.target.comment.value;
+    const toastId=toast.loading("commenting..")
 
     const commentInFo = {
       postId: _id,
@@ -105,7 +107,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
     };
     const res = (await postComment(commentInFo)) as TResponse<any>;
     if (res?.data) {
-      toast.success("your comment post succefully..", { duration: 1000 });
+      toast.success("your comment post succefully..", { duration: 1000 ,id:toastId});
       e.target.comment.value = "";
     }
     // console.log(res);
@@ -169,7 +171,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
-                  `${postContent?.slice(0, 120)}<span style="color:blue"}> more....</span>`
+                  `${postContent?.length>120 ? postContent?.slice(0, 120)+`<span style="color:blue"}> more....</span>`:postContent}`
                 ),
               }}
             />
@@ -199,7 +201,7 @@ export default function NewsFeedCard({ postItem }: { postItem: TPost }) {
 
           <div className="flex justify-center items-center gap-3">
             <button
-              className="flex items-center gap-1"
+              className="btn flex items-center gap-1"
               onClick={() => setShowComment(!showComment)}
             >
               <span>

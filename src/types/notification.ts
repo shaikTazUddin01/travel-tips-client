@@ -5,7 +5,7 @@ export interface INotification{
     _id:string;
     senderId:TUser;
     createdAt:string;
-    type:"follow"|"like"|"messages";
+    type:"follow"|"like"|"messages"|'confirm Request';
     isRead:boolean
 
 }

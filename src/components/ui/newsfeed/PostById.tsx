@@ -72,7 +72,7 @@ export default function PostById({postItem}:{postItem:TPost}) {
             <div
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(
-                  `${postId?.postContent?.slice(0, 120)}<span style="color:blue"}> more....</span>`
+                  `${ postId?.postContent?.length>120 ?postId?.postContent?.slice(0, 120)+`<span style="color:blue"}> more....</span>`:postId?.postContent}`
                 ),
               }}
             />
