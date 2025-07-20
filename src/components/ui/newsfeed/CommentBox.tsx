@@ -86,7 +86,7 @@ const CommentBox = ({
       {comment?.map((item: any) => {
         return (
           <div key={item?._id} className=" pb-4 px-2 w-[100%]">
-            <div className="flex gap-2 w-[100%] items-center justify-start">
+            <div className="flex gap-2 w-[100%] items-start justify-start">
               <Link href={`/${item?.userId?._id}`}>
                 <Avatar
                   isBordered
@@ -98,6 +98,7 @@ const CommentBox = ({
               </Link>
               {editCommentId !== item?._id ? (
                 // content and dropdown
+                // <div className="">
                 <div className="flex gap-5 items-start justify-between  bg-default-200 rounded-xl p-2">
                   {/* content */}
                   <div>
@@ -107,7 +108,10 @@ const CommentBox = ({
                       </h4>
                     </Link>
                     <h5 className="text-small ">{item?.comment}</h5>
+                    
                   </div>
+                {/* </div> */}
+                {/* <h1 className="text-[12px] float-end">Reply</h1> */}
                   {/* edit delete action */}
                   {/* dropdown */}
                   {user?.userId == item?.userId?._id && (

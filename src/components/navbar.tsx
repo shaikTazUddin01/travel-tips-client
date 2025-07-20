@@ -57,10 +57,8 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        
         {/* lg menu */}
         <ul className="hidden lg:flex gap-4  w-full ml-2 items-center justify-end">
-         
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -70,13 +68,12 @@ export const Navbar = () => {
                 )}
                 color="foreground"
                 href={item.href}
-                
               >
                 {item.label}
               </NextLink>
             </NavbarItem>
           ))}
-          
+
           <NavbarItem className="hidden sm:flex gap-2">
             {/* <ThemeSwitch /> */}
             <Avatar
@@ -149,7 +146,11 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link className="text-black hover:text-blue-600" href={item?.href} size="lg">
+              <Link
+                className="text-black hover:text-blue-600"
+                href={item?.href}
+                size="lg"
+              >
                 {item.label}
               </Link>
             </NavbarMenuItem>

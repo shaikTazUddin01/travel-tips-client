@@ -10,7 +10,6 @@ import {
   Button,
   Image,
   Divider,
-  Tooltip,
 } from "@nextui-org/react";
 import DOMPurify from "dompurify";
 import { AiOutlineLike } from "react-icons/ai";

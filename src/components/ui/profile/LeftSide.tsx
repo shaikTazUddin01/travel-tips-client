@@ -76,9 +76,9 @@ const LeftSide = ({
       ) : (
         <div className="rounded-xl border shadow-lg  p-3 mt-5 md:mt-0 lg:mt-5 flex-1 ">
           <h1 className="text-[22px] font-semibold">Photos</h1>
-          <div className="grid grid-cols-3 justify-between  gap-1 rounded-xl overflow-hidden">
-            {myPost?.length > 0 ? (
-              myPost?.map(
+          {myPost?.length > 0 ? (
+            <div className="grid grid-cols-3 justify-between  gap-1 rounded-xl overflow-hidden">
+              {myPost?.map(
                 (item: TPost) =>
                   !item?.isThisPostShare && (
                     <div key={item?._id} className="col-span-1  border-2">
@@ -92,11 +92,11 @@ const LeftSide = ({
                       />
                     </div>
                   )
-              )
-            ) : (
-              <p className="">No photo added.!</p>
-            )}
-          </div>
+              )}
+            </div>
+          ) : (
+            <p className="">No photo added.!</p>
+          )}
         </div>
       )}
     </div>

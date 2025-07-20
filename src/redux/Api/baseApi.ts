@@ -5,8 +5,8 @@ import { RootState } from "../store";
 
 const baseQuery = fetchBaseQuery({
   baseUrl:
-  "http://localhost:5000/api/v1"
-  // "https://travel-tips-server.vercel.app/api/v1"
+  // "http://localhost:5000/api/v1"
+  "https://travel-tips-server.vercel.app/api/v1"
   ,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {

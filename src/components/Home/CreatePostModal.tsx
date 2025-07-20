@@ -148,7 +148,7 @@ export default function CreatePostModal({
 
                     <div className=" w-full  flex">
                       <label
-                        className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl"
+                        className="border-2 w-full border-[#e6e6e6] text-left p-3 text-[15px] text-default-500 font-normal rounded-xl overflow-hidden"
                         htmlFor="image"
                       >
                         {imageFile ? imageFile.name : "select image"}

@@ -61,7 +61,7 @@ export default function Navbar2() {
   const readNotifi = notification?.data?.filter(
     (item: INotification) => !item?.isRead
   );
-  console.log(readNotifi, notification);
+  // console.log(readNotifi, notification);
 
   return (
     <div className="bg-white shadow-md fixed w-full z-50">
@@ -102,8 +102,9 @@ export default function Navbar2() {
           {/* lg navbar menu */}
           <ul className="hidden lg:flex gap-0  w-full ml-2 items-center justify-end ">
             {siteConfig.navItems.map((item) => (
-              <NavbarItem key={item.href}
-              onClick={() => setShowNotification(false)}
+              <NavbarItem
+                key={item.href}
+                onClick={() => setShowNotification(false)}
               >
                 <Link
                   onClick={() => setactive(item?.label)}
@@ -162,8 +163,9 @@ export default function Navbar2() {
             </NavbarItem>
 
             {/* user profile */}
-            <NavbarItem className="hidden sm:flex gap-2 ml-3"
-            onClick={() => setShowNotification(false)}
+            <NavbarItem
+              className="hidden sm:flex gap-2 ml-3"
+              onClick={() => setShowNotification(false)}
             >
               {/* <ThemeSwitch /> */}
               <span
@@ -188,7 +190,10 @@ export default function Navbar2() {
                   <ul>
                     <NavbarItem>
                       <Link className="w-full" href="/profile">
-                        <div className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1">
+                        <div
+                          className="w-full h-auto flex items-center gap-2 justify-start hover:bg-default-200 p-2 rounded-xl mb-1"
+                          onClick={() => setProfileNavToggle(false)}
+                        >
                           <Avatar
                             isBordered
                             radius="full"
@@ -207,6 +212,7 @@ export default function Navbar2() {
                         <Button
                           className="w-full flex items-center gap-2 justify-start"
                           variant="light"
+                          onClick={() => setProfileNavToggle(false)}
                         >
                           Privacy Policy
                         </Button>
@@ -218,6 +224,7 @@ export default function Navbar2() {
                         <Button
                           className="w-full flex items-center gap-2 justify-start"
                           variant="light"
+                          onClick={() => setProfileNavToggle(false)}
                         >
                           Help Center
                         </Button>
@@ -229,6 +236,7 @@ export default function Navbar2() {
                         <Button
                           className="w-full flex items-center gap-2 justify-start"
                           variant="light"
+                          onClick={() => setProfileNavToggle(false)}
                         >
                           Change Password
                         </Button>

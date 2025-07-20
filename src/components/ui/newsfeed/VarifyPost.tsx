@@ -1,4 +1,3 @@
-import React from "react";
 import NewsFeedCard from "./Card";
 import { TPost } from "@/src/types";
 import SharedPostCard from "./SharedPostCard";

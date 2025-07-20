@@ -26,31 +26,31 @@ const NewsFeed = () => {
     isError,
     isLoading,
     isFetching,
-  } = useGetPostQuery({ category, search,sorting, type ,page});
+  } = useGetPostQuery({ category, search, sorting, type, page });
 
   useEffect(() => {
     if (postData?.data) {
       if (page === 1) {
-        setPosts(postData.data); 
+        setPosts(postData.data);
       } else {
-        setPosts((prevPosts) => [...prevPosts, ...postData.data]); 
+        setPosts((prevPosts) => [...prevPosts, ...postData.data]);
       }
 
       if (postData.data.length === 0) {
-        setHasMore(false); 
+        setHasMore(false);
       }
     }
   }, [postData]);
 
   useEffect(() => {
-    setPage(1); 
-    setHasMore(true); 
-    setPosts([]); 
-  }, [category, search, type]); 
+    setPage(1);
+    setHasMore(true);
+    setPosts([]);
+  }, [category, search, type]);
 
   const fetchMorePosts = () => {
     if (!isFetching && hasMore) {
-      setPage((prevPage) => prevPage + 1); 
+      setPage((prevPage) => prevPage + 1);
     }
   };
 
@@ -65,12 +65,12 @@ const NewsFeed = () => {
           </p>
         }
         hasMore={hasMore}
-        loader={<LoadingSkeleton />} 
+        loader={<LoadingSkeleton />}
         next={fetchMorePosts}
       >
-        {posts.map((data: TPost,idx) => (
+        {posts.map((data: TPost, idx) => (
           <div key={idx}>
-            <FilterPost postItem={data}/>
+            <FilterPost postItem={data} />
             {/* <NewsFeedCard postItem={data} /> */}
           </div>
         ))}
